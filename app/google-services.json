@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "909442302767",
+    "firebase_url": "https://resuelvelo-627a7.firebaseio.com",
+    "project_id": "resuelvelo-627a7",
+    "storage_bucket": "resuelvelo-627a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909442302767:android:63b072acd6e3aaf5",
+        "android_client_info": {
+          "package_name": "com.example.sebas_pc.resuelvelo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909442302767-b0qbsgc1i5hjbsv7r5b3tg1fvkirjh9k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sebas_pc.resuelvelo",
+            "certificate_hash": "28b8dc0fe428f78ff17d8c2514bf8a5eb5527007"
+          }
+        },
+        {
+          "client_id": "909442302767-hetkql8p5mq08j8jefc257meluqvbebn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqa7zRyUTb9iBJ_IkS289GpS_-7gsyAl0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909442302767-hetkql8p5mq08j8jefc257meluqvbebn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
