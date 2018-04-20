@@ -6,8 +6,8 @@
     <string name="resuelvelo">Resuelvelo!</string>
     <string name="empresario">Empresario</string>
     <string name="empleado">Empleado</string>
-    <string name="email">&#032;Email</string>
-    <string name="contraseña">&#032;Contraseña</string>
+    <string name="email">&#160;&#160;Email</string>
+    <string name="contraseña">&#160;&#160;Contraseña</string>
     <string name="confContraseña">Confirmar contraseña</string>
     <string name="entra">Entra</string>
     <string name="entre">Entre con</string>
