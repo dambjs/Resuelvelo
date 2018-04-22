@@ -26,8 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Registro extends AppCompatActivity implements View.OnClickListener {
 
     //defining view objects
-    private EditText nombre;
-    private EditText email;
+    private EditText Nnombre;
+    private EditText Nemail;
     private EditText contraseña;
     private EditText confirmarContra;
     private Button registrarse;
@@ -76,8 +76,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         };
 
         //initializing views
-        nombre = (EditText) findViewById(R.id.nombre);
-        email = (EditText) findViewById(R.id.email);
+        Nnombre = (EditText) findViewById(R.id.Nnombre);
+        Nemail = (EditText) findViewById(R.id.Nemail);
         confirmarContra = (EditText) findViewById(R.id.confirmarContra);
         contraseña = (EditText) findViewById(R.id.contraseña);
         entre = (TextView) findViewById(R.id.entre);
@@ -106,15 +106,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     private void registerUser(){
 
         //getting bordes and password from edit texts
-        final String nombreP = nombre.getText().toString().trim();
-        String emailP = email.getText().toString().trim();
+        final String nombreP = Nnombre.getText().toString().trim();
+        String emailP = Nemail.getText().toString().trim();
         String confPass = confirmarContra.getText().toString().trim();
         String password  = contraseña.getText().toString().trim();
-
-//        DatabaseReference myRootRef = FirebaseDatabase.getInstance().getReference();
-//        DatabaseReference userNameRef =  myRootRef.child("users/nombre");
-//        userNameRef.setValue(nombreP);
-
 
         if(TextUtils.isEmpty(nombreP)){
             Toast.makeText(this,"Porfavor ponga un nombre", Toast.LENGTH_LONG).show();
@@ -173,22 +168,23 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
     private void onAuthSuccess(FirebaseUser usersE) {
 
-        String correo = email.getText().toString();
+        String email = Nemail.getText().toString();
 
         // Write new user
-        writeNewUser(usersE.getUid(),correo);
+
+        writeNewUser(usersE.getUid(),email);
 
         // Go to MainActivity
         startActivity(new Intent(Registro.this, PerfilEmpresario.class));
         finish();
     }
 
-    private void writeNewUser(String id, String correo) {
-        String nom = nombre.getText().toString();
+    private void writeNewUser(String userId, String email) {
+        String nombre = Nnombre.getText().toString();
 
-        UsersE usersE = new UsersE(id,nom,correo);
+        UsersE usersE = new UsersE(userId,nombre,email);
 
-        mDatabase.child("usersEmail").child(id).setValue(usersE);
+        mDatabase.child("users").child(userId).setValue(usersE);
     }
 
     @Override
