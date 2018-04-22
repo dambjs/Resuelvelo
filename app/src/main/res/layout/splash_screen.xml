@@ -6,33 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.sebas_pc.resuelvelo.view.SplashScreen"
-    android:id="@+id/splash_screen">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/wallpaper"
-        android:scaleType="fitXY"/>
-
-    <TextView
-        android:text="Aditya Wi_"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvSplash"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:fontFamily="sans-serif-smallcaps"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="37dp" />
+    android:id="@+id/splash_screen"
+    android:background="#1f4747">
 
     <ProgressBar
         android:id="@+id/progresBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="321dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/resuelvelo" />
+
 
 </RelativeLayout>

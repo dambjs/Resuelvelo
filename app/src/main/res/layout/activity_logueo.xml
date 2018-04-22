@@ -75,7 +75,7 @@
                 android:id="@+id/entre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="50dp"
                 android:layout_marginTop="-32dp"
                 android:text="@string/entre"
                 android:textColor="@android:color/white" />
@@ -84,7 +84,7 @@
                 android:id="@+id/google"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginLeft="-60dp"
+                android:layout_marginLeft="-70dp"
                 android:layout_marginTop="25dp"
                 android:background="@mipmap/goog" />
 
