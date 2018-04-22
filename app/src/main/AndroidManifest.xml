@@ -21,7 +21,8 @@
         <activity
             android:name=".view.PerfilEmpresario"/>
         <activity
-            android:name=".view.Registro"/>
+            android:name=".view.Registro"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

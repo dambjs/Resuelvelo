@@ -148,6 +148,8 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
                             //start the profile activity
                             finish();
                             startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
+                        } else{
+                            progressDialog.setMessage("Error, algo está mal");
                         }
                     }
                 });
