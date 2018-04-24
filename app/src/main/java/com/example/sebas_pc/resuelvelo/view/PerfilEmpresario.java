@@ -13,6 +13,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 public class PerfilEmpresario extends AppCompatActivity {
 
@@ -60,5 +61,13 @@ public class PerfilEmpresario extends AppCompatActivity {
                 .setNegativeButton("No", null)
                 .show();
     }
+
+//    @Override
+//    public void onDataChange(DataSnapshot snapshot) {
+//        for (DataSnapshot chatSnapshot: snapshot.getChildren()) {
+//            String key = chatSnapshot.getKey();
+//            System.out.println(key);
+//        }
+//    }
 
 }

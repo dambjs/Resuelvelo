@@ -97,7 +97,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
             if (resultCode == RESULT_OK) {
                 comeIn();
             } else {
-                // Sign in failed
+//                 Sign in failed
                 if (response == null) {
                     // User pressed back button
                     return;

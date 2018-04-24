@@ -62,7 +62,7 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="salir"
         android:layout_marginTop="100dp"
+        android:onClick="salir"
         android:text="@string/salir" />
 </LinearLayout>

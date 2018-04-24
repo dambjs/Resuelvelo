@@ -171,6 +171,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
         // Write new user
 
+
         writeNewUser(usersE.getUid(),email);
 
         // Go to MainActivity
