@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -61,7 +60,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             finish();
 
             //and open profile activity
-            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
+            startActivity(new Intent(getApplicationContext(), PerfilEmpresario2.class));
         }
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -91,9 +90,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         entre.setOnClickListener(this);
 
     }
-
-
-
 
     @Override
     protected void onStart() {
@@ -143,7 +139,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
 
 
-
         //creating a new user
         firebaseAuth.createUserWithEmailAndPassword(emailP, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -153,7 +148,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                         if(task.isSuccessful()){
                             onAuthSuccess(task.getResult().getUser());
                             finish();
-                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
+                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario2.class));
                         }else{
                             //display some message here
                             Toast.makeText(Registro.this,"Registro Erroneo", Toast.LENGTH_LONG).show();
@@ -170,19 +165,17 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         String email = Nemail.getText().toString();
 
         // Write new user
-
-
         writeNewUser(usersE.getUid(),email);
 
         // Go to MainActivity
-        startActivity(new Intent(Registro.this, PerfilEmpresario.class));
+        startActivity(new Intent(Registro.this, PerfilEmpresario2.class));
         finish();
     }
 
     private void writeNewUser(String userId, String email) {
         String nombre = Nnombre.getText().toString();
         UsersE usersE = new UsersE(userId,nombre,email);
-        mDatabase.child("users").child(userId).setValue(usersE);
+        mDatabase.child("usersEmail").child(userId).setValue(usersE);
     }
 
     @Override
