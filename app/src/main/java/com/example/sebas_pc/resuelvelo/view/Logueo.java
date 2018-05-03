@@ -69,7 +69,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
 
             final String userId = firebaseUser.getUid();
 
-            FirebaseDatabase.getInstance().getReference("users")
+            FirebaseDatabase.getInstance().getReference("usersGoogle")
                     .child(userId)
                     .setValue(new UsersG(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
 
@@ -97,7 +97,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
             if (resultCode == RESULT_OK) {
                 comeIn();
             } else {
-                // Sign in failed
+//                 Sign in failed
                 if (response == null) {
                     // User pressed back button
                     return;
@@ -147,7 +147,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             //start the profile activity
                             finish();
-                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
+                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario2.class));
                         } else{
                             progressDialog.setMessage("Error, algo está mal");
                         }

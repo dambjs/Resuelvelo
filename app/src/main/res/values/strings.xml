@@ -15,7 +15,8 @@
     <!-- Registro -->
 
     <string name="registro">Hola, Registrate!</string>
-    <string name="nombreEmpresa">Nombre de la empresa</string>
+    <string name="nombreEmpresa">Nombre de la empresa:</string>
+    <string name="nombreEmpresario">Nombre:</string>
     <string name="nombre">&#160;Nombre</string>
     <string name="email2">&#160;Email</string>
     <string name="contraseña2">&#160;Contraseña</string>
@@ -24,5 +25,5 @@
     <string name="salir">Cerrar sesion</string>
 
     <string name="not_close_session">No se pudo cerrar sesión</string>
-
+    <string name="not_revoke">No se pudo revocar el acceso</string>
 </resources>
