@@ -27,14 +27,13 @@ public class PerfilEmpresario2 extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private  TextView nom;
     private TextView correo;
-
     private DatabaseReference mDatabase;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_empresario2);
+        setContentView(R.layout.activity_perfil_empresario);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("usersEmail");
 
@@ -45,15 +44,15 @@ public class PerfilEmpresario2 extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
-             public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     UsersE usersE = postSnapshot.getValue(UsersE.class);
                     String nombre = usersE.getNombre();
                     String email = usersE.getEmail();
                     nom.setText(nombre);
                     correo.setText(email);
+                }
             }
-        }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
