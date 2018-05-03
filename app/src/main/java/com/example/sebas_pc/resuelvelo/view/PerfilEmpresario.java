@@ -36,8 +36,9 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("usersGoogle");
 
-        nom = (TextView) findViewById(R.id.nombre);
         correo = (TextView) findViewById(R.id.email);
+        nom = (TextView) findViewById(R.id.nombre);
+
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
