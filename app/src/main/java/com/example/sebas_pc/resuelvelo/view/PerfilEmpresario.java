@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import com.example.sebas_pc.resuelvelo.R;
+import com.example.sebas_pc.resuelvelo.model.UsersE;
 import com.example.sebas_pc.resuelvelo.model.UsersG;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,7 +35,9 @@ public class PerfilEmpresario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_empresario);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("usersGoogle");
+        String uid = FirebaseAuth.getInstance().getUid();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
         correo = (TextView) findViewById(R.id.email);
         nom = (TextView) findViewById(R.id.nombre);
@@ -43,13 +46,11 @@ public class PerfilEmpresario extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    UsersG usersG = postSnapshot.getValue(UsersG.class);
-                    String nombre = usersG.getNombre();
-                    String email = usersG.getEmail();
+                    UsersE usersE = dataSnapshot.getValue(UsersE.class);
+                    String nombre = usersE.getNombre();
+                    String email = usersE.getEmail();
                     nom.setText(nombre);
                     correo.setText(email);
-                }
             }
 
             @Override

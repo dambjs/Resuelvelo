@@ -38,7 +38,6 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
 
             final String userId = firebaseUser.getUid();
 
-            FirebaseDatabase.getInstance().getReference("usersGoogle")
+            FirebaseDatabase.getInstance().getReference("users")
                     .child(userId)
                     .setValue(new UsersG(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
 
@@ -147,7 +146,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             //start the profile activity
                             finish();
-                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario2.class));
+                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
                         } else{
                             progressDialog.setMessage("Error, algo está mal");
                         }

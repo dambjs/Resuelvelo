@@ -60,7 +60,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
             finish();
 
             //and open profile activity
-            startActivity(new Intent(getApplicationContext(), PerfilEmpresario2.class));
+            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
         }
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -148,7 +148,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                         if(task.isSuccessful()){
                             onAuthSuccess(task.getResult().getUser());
                             finish();
-                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario2.class));
+                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
                         }else{
                             //display some message here
                             Toast.makeText(Registro.this,"Registro Erroneo", Toast.LENGTH_LONG).show();
@@ -168,14 +168,14 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         writeNewUser(usersE.getUid(),email);
 
         // Go to MainActivity
-        startActivity(new Intent(Registro.this, PerfilEmpresario2.class));
+        startActivity(new Intent(Registro.this, PerfilEmpresario.class));
         finish();
     }
 
     private void writeNewUser(String userId, String email) {
         String nombre = Nnombre.getText().toString();
         UsersE usersE = new UsersE(userId,nombre,email);
-        mDatabase.child("usersEmail").child(userId).setValue(usersE);
+        mDatabase.child("users").child(userId).setValue(usersE);
     }
 
     @Override
