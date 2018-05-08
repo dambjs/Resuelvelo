@@ -9,8 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import com.example.sebas_pc.resuelvelo.R;
-import com.example.sebas_pc.resuelvelo.model.UsersE;
-import com.example.sebas_pc.resuelvelo.model.UsersG;
+import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,24 +38,22 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
-        correo = (TextView) findViewById(R.id.email);
-        nom = (TextView) findViewById(R.id.nombre);
+        correo = findViewById(R.id.email);
+        nom = findViewById(R.id.displayName);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    UsersE usersE = dataSnapshot.getValue(UsersE.class);
-                    String nombre = usersE.getNombre();
-                    String email = usersE.getEmail();
-                    nom.setText(nombre);
-                    correo.setText(email);
+                    User user = dataSnapshot.getValue(User.class);
+                    if(user != null) {
+                        nom.setText(user.displayName);
+                        correo.setText(user.email);
+                    }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
-                // [START_EXCLUDE]
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });

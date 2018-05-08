@@ -5,16 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
-import com.example.sebas_pc.resuelvelo.model.UsersG;
+import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
@@ -23,7 +21,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 
@@ -31,10 +33,10 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGN_IN = 123;
 
-    private Button entra; //ok
-    private EditText email; // ok
-    private EditText constraseña; // ok
-    private TextView registrarte; //ok
+    private Button btnEntra; //ok
+    private EditText etEmail; // ok
+    private EditText etPassword; // ok
+    private TextView tvRegistrarte; //ok
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
@@ -43,10 +45,10 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logueo);
 
-        email = (EditText) findViewById(R.id.email); // ok
-        constraseña = (EditText) findViewById(R.id.constraseña); //ok
-        entra = (Button) findViewById(R.id.entra); // ok
-        registrarte = (TextView) findViewById(R.id.registrarte); // ok
+        etEmail = (EditText) findViewById(R.id.email); // ok
+        etPassword = (EditText) findViewById(R.id.constraseña); //ok
+        btnEntra = (Button) findViewById(R.id.entra); // ok
+        tvRegistrarte = (TextView) findViewById(R.id.registrarte); // ok
 
         findViewById(R.id.google).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +59,8 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
-        entra.setOnClickListener(this);
-        registrarte.setOnClickListener(Logueo.this);
+        btnEntra.setOnClickListener(this);
+        tvRegistrarte.setOnClickListener(Logueo.this);
         comeIn();
     }
 
@@ -68,10 +70,22 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
 
             final String userId = firebaseUser.getUid();
 
-            FirebaseDatabase.getInstance().getReference("users")
-                    .child(userId)
-                    .setValue(new UsersG(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(userId);
 
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if(user == null){
+                        databaseReference.setValue(new User(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getMessage());
+                }
+            });
             startActivity(new Intent(this, PerfilEmpresario.class));
             finish();
         }
@@ -114,18 +128,17 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void userLogin() {
-        String emailP = email.getText().toString().trim();
-        String password = constraseña.getText().toString().trim();
-
-
-        //checking if bordes and passwords are empty
+        String emailP = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(emailP)) {
+            etEmail.setError("Obligatorio");
             Toast.makeText(this, "Porfavor ponga un email", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
+            etPassword.setError("Obligatorio");
             Toast.makeText(this, "Porfavor ponga su contraseña", Toast.LENGTH_LONG).show();
             return;
         }
@@ -156,11 +169,11 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == entra) {
+        if (view == btnEntra) {
             userLogin();
         }
 
-        if (view == registrarte) {
+        if (view == tvRegistrarte) {
             finish();
             startActivity(new Intent(this, Registro.class));
         }

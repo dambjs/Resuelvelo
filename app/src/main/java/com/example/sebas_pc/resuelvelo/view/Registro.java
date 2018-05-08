@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
-import com.example.sebas_pc.resuelvelo.model.UsersE;
+import com.example.sebas_pc.resuelvelo.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,26 +23,17 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener {
 
-    //defining view objects
-    private EditText Nnombre;
-    private EditText Nemail;
-    private EditText contraseña;
-    private EditText confirmarContra;
-    private Button registrarse;
+    private EditText etDisplayName;
+    private EditText etEmail;
+    private EditText etPassword;
+    private EditText etPassword2;
+    private Button btnRegistrarse;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private TextView entre;
+    private TextView tvEntrar;
 
     private ProgressDialog progressDialog;
 
-    //
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
-
-    //
-
-    //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
 
     @Override
@@ -50,16 +41,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        //initializing firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 
-        //if getCurrentUser does not returns null
         if(firebaseAuth.getCurrentUser() != null){
-            //that means user is already logged in
-            //so close this activity
             finish();
-
-            //and open profile activity
             startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
         }
 
@@ -72,23 +57,19 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                 }
             }
         };
-
-        //initializing views
-        Nnombre = (EditText) findViewById(R.id.Nnombre);
-        Nemail = (EditText) findViewById(R.id.Nemail);
-        confirmarContra = (EditText) findViewById(R.id.confirmarContra);
-        contraseña = (EditText) findViewById(R.id.contraseña);
-        entre = (TextView) findViewById(R.id.entre);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        registrarse = (Button) findViewById(R.id.registrarse);
+        etDisplayName = (EditText) findViewById(R.id.displayName);
+        etEmail = (EditText) findViewById(R.id.email);
+        etPassword2 = (EditText) findViewById(R.id.password2);
+        etPassword = (EditText) findViewById(R.id.password);
+        tvEntrar = (TextView) findViewById(R.id.entrar);
+        btnRegistrarse = (Button) findViewById(R.id.registrarse);
 
         progressDialog = new ProgressDialog(this);
 
-        //attaching listener to button
-        registrarse.setOnClickListener(this);
-        entre.setOnClickListener(this);
-
+        btnRegistrarse.setOnClickListener(this);
+        tvEntrar.setOnClickListener(this);
     }
 
     @Override
@@ -100,47 +81,41 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
     private void registerUser(){
 
-        //getting bordes and password from edit texts
-        final String nombreP = Nnombre.getText().toString().trim();
-        String emailP = Nemail.getText().toString().trim();
-        String confPass = confirmarContra.getText().toString().trim();
-        String password  = contraseña.getText().toString().trim();
+        final String displayName = etDisplayName.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+        String password2 = etPassword2.getText().toString().trim();
+        String password  = etPassword.getText().toString().trim();
 
-        if(TextUtils.isEmpty(nombreP)){
-            Toast.makeText(this,"Porfavor ponga un nombre", Toast.LENGTH_LONG).show();
+        if(TextUtils.isEmpty(displayName)){
+            Toast.makeText(this,"Porfavor ponga un displayName", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(TextUtils.isEmpty(emailP)){
+        if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Porfavor ponga un bordes", Toast.LENGTH_LONG).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Porfavor ponga una contraseña", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ponga una etPassword", Toast.LENGTH_LONG).show();
             return;
         }
 
         if(password.length()<6){
-            Toast.makeText(this,"Porfavor introduzca una contraseña de más de 6 caracteres", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor introduzca una etPassword de más de 6 caracteres", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(!password.equals(confPass)){
-            Toast.makeText(this,"Porfavor introduzca una contraseña identica", Toast.LENGTH_LONG).show();
+        if(!password.equals(password2)){
+            Toast.makeText(this,"Porfavor introduzca una etPassword identica", Toast.LENGTH_LONG).show();
             return;
         }
-
-        //if the bordes and password are not empty
-        //displaying a progress dialog
 
         progressDialog.setMessage("Registrando, espere por favor...");
         progressDialog.show();
 
-
-
         //creating a new user
-        firebaseAuth.createUserWithEmailAndPassword(emailP, password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -150,7 +125,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                             finish();
                             startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
                         }else{
-                            //display some message here
                             Toast.makeText(Registro.this,"Registro Erroneo", Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
@@ -160,35 +134,25 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
     }
 
-    private void onAuthSuccess(FirebaseUser usersE) {
+    private void onAuthSuccess(FirebaseUser user) {
+        String email = etEmail.getText().toString();
+        String nombre = etDisplayName.getText().toString();
+        mDatabase.child("users").child(user.getUid()).setValue(new User(user.getUid(), nombre, email));
 
-        String email = Nemail.getText().toString();
-
-        // Write new user
-        writeNewUser(usersE.getUid(),email);
-
-        // Go to MainActivity
         startActivity(new Intent(Registro.this, PerfilEmpresario.class));
         finish();
-    }
-
-    private void writeNewUser(String userId, String email) {
-        String nombre = Nnombre.getText().toString();
-        UsersE usersE = new UsersE(userId,nombre,email);
-        mDatabase.child("users").child(userId).setValue(usersE);
     }
 
     @Override
     public void onClick(View view) {
 
-        if(view == registrarse){
+        if(view == btnRegistrarse){
             registerUser();
         }
 
-        if(view == entre){
+        if(view == tvEntrar){
             //open login activity when user taps on the already registered textview
             startActivity(new Intent(this, Logueo.class));
         }
     }
-
 }
