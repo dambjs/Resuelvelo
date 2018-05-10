@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import com.example.sebas_pc.resuelvelo.R;
+import com.example.sebas_pc.resuelvelo.model.Empresa;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,7 +27,10 @@ public class PerfilEmpresario extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private  TextView nom;
     private TextView correo;
+    private TextView prueba;
     private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase2;
+
 
 
     @Override
@@ -37,9 +41,12 @@ public class PerfilEmpresario extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayName);
+        prueba = findViewById(R.id.prueba);
+
 
         mDatabase.addValueEventListener(new ValueEventListener() {
 
@@ -50,6 +57,23 @@ public class PerfilEmpresario extends AppCompatActivity {
                         nom.setText(user.displayName);
                         correo.setText(user.email);
                     }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+
+
+        mDatabase2.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Empresa empresa = dataSnapshot.getValue(Empresa.class);
+                if(empresa != null) {
+                    prueba.setText(empresa.displayName);
+                }
             }
 
             @Override
