@@ -4,10 +4,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
 import com.example.sebas_pc.resuelvelo.model.User;
@@ -15,6 +21,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,12 +32,13 @@ public class PerfilEmpresario extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private FirebaseAuth firebaseAuth;
-    private  TextView nom;
+    private TextView nom;
     private TextView correo;
-    private TextView prueba;
+    private TextView nombreEmp;
+    private ImageView imageview;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabase2;
-
+    private DatabaseReference mDatabase3;
 
 
     @Override
@@ -45,7 +53,8 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayName);
-        prueba = findViewById(R.id.prueba);
+        nombreEmp = findViewById(R.id.nombreEmp);
+        imageview = findViewById(R.id.imageview);
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -72,7 +81,7 @@ public class PerfilEmpresario extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Empresa empresa = dataSnapshot.getValue(Empresa.class);
                 if(empresa != null) {
-                    prueba.setText(empresa.displayName);
+                    nombreEmp.setText(empresa.displayName);
                 }
             }
 
@@ -83,6 +92,8 @@ public class PerfilEmpresario extends AppCompatActivity {
         });
 
     }
+
+
 
     public void salir(View view) {
         AuthUI.getInstance()
@@ -114,4 +125,5 @@ public class PerfilEmpresario extends AppCompatActivity {
         Intent intent = new Intent(this, CrearEmpresa.class);
         startActivity(intent);
     }
+
 }
