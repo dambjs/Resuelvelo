@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
+import com.example.sebas_pc.resuelvelo.model.Post;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,11 +51,12 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("logoEmpresas").child(uid);
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayName);
         nombreEmp = findViewById(R.id.nombreEmp);
-        imageview = findViewById(R.id.imageview);
+        imageview = findViewById(R.id.image);
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {

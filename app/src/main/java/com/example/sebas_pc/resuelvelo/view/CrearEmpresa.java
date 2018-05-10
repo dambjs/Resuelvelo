@@ -85,7 +85,7 @@ public class CrearEmpresa extends AppCompatActivity {
     }
 
     void uploadFile(){
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child(mediaTYPE + "/" + UUID.randomUUID() + "-" + mediaUri.getLastPathSegment());
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child(mediaTYPE + "/" + UUID.randomUUID());
         fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -102,7 +102,7 @@ public class CrearEmpresa extends AppCompatActivity {
         if (data != null) {
             if (requestCode == RC_IMAGE_PICK) {
                 mediaUri = data.getData();
-                mediaTYPE = "image";
+                mediaTYPE = "logoEmpresas";
                 Glide.with(this).load(mediaUri).into(image);
             }
         }
