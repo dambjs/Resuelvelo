@@ -19,6 +19,7 @@ import com.example.sebas_pc.resuelvelo.model.Empresa;
 import com.example.sebas_pc.resuelvelo.model.Post;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,17 +47,18 @@ public class PerfilEmpresario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_empresario);
+        FirebaseRecyclerAdapter mAdapter;
 
         String uid = FirebaseAuth.getInstance().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
-        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("logoEmpresas").child(uid);
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayName);
         nombreEmp = findViewById(R.id.nombreEmp);
         imageview = findViewById(R.id.image);
+
 
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -93,9 +95,15 @@ public class PerfilEmpresario extends AppCompatActivity {
             }
         });
 
+
+
+//mirar esto
+        String urlImage = "http://resuelvelo-627a7.appspot.com";
+
+        Glide.with(PerfilEmpresario.this)
+                .load(urlImage)
+                .into(imageview);
     }
-
-
 
     public void salir(View view) {
         AuthUI.getInstance()
@@ -123,9 +131,12 @@ public class PerfilEmpresario extends AppCompatActivity {
                 .show();
     }
 
+
+
     public void add(View view) {
         Intent intent = new Intent(this, CrearEmpresa.class);
         startActivity(intent);
     }
+
 
 }
