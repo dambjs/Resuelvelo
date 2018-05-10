@@ -5,6 +5,7 @@ public class Empresa {
     public String displayName;
     public String date;
 
+
     public Empresa(String userId, String displayName, String date) {
         this.userId = userId;
         this.displayName = displayName;
@@ -12,4 +13,5 @@ public class Empresa {
     }
 
     public Empresa(){}
+
 }
