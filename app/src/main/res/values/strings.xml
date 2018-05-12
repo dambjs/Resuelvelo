@@ -15,9 +15,8 @@
     <!-- Registro -->
 
     <string name="registro">Hola, Registrate!</string>
-    <string name="nombreEmpresa">Nombre de la empresa:</string>
     <string name="nombreEmpresario">Nombre:</string>
-    <string name="nombre">&#160;Nombre</string>
+    <string name="displayName">&#160;Nombre</string>
     <string name="email2">&#160;Email</string>
     <string name="contraseña2">&#160;Contraseña</string>
     <string name="confContraseña">&#160;Confirmar contraseña</string>
@@ -26,4 +25,14 @@
 
     <string name="not_close_session">No se pudo cerrar sesión</string>
     <string name="not_revoke">No se pudo revocar el acceso</string>
+
+    <!-- Perfil Empresario -->
+    <string name="empresas">MIS EMPRESAS</string>
+
+    <!-- Perfil Empresario -->
+    <string name="creaEmp">Crear empresa</string>
+    <string name="nombreEmp">Nombre de la empresa</string>
+    <string name="fechaEmp">Fecha de fundación</string>
+    <string name="descEmp">Descripción de la empresa</string>
+    <string name="logoEmp">Logo de la empresa</string>
 </resources>
