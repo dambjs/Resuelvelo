@@ -1,15 +1,21 @@
 package com.example.sebas_pc.resuelvelo.model;
 
 
+import java.util.HashMap;
+
 public class Post {
-    public String userId;
-    public String image;
+    public String uid;
+    public String mediaUrl;
+    public String mediaTYPE;
 
+    public Post(String uid) {
+        this.uid = uid;
 
-    public Post() {}
-
-    public Post(String userId, String image) {
-        this.userId = userId;
-        this.image = image;
     }
+    public Post(String uid, String mediaUrl, String mediaTYPE) {
+        this.uid = uid;
+        this.mediaUrl = mediaUrl;
+        this.mediaTYPE = mediaTYPE;
+    }
+    public Post() {}
 }

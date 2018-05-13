@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
+import com.example.sebas_pc.resuelvelo.model.Post;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,9 +61,9 @@ public class CrearEmpresa extends AppCompatActivity {
                 if (mediaUri != null){
                     uploadFile();
                 }
-//                else{
-//                    writeNewPost();
-//                }
+                else{
+                    writeNewPost();
+                }
                 finish();
                 startActivity(new Intent(CrearEmpresa.this, PerfilEmpresario.class));
             }
@@ -84,14 +85,25 @@ public class CrearEmpresa extends AppCompatActivity {
         finish();
     }
 
+    void writeNewPost() {
+        String postKey = mDatabase.child("logoEmpresas").push().getKey();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Post post;
+        if(downloaderUrl == null){
+            post = new Post(firebaseUser.getPhotoUrl().toString());
+        }else {
+            post =  new Post(firebaseUser.getPhotoUrl().toString(),downloaderUrl.toString(),mediaTYPE.toString());
+        }
+        mDatabase.child("logoEmpresas").child(postKey).setValue(post);
+    }
+
     void uploadFile(){
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child(mediaTYPE + "/" + UUID.randomUUID());
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child(mediaTYPE + "/" + nombreEmp.getText());
         fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 downloaderUrl = taskSnapshot.getDownloadUrl();
-
-//                writeNewPost();
+                writeNewPost();
             }
         });
     }

@@ -20,7 +20,9 @@ import com.example.sebas_pc.resuelvelo.model.Post;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +31,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 public class PerfilEmpresario extends AppCompatActivity {
 
@@ -42,7 +49,6 @@ public class PerfilEmpresario extends AppCompatActivity {
     private DatabaseReference mDatabase2;
     private DatabaseReference mDatabase3;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,7 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("logoEmpresas").child(uid);
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayName);
@@ -65,11 +72,11 @@ public class PerfilEmpresario extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if(user != null) {
-                        nom.setText(user.displayName);
-                        correo.setText(user.email);
-                    }
+                User user = dataSnapshot.getValue(User.class);
+                if(user != null) {
+                    nom.setText(user.displayName);
+                    correo.setText(user.email);
+                }
             }
 
             @Override
@@ -77,7 +84,6 @@ public class PerfilEmpresario extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-
 
         mDatabase2.addValueEventListener(new ValueEventListener() {
 
@@ -95,14 +101,33 @@ public class PerfilEmpresario extends AppCompatActivity {
             }
         });
 
+        mDatabase3.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Post post = dataSnapshot.getValue(Post.class);
+                if(post != null) {
+//                    nombreEmp.setText(post.displayName);
+                    Glide.with(PerfilEmpresario.this)
+                            .load(post.mediaUrl)
+                            .into(image);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
 
 
 //mirar esto
-        String urlImage = "http://resuelvelo-627a7.appspot.com";
+//        Post post = new Post();
+//        Glide.with(this)
+//                .load(post.mediaUrl)
+//                .into(image);
 
-        Glide.with(PerfilEmpresario.this)
-                .load(urlImage)
-                .into(image);
     }
 
     public void salir(View view) {
