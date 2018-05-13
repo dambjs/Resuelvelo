@@ -37,7 +37,7 @@ public class PerfilEmpresario extends AppCompatActivity {
     private TextView nom;
     private TextView correo;
     private TextView nombreEmp;
-    private ImageView imageview;
+    private ImageView image;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabase2;
     private DatabaseReference mDatabase3;
@@ -57,7 +57,7 @@ public class PerfilEmpresario extends AppCompatActivity {
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayName);
         nombreEmp = findViewById(R.id.nombreEmp);
-        imageview = findViewById(R.id.image);
+        image = findViewById(R.id.image);
 
 
 
@@ -102,7 +102,7 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         Glide.with(PerfilEmpresario.this)
                 .load(urlImage)
-                .into(imageview);
+                .into(image);
     }
 
     public void salir(View view) {
