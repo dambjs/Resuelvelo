@@ -16,7 +16,7 @@
 
     <string name="registro">Hola, Registrate!</string>
     <string name="nombreEmpresario">Nombre:</string>
-    <string name="displayName">&#160;Nombre</string>
+    <string name="displayNameEmpresa">&#160;Nombre</string>
     <string name="email2">&#160;Email</string>
     <string name="contraseña2">&#160;Contraseña</string>
     <string name="confContraseña">&#160;Confirmar contraseña</string>

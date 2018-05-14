@@ -4,38 +4,26 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
-import com.example.sebas_pc.resuelvelo.model.Post;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.util.UUID;
 
 public class PerfilEmpresario extends AppCompatActivity {
 
@@ -59,7 +47,6 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
-        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("logoEmpresas").child(uid);
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayName);
@@ -89,10 +76,13 @@ public class PerfilEmpresario extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Empresa empresa = dataSnapshot.getValue(Empresa.class);
-                if(empresa != null) {
-                    nombreEmp.setText(empresa.displayName);
-                }
+                    Empresa empresa = dataSnapshot.getValue(Empresa.class);
+                    if(empresa != null) {
+                        nombreEmp.setText(empresa.displayNameEmpresa);
+                        Glide.with(PerfilEmpresario.this)
+                                .load(empresa.photoEmpresaUrl)
+                                .into(image);
+                    }
             }
 
             @Override
@@ -100,34 +90,6 @@ public class PerfilEmpresario extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-
-        mDatabase3.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Post post = dataSnapshot.getValue(Post.class);
-                if(post != null) {
-//                    nombreEmp.setText(post.displayName);
-                    Glide.with(PerfilEmpresario.this)
-                            .load(post.mediaUrl)
-                            .into(image);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getMessage());
-            }
-        });
-
-
-//mirar esto
-//        Post post = new Post();
-//        Glide.with(this)
-//                .load(post.mediaUrl)
-//                .into(image);
-
     }
 
     public void salir(View view) {

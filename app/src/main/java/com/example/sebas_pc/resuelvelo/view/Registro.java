@@ -87,7 +87,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         String password  = etPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(displayName)){
-            Toast.makeText(this,"Porfavor ponga un displayName", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ponga un displayNameEmpresa", Toast.LENGTH_LONG).show();
             return;
         }
 
