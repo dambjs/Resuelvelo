@@ -85,9 +85,9 @@ public class CrearEmpresa extends AppCompatActivity {
         String nombre = nombreEmp.getText().toString();
         String fecha = fechaEmp.getText().toString();
         if(downloaderUrl == null) {
-            mDatabase.child("empresa").child(user.getUid()).push().setValue(new Empresa(user.getUid(), nombre, fecha, downloaderUrl.toString()));
-        } else {
             mDatabase.child("empresa").child(user.getUid()).push().setValue(new Empresa(user.getUid(), nombre, fecha, null));
+        } else {
+            mDatabase.child("empresa").child(user.getUid()).push().setValue(new Empresa(user.getUid(), nombre, fecha, downloaderUrl.toString()));
         }
         finish();
     }

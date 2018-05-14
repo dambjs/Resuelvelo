@@ -35,7 +35,6 @@ public class PerfilEmpresario extends AppCompatActivity {
     private ImageView image;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabase2;
-    private DatabaseReference mDatabase3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class PerfilEmpresario extends AppCompatActivity {
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
 
         correo = findViewById(R.id.email);
-        nom = findViewById(R.id.displayName);
+        nom = findViewById(R.id.displayNameEmpresa);
         nombreEmp = findViewById(R.id.nombreEmp);
         image = findViewById(R.id.image);
 
@@ -76,13 +75,15 @@ public class PerfilEmpresario extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    Empresa empresa = dataSnapshot.getValue(Empresa.class);
-                    if(empresa != null) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Empresa empresa = noteDataSnapshot.getValue(Empresa.class);
+                    if (empresa != null) {
                         nombreEmp.setText(empresa.displayNameEmpresa);
                         Glide.with(PerfilEmpresario.this)
                                 .load(empresa.photoEmpresaUrl)
                                 .into(image);
                     }
+                }
             }
 
             @Override
