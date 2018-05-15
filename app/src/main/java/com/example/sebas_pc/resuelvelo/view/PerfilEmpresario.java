@@ -6,16 +6,19 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,18 +26,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class PerfilEmpresario extends AppCompatActivity {
 
-    private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private FirebaseAuth firebaseAuth;
     private TextView nom;
     private TextView correo;
-    private TextView nombreEmp;
-    private ImageView image;
-    private DatabaseReference mDatabase;
-    private DatabaseReference mDatabase2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +43,15 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayNameEmpresa);
-        nombreEmp = findViewById(R.id.nombreEmp);
-        image = findViewById(R.id.image);
-
-
+        RecyclerView recyclerView = findViewById(R.id.list_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mDatabase.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
@@ -71,26 +67,46 @@ public class PerfilEmpresario extends AppCompatActivity {
             }
         });
 
-        mDatabase2.addValueEventListener(new ValueEventListener() {
 
+        Query postsQuery = mDatabase2.child("empresa").child(uid);
+
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Empresa>()
+                .setQuery(postsQuery, Empresa.class)
+                .setLifecycleOwner(this)
+                .build();
+
+        mAdapter = new FirebaseRecyclerAdapter<Empresa, EmpresaViewHolder>(options) {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Empresa empresa = noteDataSnapshot.getValue(Empresa.class);
-                    if (empresa != null) {
-                        nombreEmp.setText(empresa.displayNameEmpresa);
-                        Glide.with(PerfilEmpresario.this)
-                                .load(empresa.photoEmpresaUrl)
-                                .into(image);
-                    }
+            protected void onBindViewHolder(@NonNull EmpresaViewHolder holder, final int position, @NonNull final Empresa empresa) {
+                holder.nombreEmp.setText(empresa.displayNameEmpresa);
+                if(empresa.photoEmpresaUrl != null) {
+                    holder.image.setVisibility(View.VISIBLE);
+                    Glide.with(PerfilEmpresario.this)
+                            .load(empresa.photoEmpresaUrl)
+                            .into(holder.image);
+                }else{
+                    holder.image.setVisibility(View.GONE);
                 }
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PerfilEmpresario.this, PerfilEmpresa.class);
+                        intent.putExtra("EMPRESA_KEY", getRef(position).getKey());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getMessage());
+            public EmpresaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empresas, parent, false);
+                return new EmpresaViewHolder(view);
+
             }
-        });
+        };
+
+        recyclerView.setAdapter(mAdapter);
     }
 
     public void salir(View view) {
