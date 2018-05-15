@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tw__solid_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="158dp"
+                android:layout_height="101dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="25dp"
+                android:src="@mipmap/empresa" />
+
+            <TextView
+                android:layout_width="311dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-150dp"
+                android:layout_marginTop="150dp"
+                android:text="Somos una empresa que desde sus inicios se ha dedicado siempre a proveer y equipar con sistemas de telecomunicaciones. " />
+
+            <LinearLayout
+                android:layout_width="167dp"
+                android:layout_height="124dp"
+                android:layout_marginLeft="-170dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="Empresa" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-55dp"
+                    android:layout_marginTop="65dp"
+                    android:text="Año" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-25dp"
+                    android:layout_marginTop="90dp"
+                    android:text="Director" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card2"
+                card_view:cardBackgroundColor="#2ECCFA"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <TextView
+                    android:id="@+id/txt1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#A9F5F2"
+                    android:padding="10dp"
+                    android:text="@string/grupos"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/nombreEmp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="29dp"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:onClick="add"
+                    android:src="@mipmap/mas" />
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Crear incidencia" />
+
+            <Button
+                android:layout_width="148dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Ver incidencia" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
