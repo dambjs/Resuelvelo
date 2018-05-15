@@ -22,8 +22,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.UUID;
-
 public class CrearEmpresa extends AppCompatActivity {
 
     private EditText nombreEmp;
@@ -34,12 +32,9 @@ public class CrearEmpresa extends AppCompatActivity {
     private Button registrarse;
     Uri mediaUri;
     Uri downloaderUrl;
-    String mediaTYPE;
     private final int RC_IMAGE_PICK = 5677;
 
     private DatabaseReference mDatabase;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +50,12 @@ public class CrearEmpresa extends AppCompatActivity {
         registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                creaEmpresa();
                 registrarse.setEnabled(false);
                 if (mediaUri != null){
                     uploadFile();
+                } else{
+                    creaEmpresa();
                 }
-//                else{
-//                    writeNewPost();
-//                }
                 finish();
                 startActivity(new Intent(CrearEmpresa.this, PerfilEmpresario.class));
             }
@@ -76,24 +69,27 @@ public class CrearEmpresa extends AppCompatActivity {
         });
     }
 
-    private void creaEmpresa() {
-        final FirebaseUser empresa = FirebaseAuth.getInstance().getCurrentUser();
-        String nombre = nombreEmp.getText().toString();
-        String fecha = fechaEmp.getText().toString();
-        mDatabase.child("empresa").child(empresa.getUid()).setValue(new Empresa(empresa.getUid(), nombre, fecha));
-        finish();
-    }
-
     void uploadFile(){
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child(mediaTYPE + "/" + UUID.randomUUID());
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("logos/" + nombreEmp.getText());
         fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 downloaderUrl = taskSnapshot.getDownloadUrl();
-
-//                writeNewPost();
+                creaEmpresa();
             }
         });
+    }
+
+    private void creaEmpresa() {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String nombre = nombreEmp.getText().toString();
+        String fecha = fechaEmp.getText().toString();
+        if(downloaderUrl == null) {
+            mDatabase.child("empresa").child(user.getUid()).push().setValue(new Empresa(user.getUid(), nombre, fecha, null));
+        } else {
+            mDatabase.child("empresa").child(user.getUid()).push().setValue(new Empresa(user.getUid(), nombre, fecha, downloaderUrl.toString()));
+        }
+        finish();
     }
 
     @Override
@@ -102,7 +98,6 @@ public class CrearEmpresa extends AppCompatActivity {
         if (data != null) {
             if (requestCode == RC_IMAGE_PICK) {
                 mediaUri = data.getData();
-                mediaTYPE = "logoEmpresas";
                 Glide.with(this).load(mediaUri).into(image);
             }
         }

@@ -42,7 +42,7 @@
             android:layout_height="50dp"
             android:layout_margin="15dp"
             android:background="@drawable/bordes"
-            android:hint="@string/displayName"
+            android:hint="@string/displayNameEmpresa"
             android:inputType="text"
             android:paddingLeft="5dp"
             android:textColor="@android:color/black"

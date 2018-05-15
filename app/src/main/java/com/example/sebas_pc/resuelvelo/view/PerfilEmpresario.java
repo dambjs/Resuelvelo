@@ -4,26 +4,21 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
-import com.example.sebas_pc.resuelvelo.model.Post;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,11 +32,9 @@ public class PerfilEmpresario extends AppCompatActivity {
     private TextView nom;
     private TextView correo;
     private TextView nombreEmp;
-    private ImageView imageview;
+    private ImageView image;
     private DatabaseReference mDatabase;
     private DatabaseReference mDatabase2;
-    private DatabaseReference mDatabase3;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +48,9 @@ public class PerfilEmpresario extends AppCompatActivity {
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
 
         correo = findViewById(R.id.email);
-        nom = findViewById(R.id.displayName);
+        nom = findViewById(R.id.displayNameEmpresa);
         nombreEmp = findViewById(R.id.nombreEmp);
-        imageview = findViewById(R.id.image);
+        image = findViewById(R.id.image);
 
 
 
@@ -65,27 +58,10 @@ public class PerfilEmpresario extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if(user != null) {
-                        nom.setText(user.displayName);
-                        correo.setText(user.email);
-                    }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getMessage());
-            }
-        });
-
-
-        mDatabase2.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Empresa empresa = dataSnapshot.getValue(Empresa.class);
-                if(empresa != null) {
-                    nombreEmp.setText(empresa.displayName);
+                User user = dataSnapshot.getValue(User.class);
+                if(user != null) {
+                    nom.setText(user.displayName);
+                    correo.setText(user.email);
                 }
             }
 
@@ -95,14 +71,26 @@ public class PerfilEmpresario extends AppCompatActivity {
             }
         });
 
+        mDatabase2.addValueEventListener(new ValueEventListener() {
 
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Empresa empresa = noteDataSnapshot.getValue(Empresa.class);
+                    if (empresa != null) {
+                        nombreEmp.setText(empresa.displayNameEmpresa);
+                        Glide.with(PerfilEmpresario.this)
+                                .load(empresa.photoEmpresaUrl)
+                                .into(image);
+                    }
+                }
+            }
 
-//mirar esto
-        String urlImage = "http://resuelvelo-627a7.appspot.com";
-
-        Glide.with(PerfilEmpresario.this)
-                .load(urlImage)
-                .into(imageview);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
     }
 
     public void salir(View view) {
