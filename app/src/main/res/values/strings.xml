@@ -29,6 +29,9 @@
     <!-- Perfil Empresario -->
     <string name="empresas">MIS EMPRESAS</string>
 
+    <!-- Perfil Empresa -->
+    <string name="grupos">CREAR GRUPO</string>
+
     <!-- Perfil Empresario -->
     <string name="creaEmp">Crear empresa</string>
     <string name="nombreEmp">Nombre de la empresa</string>

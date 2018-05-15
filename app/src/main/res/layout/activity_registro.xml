@@ -24,7 +24,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UselessParent">
 
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"

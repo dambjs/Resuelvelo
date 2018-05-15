@@ -120,9 +120,13 @@ public class PerfilEmpresario extends AppCompatActivity {
     }
 
 
-
     public void add(View view) {
         Intent intent = new Intent(this, CrearEmpresa.class);
+        startActivity(intent);
+    }
+
+    public void empresa(View view) {
+        Intent intent = new Intent(this, PerfilEmpresa.class);
         startActivity(intent);
     }
 
