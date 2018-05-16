@@ -27,5 +27,17 @@
         <activity
             android:name=".view.CrearEmpresa"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+        <activity
+            android:name=".view.CrearIncidencia"
+            android:theme="@style/AppTheme"
+            android:label="@string/priority_bar">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sebas_pc.resuelvelo.view.CrearIncidencia" />
+
+        </activity>
+
     </application>
 </manifest>

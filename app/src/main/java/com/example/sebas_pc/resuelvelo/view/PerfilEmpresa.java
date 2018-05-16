@@ -85,5 +85,8 @@ public class PerfilEmpresa extends AppCompatActivity {
         });
     }
 
-
+    public void create(View view) {
+        Intent intent = new Intent(this, CrearIncidencia.class);
+        startActivity(intent);
+    }
 }

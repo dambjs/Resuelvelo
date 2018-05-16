@@ -26,6 +26,11 @@
     <string name="not_close_session">No se pudo cerrar sesión</string>
     <string name="not_revoke">No se pudo revocar el acceso</string>
 
+    <!-- Crear Incidencia -->
+    <string name="priority_bar">Prioridad</string>
+
+
+
     <!-- Perfil Empresario -->
     <string name="empresas">MIS EMPRESAS</string>
 
@@ -38,4 +43,6 @@
     <string name="fechaEmp">Fecha de fundación</string>
     <string name="descEmp">Descripción de la empresa</string>
     <string name="logoEmp">Logo de la empresa</string>
+
+
 </resources>
