@@ -32,10 +32,15 @@ public class PerfilEmpresa extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_empresa);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         nombreDept = findViewById(R.id.nombreDept);
 
+        String uid = FirebaseAuth.getInstance().getUid();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
+        prueba();
     }
 
     public void add(View view) {
@@ -50,24 +55,7 @@ public class PerfilEmpresa extends AppCompatActivity {
                         final FirebaseUser departamentos = FirebaseAuth.getInstance().getCurrentUser();
 
                         final String nombre = taskEditText.getText().toString();
-                        mDatabase.child("departamentos").child(departamentos.getUid()).setValue(new Departamentos(departamentos.getUid(), nombre));
-
-
-                        mDatabase.addValueEventListener(new ValueEventListener() {
-
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                Departamentos dept = dataSnapshot.getValue(Departamentos.class);
-                                if(dept != null) {
-                                    taskEditText.setText(dept.displayNameDept);
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                System.out.println("The read failed: " + databaseError.getMessage());
-                            }
-                        });
+                        mDatabase.push().setValue(new Departamentos(departamentos.getUid(), nombre));
 
                     }
                 })
@@ -76,7 +64,26 @@ public class PerfilEmpresa extends AppCompatActivity {
         dialog.show();
     }
 
+    void prueba(){
 
+        mDatabase.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Departamentos dept = noteDataSnapshot.getValue(Departamentos.class);
+                    if (dept != null) {
+                        nombreDept.setText(dept.displayNameDept);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+    }
 
 
 }

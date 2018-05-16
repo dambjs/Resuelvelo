@@ -33,7 +33,7 @@ public class PerfilEmpresario extends AppCompatActivity {
 
     private TextView nom;
     private TextView correo;
-
+    private DatabaseReference mDatabase, mDatabase2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         String uid = FirebaseAuth.getInstance().getUid();
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-        DatabaseReference mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayNameEmpresa);
