@@ -56,14 +56,6 @@
         android:textSize="20sp"
         android:text="@string/app_name"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="PRUEBA"
-            android:layout_marginTop="20dp"
-            android:textColor="@android:color/black"
-            android:onClick="empresa"/>
-
     </LinearLayout>
 
     <LinearLayout
