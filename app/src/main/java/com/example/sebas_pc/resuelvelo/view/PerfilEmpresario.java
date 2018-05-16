@@ -34,12 +34,13 @@ public class PerfilEmpresario extends AppCompatActivity {
     private TextView nom;
     private TextView correo;
     private DatabaseReference mDatabase, mDatabase2;
+    private FirebaseRecyclerAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_empresario);
-        FirebaseRecyclerAdapter mAdapter;
 
         String uid = FirebaseAuth.getInstance().getUid();
 
@@ -48,8 +49,7 @@ public class PerfilEmpresario extends AppCompatActivity {
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayNameEmpresa);
-        RecyclerView recyclerView = findViewById(R.id.list_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,8 +67,10 @@ public class PerfilEmpresario extends AppCompatActivity {
             }
         });
 
+        RecyclerView recyclerView = findViewById(R.id.list_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Query postsQuery = mDatabase2.child("empresa").child(uid);
+        Query postsQuery = mDatabase2;
 
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Empresa>()
                 .setQuery(postsQuery, Empresa.class)
