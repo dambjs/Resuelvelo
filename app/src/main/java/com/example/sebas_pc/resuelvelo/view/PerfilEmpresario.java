@@ -141,6 +141,7 @@ public class PerfilEmpresario extends AppCompatActivity {
     public void add(View view) {
         Intent intent = new Intent(this, CrearEmpresa.class);
         startActivity(intent);
+        jaja;
     }
 
 }
