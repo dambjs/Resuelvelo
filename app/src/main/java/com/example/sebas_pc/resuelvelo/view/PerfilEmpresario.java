@@ -143,10 +143,4 @@ public class PerfilEmpresario extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void empresa(View view) {
-        Intent intent = new Intent(this, PerfilEmpresa.class);
-        startActivity(intent);
-    }
-
-
 }
