@@ -87,7 +87,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         String password  = etPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(displayName)){
-            Toast.makeText(this,"Porfavor ponga un displayNameEmpresa", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ponga un nombre de empresa", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -97,17 +97,17 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
         }
 
         if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Porfavor ponga una etPassword", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor ponga una Password", Toast.LENGTH_LONG).show();
             return;
         }
 
         if(password.length()<6){
-            Toast.makeText(this,"Porfavor introduzca una etPassword de más de 6 caracteres", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor introduzca una ePassword de más de 6 caracteres", Toast.LENGTH_LONG).show();
             return;
         }
 
         if(!password.equals(password2)){
-            Toast.makeText(this,"Porfavor introduzca una etPassword identica", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Porfavor introduzca una Password identica", Toast.LENGTH_LONG).show();
             return;
         }
 
