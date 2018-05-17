@@ -11,7 +11,6 @@ public class EmpresaViewHolder extends RecyclerView.ViewHolder{
     TextView nombreEmp;
     ImageView image;
 
-
     public EmpresaViewHolder(View itemView) {
         super(itemView);
 

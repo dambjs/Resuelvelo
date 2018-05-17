@@ -50,7 +50,6 @@ public class PerfilEmpresario extends AppCompatActivity {
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayNameEmpresa);
 
-
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -102,7 +101,7 @@ public class PerfilEmpresario extends AppCompatActivity {
 
             @Override
             public EmpresaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empresas, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empresa, parent, false);
                 return new EmpresaViewHolder(view);
 
             }
