@@ -144,47 +144,6 @@ public class PerfilEmpresa extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getMessage());
             }
         });
-
-//        mDatabase2.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-//                    Empresa empresa = noteDataSnapshot.getValue(Empresa.class);
-//                    if (empresa != null) {
-//                        nombreEmp.setText(empresa.displayNameEmpresa);
-//                        fechaEmp.setText(empresa.date);
-//                        descEmp.setText(empresa.descripcionEmpresa);
-//                        Glide.with(PerfilEmpresa.this)
-//                            .load(empresa.photoEmpresaUrl)
-//                                .into(imagen);
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("The read failed: " + databaseError.getMessage());
-//            }
-//        });
-//
-//        mDatabase3.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                    User user = dataSnapshot.getValue(User.class);
-//                    if (user != null) {
-//                        director.setText(user.displayName);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("The read failed: " + databaseError.getMessage());
-//            }
-//        });
-
-
-
-
     }
 
     public void create(View view) {
