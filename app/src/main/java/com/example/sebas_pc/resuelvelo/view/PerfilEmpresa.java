@@ -8,12 +8,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -38,6 +36,7 @@ public class PerfilEmpresa extends AppCompatActivity {
     private TextView nombreDept;
 
     private FirebaseRecyclerAdapter mAdapter, mAdapter2;
+    String idEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +45,14 @@ public class PerfilEmpresa extends AppCompatActivity {
 
         nombreDept = findViewById(R.id.nombreDept);
 
+        idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
         String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
-        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
-        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase2 = mDatabase.child("empresa").child(uid);
+        mDatabase3 = mDatabase.child("users").child(uid);
 
-
-        departamentos();
+        cargarDepartamentos();
     }
 
     public void add(View view) {
@@ -77,7 +76,29 @@ public class PerfilEmpresa extends AppCompatActivity {
         dialog.show();
     }
 
-    void departamentos(){
+    void cargarDatosEmpresa(){
+        mDatabase.child(FirebaseAuth.getInstance().getUid()).child(idEmpresa).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Empresa empresa = dataSnapshot.getValue(Empresa.class);
+
+                nombreEmp.setText(empresa.displayNameEmpresa);
+                        fechaEmp.setText(empresa.date);
+                        descEmp.setText(empresa.descripcionEmpresa);
+                        Glide.with(PerfilEmpresa.this)
+                            .load(empresa.photoEmpresaUrl)
+                                .into(imagen);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        })
+    }
+
+    void cargarDepartamentos(){
 
         mDatabase.addValueEventListener(new ValueEventListener() {
 
@@ -98,7 +119,6 @@ public class PerfilEmpresa extends AppCompatActivity {
         });
 
 //        mDatabase2.addValueEventListener(new ValueEventListener() {
-//
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
 //                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
@@ -195,6 +215,8 @@ public class PerfilEmpresa extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
         recyclerView.setAdapter(mAdapter2);
+
+
     }
 
     public void create(View view) {
