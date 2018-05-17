@@ -7,47 +7,62 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="294dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="167dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="20dp"/>
-
-        <TextView
-            android:id="@+id/nombreEmp"
-            android:layout_width="145dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="15dp" />
-
-        <TextView
-            android:id="@+id/fechaEmp"
-            android:layout_width="145dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="-145dp"
-            android:layout_marginTop="50dp" />
-
-        <TextView
-            android:id="@+id/director"
-            android:layout_width="145dp"
-            android:layout_height="45dp"
-            android:layout_marginLeft="-145dp"
-            android:layout_marginTop="100dp" />
-
-        <TextView
-            android:id="@+id/descEmp"
-            android:layout_width="251dp"
-            android:layout_height="88dp"
-            android:layout_marginLeft="-290dp"
-            android:layout_marginTop="180dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="158dp"
+                android:layout_height="101dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="25dp"
+                android:src="@mipmap/empresa" />
+
+            <TextView
+                android:id="@+id/descEmp"
+                android:layout_width="311dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-150dp"
+                android:layout_marginTop="150dp"
+                android:text="Somos una empresa que desde sus inicios se ha dedicado siempre a proveer y equipar con sistemas de telecomunicaciones. " />
+
+            <LinearLayout
+                android:layout_width="167dp"
+                android:layout_height="124dp"
+                android:layout_marginLeft="-170dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/nombreEmp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="Empresa" />
+
+                <TextView
+                    android:id="@+id/fechaEmp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-55dp"
+                    android:layout_marginTop="65dp"
+                    android:text="Año" />
+
+                <TextView
+                    android:id="@+id/director"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-25dp"
+                    android:layout_marginTop="90dp"
+                    android:text="Director" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +72,6 @@
 
             <android.support.v7.widget.CardView
                 android:id="@+id/card2"
-                android:layout_marginTop="20dp"
                 card_view:cardBackgroundColor="#2ECCFA"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
@@ -96,7 +110,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            >
 
             <Button
                 android:layout_width="wrap_content"

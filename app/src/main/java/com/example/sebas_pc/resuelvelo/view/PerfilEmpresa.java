@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -34,8 +35,12 @@ public class PerfilEmpresa extends AppCompatActivity {
 
     private DatabaseReference mDatabase, mDatabase2, mDatabase3;
     private TextView nombreDept;
+    private ImageView image;
+    private TextView descEmp;
+    private TextView nombreEmp;
+    private TextView fechaEmp;
+    private TextView director;
 
-    private FirebaseRecyclerAdapter mAdapter, mAdapter2;
     String idEmpresa;
 
     @Override
@@ -44,15 +49,23 @@ public class PerfilEmpresa extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_empresa);
 
         nombreDept = findViewById(R.id.nombreDept);
+        image = findViewById(R.id.image);
+        descEmp = findViewById(R.id.descEmp);
+        nombreEmp = findViewById(R.id.nombreEmp);
+        fechaEmp = findViewById(R.id.fechaEmp);
+        director = findViewById(R.id.director);
+
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
         String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase2 = mDatabase.child("empresa").child(uid);
-        mDatabase3 = mDatabase.child("users").child(uid);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+
 
         cargarDepartamentos();
+        cargarDatosEmpresa();
     }
 
     public void add(View view) {
@@ -77,25 +90,25 @@ public class PerfilEmpresa extends AppCompatActivity {
     }
 
     void cargarDatosEmpresa(){
-        mDatabase.child(FirebaseAuth.getInstance().getUid()).child(idEmpresa).addValueEventListener(new ValueEventListener() {
+        mDatabase2.child(idEmpresa).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Empresa empresa = dataSnapshot.getValue(Empresa.class);
-
-                nombreEmp.setText(empresa.displayNameEmpresa);
-                        fechaEmp.setText(empresa.date);
-                        descEmp.setText(empresa.descripcionEmpresa);
-                        Glide.with(PerfilEmpresa.this)
+                if (empresa != null) {
+                    nombreEmp.setText(empresa.displayNameEmpresa);
+                    fechaEmp.setText(empresa.date);
+                    descEmp.setText(empresa.descripcionEmpresa);
+                    Glide.with(PerfilEmpresa.this)
                             .load(empresa.photoEmpresaUrl)
-                                .into(imagen);
-
+                            .into(image);
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        })
+        });
     }
 
     void cargarDepartamentos(){
@@ -104,11 +117,25 @@ public class PerfilEmpresa extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Departamentos dept = noteDataSnapshot.getValue(Departamentos.class);
-                    if (dept != null) {
-                        nombreDept.setText(dept.displayNameDept);
-                    }
+                Departamentos dept = dataSnapshot.getValue(Departamentos.class);
+                if (dept != null) {
+                    nombreDept.setText(dept.displayNameDept);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getMessage());
+            }
+        });
+
+
+        mDatabase3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        director.setText(user.displayName);
                 }
             }
 
@@ -155,66 +182,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 //            }
 //        });
 
-        RecyclerView recyclerView = findViewById(R.id.list_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Query postsQuery = mDatabase2;
-        Query postsQuery2 = mDatabase3;
-
-
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Empresa>()
-                .setQuery(postsQuery, Empresa.class)
-                .setLifecycleOwner(this)
-                .build();
-
-        FirebaseRecyclerOptions options2 = new FirebaseRecyclerOptions.Builder<User>()
-                .setQuery(postsQuery2, User.class)
-                .setLifecycleOwner(this)
-                .build();
-
-        mAdapter = new FirebaseRecyclerAdapter<Empresa, EmpresaViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull EmpresaViewHolder holder, final int position, @NonNull final Empresa empresa) {
-                holder.nombreEmp.setText(empresa.displayNameEmpresa);
-                holder.fechaEmp.setText(empresa.date);
-                holder.descEmp.setText(empresa.descripcionEmpresa);
-
-                if(empresa.photoEmpresaUrl != null) {
-                    holder.image.setVisibility(View.VISIBLE);
-                    Glide.with(PerfilEmpresa.this)
-                            .load(empresa.photoEmpresaUrl)
-                            .into(holder.image);
-                }else{
-                    holder.image.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public EmpresaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empresario, parent, false);
-                return new EmpresaViewHolder(view);
-
-            }
-        };
-
-        mAdapter2 = new FirebaseRecyclerAdapter<User, EmpresaViewHolder>(options2) {
-            @Override
-            protected void onBindViewHolder(@NonNull EmpresaViewHolder holder, final int position, @NonNull final User user) {
-                holder.director.setText(user.displayName);
-
-            }
-
-            @Override
-            public EmpresaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_empresario, parent, false);
-                return new EmpresaViewHolder(view);
-
-            }
-        };
-
-        recyclerView.setAdapter(mAdapter);
-
-        recyclerView.setAdapter(mAdapter2);
 
 
     }
