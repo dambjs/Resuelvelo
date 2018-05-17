@@ -117,9 +117,11 @@ public class PerfilEmpresa extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Departamentos dept = dataSnapshot.getValue(Departamentos.class);
-                if (dept != null) {
-                    nombreDept.setText(dept.displayNameDept);
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                    Departamentos dept = noteDataSnapshot.getValue(Departamentos.class);
+                    if (dept != null) {
+                        nombreDept.setText(dept.displayNameDept);
+                    }
                 }
             }
 
@@ -133,9 +135,9 @@ public class PerfilEmpresa extends AppCompatActivity {
         mDatabase3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
-                    if (user != null) {
-                        director.setText(user.displayName);
+                User user = dataSnapshot.getValue(User.class);
+                if (user != null) {
+                    director.setText(user.displayName);
                 }
             }
 
