@@ -30,14 +30,12 @@
 
         <activity
             android:name=".view.CrearIncidencia"
-            android:theme="@style/AppTheme"
-            android:label="@string/priority_bar">
+            android:theme="@style/AppTheme">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sebas_pc.resuelvelo.view.CrearIncidencia" />
 
         </activity>
-
     </application>
 </manifest>

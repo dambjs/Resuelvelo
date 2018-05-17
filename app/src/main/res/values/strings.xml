@@ -27,8 +27,11 @@
     <string name="not_revoke">No se pudo revocar el acceso</string>
 
     <!-- Crear Incidencia -->
-    <string name="priority_bar">Prioridad</string>
+    <string name="departamentotitulo">DEPARTAMENTO</string>
+    <string name="destinatariotitulo">DESTINATARIO</string>
+    <string name="motivotitulo">MOTIVO</string>
 
+    <string name="botonenviar">E N V I A R</string>
 
 
     <!-- Perfil Empresario -->
