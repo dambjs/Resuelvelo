@@ -44,5 +44,7 @@
     <string name="descEmp">Descripción de la empresa</string>
     <string name="logoEmp">Logo de la empresa</string>
 
+    <!-- Menu -->
+    <string name="imagenP">Imagen de perfil</string>
 
 </resources>
