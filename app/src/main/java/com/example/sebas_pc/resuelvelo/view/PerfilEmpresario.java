@@ -64,6 +64,7 @@ public class PerfilEmpresario extends AppCompatActivity {
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
 //        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("imagenPersonal").child(uid);
 
+
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayNameEmpresa);
         imagenP = findViewById(R.id.imagenP);
