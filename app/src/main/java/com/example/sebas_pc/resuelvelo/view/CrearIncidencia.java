@@ -5,7 +5,6 @@ import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -16,141 +15,91 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.sebas_pc.resuelvelo.R;
+import com.example.sebas_pc.resuelvelo.model.Incidencia;
+import com.example.sebas_pc.resuelvelo.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CrearIncidencia extends AppCompatActivity {
 
-    // The drop down menu list text.
-    private String dropDownItemArr[] = {"Prioridad Baja", "Prioridad Media", "Prioridad Alta"};
-
+//    private String dropDownItemArr[] = {"Prioridad Baja", "Prioridad Media", "Prioridad Alta"};
+    private ImageView image;
     private ActionBar actionBar;
+    private DatabaseReference mDatabase, mDatabase2;
+    private final static String[] letra = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
+            "Pantalla sin señal", "Proyector estropeado", "Otros" };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_incidencia);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        String[] departamentos = {"Sistemas Informáticos","Electricidad","Iluminación","Mobiliario","Equipos o Maquinaria"};
-        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, departamentos));
+        String uid = FirebaseAuth.getInstance().getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usuariosM");
+        image = findViewById(R.id.image);
 
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-        String[] destinatario = {"A","B","C","D","E"};
-        spinner2.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, destinatario));
+        Spinner jaja = (Spinner) findViewById(R.id.sp3);
 
-        Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
-        String[] motivo = {"Conexión a Internet","Fallo Impresora","Fallo del Ordenador"};
-        spinner3.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, motivo));
+        jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
-        // Get ActionBar
-        actionBar = getSupportActionBar();
-
-        // SpinnerAdapter is used to calculate data and view that will be shown in drop down menu list.
-        SpinnerAdapter spinnerAdapter = new SpinnerAdapter() {
-
-            // This method return the View object for dropdown list item.
-            // The return view contains one ImageView and one TextView.
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public View getDropDownView(int itemIndex, View view, ViewGroup viewGroup) {
-                // Create a LinearLayout view object.
-                LinearLayout linearLayout = new LinearLayout(CrearIncidencia.this);
-                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-                linearLayout.setLayoutParams(layoutParams);
+                final List<String> areas = new ArrayList<String>();
 
-                // Create TextView and set it's text and color.
-                TextView itemTextView = new TextView(CrearIncidencia.this);
-                String itemText = dropDownItemArr[itemIndex];
-                itemTextView.setText(itemText);
-                itemTextView.setTextSize(20);
-                linearLayout.setBackgroundColor(Color.WHITE);
-                linearLayout.setPadding(10,10,50,10);
-                itemTextView.setBackgroundColor(Color.WHITE);
-                itemTextView.setTextColor(Color.BLACK);
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String areaName = areaSnapshot.child("displayNameDept").getValue(String.class);
+                    areas.add(areaName);
+                }
 
-                // Add TextView in return view.
-                linearLayout.addView(itemTextView,0);
-
-                return linearLayout;
+                Spinner areaSpinner = (Spinner) findViewById(R.id.sp);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, areas);
+                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                areaSpinner.setAdapter(areasAdapter);
             }
 
             @Override
-            public void registerDataSetObserver(DataSetObserver dataSetObserver) {
+            public void onCancelled(DatabaseError databaseError) {
 
-            }
-
-            @Override
-            public void unregisterDataSetObserver(DataSetObserver dataSetObserver) {
-
-            }
-
-            @Override
-            public int getCount() {
-                // Return drop down menu item count.
-                return dropDownItemArr.length;
-            }
-
-            @Override
-            public Object getItem(int itemIndex) {
-                // Return drop down menu item text.
-                return dropDownItemArr[itemIndex];
-            }
-
-            @Override
-            public long getItemId(int itemIndex) {
-                return itemIndex;
-            }
-
-            @Override
-            public boolean hasStableIds() {
-                return false;
-            }
-
-            // This method return the View object for drop down input box.
-            // It only return TextView object.
-            @Override
-            public View getView(int itemIndex, View view, ViewGroup viewGroup) {
-                TextView itemTextView = new TextView(CrearIncidencia.this);
-                String itemText = dropDownItemArr[itemIndex];
-                itemTextView.setText(itemText);
-                itemTextView.setTextSize(20);
-                itemTextView.setTextColor(Color.WHITE);
-
-                return itemTextView;
-            }
-
-            @Override
-            public int getItemViewType(int i) {
-                return 0;
-            }
-
-            @Override
-            public int getViewTypeCount() {
-                // This method must return 1, otherwise java.lang.IllegalArgumentException will be thrown.
-                return 1;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-        };
-
-        // Set action bar navigation mode to list mode.
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-
-        // Set action bar list navigation data and item click listener.
-        actionBar.setListNavigationCallbacks(spinnerAdapter, new ActionBar.OnNavigationListener() {
-            @Override
-            public boolean onNavigationItemSelected(int itemPosition, long itemId) {
-                return true;
             }
         });
 
+        mDatabase2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final List<String> areas = new ArrayList<String>();
+
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String areaName = areaSnapshot.child("nombre").getValue(String.class);
+                    areas.add(areaName);
+                }
+
+                Spinner areaSpinner = (Spinner) findViewById(R.id.sp2);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, areas);
+                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                areaSpinner.setAdapter(areasAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
+
+
 }

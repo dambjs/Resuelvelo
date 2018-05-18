@@ -50,4 +50,15 @@
     <!-- Menu -->
     <string name="imagenP">Imagen de perfil</string>
 
+    <!-- spinner3 -->
+
+    <string-array name="motivo">
+        <item>Fallo de impresora</item>
+        <item>Fallo de Sistema Operativo</item>
+        <item>Falla el ordenador</item>
+        <item>Pantalla sin señal</item>
+        <item>Proyector estropeado</item>
+        <item>Otros</item>
+    </string-array>
+
 </resources>
