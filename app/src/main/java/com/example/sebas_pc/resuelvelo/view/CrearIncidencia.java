@@ -83,10 +83,9 @@ public class CrearIncidencia extends AppCompatActivity {
 
                 final List<String> areas = new ArrayList<String>();
 
-                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-                    String areaName = areaSnapshot.child("nombre").getValue(String.class);
+                    String areaName = dataSnapshot.child("nombre").getValue(String.class);
                     areas.add(areaName);
-                }
+
 
                 Spinner areaSpinner = (Spinner) findViewById(R.id.sp2);
                 ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, areas);
