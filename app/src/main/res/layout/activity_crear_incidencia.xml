@@ -15,35 +15,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="30dp"
             android:text="@string/departamentotitulo"
             android:textSize="24sp"
             android:textColor="#7426b7" />
 
-        <include layout="@layout/spinner1" />
+        <include layout="@layout/spinner1"/>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="30dp"
             android:text="@string/destinatariotitulo"
             android:textSize="24sp"
             android:textColor="#7426b7" />
 
-        <include layout="@layout/spinner2" />
+        <include layout="@layout/spinner2"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="30dp"
             android:text="@string/motivotitulo"
             android:textSize="24sp"
             android:textColor="#7426b7" />
 
-        <include layout="@layout/spinner3" />
+        <include layout="@layout/spinner3"/>
 
         <ImageView
             android:id="@+id/add"

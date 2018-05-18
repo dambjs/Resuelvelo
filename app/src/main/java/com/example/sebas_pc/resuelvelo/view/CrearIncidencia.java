@@ -52,7 +52,7 @@ public class CrearIncidencia extends AppCompatActivity {
 
         Spinner jaja = (Spinner) findViewById(R.id.sp3);
 
-        jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
+        jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, letra));
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,7 +66,7 @@ public class CrearIncidencia extends AppCompatActivity {
                 }
 
                 Spinner areaSpinner = (Spinner) findViewById(R.id.sp);
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, areas);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_dropdown_item, areas);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 areaSpinner.setAdapter(areasAdapter);
             }
@@ -99,6 +99,4 @@ public class CrearIncidencia extends AppCompatActivity {
             }
         });
     }
-
-
 }
