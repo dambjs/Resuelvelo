@@ -156,13 +156,12 @@ public class CrearIncidencia extends AppCompatActivity {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void incidencia() {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        String departamento = areaSpinner1.getTransitionName();
-        String destinatario = areaSpinner2.getTransitionName();
-        String motivo = jaja.getTransitionName();
+        String departamento = areaSpinner1.getSelectedItem().toString();
+        String destinatario = areaSpinner2.getSelectedItem().toString();
+        String motivo = jaja.getSelectedItem().toString();
 
         if(downloaderUrl == null) {
             mDatabase3.setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, null));
