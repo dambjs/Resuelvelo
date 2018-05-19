@@ -164,9 +164,9 @@ public class CrearIncidencia extends AppCompatActivity {
         String motivo = jaja.getSelectedItem().toString();
 
         if(downloaderUrl == null) {
-            mDatabase3.setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, null));
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, null));
         } else {
-            mDatabase3.setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, downloaderUrl.toString()));
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, downloaderUrl.toString()));
         }
         finish();
     }
