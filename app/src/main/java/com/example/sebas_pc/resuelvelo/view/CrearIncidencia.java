@@ -1,5 +1,6 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
@@ -156,13 +158,12 @@ public class CrearIncidencia extends AppCompatActivity {
         });
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void incidencia() {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        String departamento = areaSpinner1.getTransitionName();
-        String destinatario = areaSpinner2.getTransitionName();
-        String motivo = jaja.getTransitionName();
+        String departamento = areaSpinner1.toString();
+        String destinatario = areaSpinner2.toString();
+        String motivo = jaja.toString();
 
         if(downloaderUrl == null) {
             mDatabase3.setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, null));
