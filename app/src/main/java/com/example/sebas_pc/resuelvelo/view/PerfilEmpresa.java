@@ -34,13 +34,12 @@ import com.google.firebase.database.ValueEventListener;
 public class PerfilEmpresa extends AppCompatActivity {
 
     private DatabaseReference mDatabase, mDatabase2, mDatabase3;
-    private TextView nombreDept;
     private ImageView image;
     private TextView descEmp;
     private TextView nombreEmp;
     private TextView fechaEmp;
     private TextView director;
-
+    private FirebaseRecyclerAdapter mAdapter;
     String idEmpresa;
 
     @Override
@@ -48,7 +47,6 @@ public class PerfilEmpresa extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_empresa);
 
-        nombreDept = findViewById(R.id.nombreDept);
         image = findViewById(R.id.image);
         descEmp = findViewById(R.id.descEmp);
         nombreEmp = findViewById(R.id.nombreEmp);
@@ -63,9 +61,35 @@ public class PerfilEmpresa extends AppCompatActivity {
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
-
         cargarDepartamentos();
         cargarDatosEmpresa();
+
+        RecyclerView recyclerView = findViewById(R.id.list_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Query postsQuery = mDatabase;
+
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Departamentos>()
+                .setQuery(postsQuery, Departamentos.class)
+                .setLifecycleOwner(this)
+                .build();
+        mAdapter = new FirebaseRecyclerAdapter<Departamentos, DepartamentoViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull DepartamentoViewHolder holder, final int position, @NonNull final Departamentos empresa) {
+                holder.nombreDep.setText(empresa.displayNameDept);
+                holder.nombrePer.setText(empresa.displayName);
+            }
+
+            @Override
+            public DepartamentoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_departamento, parent, false);
+                return new DepartamentoViewHolder(view);
+
+            }
+        };
+        recyclerView.setAdapter(mAdapter);
+
+
     }
 
     public void add(View view) {
@@ -80,7 +104,27 @@ public class PerfilEmpresa extends AppCompatActivity {
                         final FirebaseUser departamentos = FirebaseAuth.getInstance().getCurrentUser();
 
                         final String nombre = taskEditText.getText().toString();
-                        mDatabase.push().setValue(new Departamentos(departamentos.getUid(), nombre));
+                        mDatabase.push().setValue(new Departamentos(departamentos.getUid(), nombre, null));
+
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .create();
+        dialog.show();
+    }
+
+    public void mas(View view) {
+        final EditText taskEditText = new EditText(this);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setMessage("Nombre del empleado")
+                .setView(taskEditText)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        final FirebaseUser departamentos = FirebaseAuth.getInstance().getCurrentUser();
+
+                        final String empleado = taskEditText.getText().toString();
+                        mDatabase.push().setValue(new Departamentos(departamentos.getUid(), null, empleado));
 
                     }
                 })
@@ -112,24 +156,6 @@ public class PerfilEmpresa extends AppCompatActivity {
     }
 
     void cargarDepartamentos(){
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    Departamentos dept = noteDataSnapshot.getValue(Departamentos.class);
-                    if (dept != null) {
-                        nombreDept.setText(dept.displayNameDept);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getMessage());
-            }
-        });
 
 
         mDatabase3.addValueEventListener(new ValueEventListener() {
