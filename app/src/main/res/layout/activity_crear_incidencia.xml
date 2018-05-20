@@ -17,6 +17,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginStart="30dp"
                 android:text="@string/departamentotitulo"
+                android:textAllCaps="true"
                 android:textSize="24sp"
                 android:textColor="#7426b7" />
 
@@ -29,6 +30,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="30dp"
                 android:text="@string/destinatariotitulo"
+                android:textAllCaps="true"
                 android:textSize="24sp"
                 android:textColor="#7426b7" />
 
@@ -40,10 +42,25 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="30dp"
                 android:text="@string/motivotitulo"
+                android:textAllCaps="true"
                 android:textSize="24sp"
                 android:textColor="#7426b7" />
 
             <include layout="@layout/spinner3"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:text="@string/prioridad"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textColor="#7426b7" />
+
+        <include layout="@layout/spinner4"/>
+
 
         <ImageView
             android:id="@+id/add"
@@ -52,78 +69,6 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="60dp"
             android:src="@mipmap/add" />
-
-        <LinearLayout
-            android:layout_width="142dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="192dp"
-            android:layout_marginTop="-80dp">
-
-            <TextView
-                android:id="@+id/tvAlta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/alta"
-                android:textColor="@android:color/black" />
-
-            <ToggleButton
-                android:id="@+id/alta"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="24dp"
-                android:textOn="x"
-                android:textOff=" "
-                android:background="@drawable/prioridad_alta"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="142dp"
-                android:layout_height="28dp"
-                android:layout_marginLeft="192dp"
-                android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tvMedia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:text="@string/media"/>
-            <ToggleButton
-                android:id="@+id/media"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="11dp"
-                android:textOn="x"
-                android:textOff=" "
-                android:background="@drawable/prioridad_media"
-                tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="142dp"
-            android:layout_height="28dp"
-            android:layout_marginLeft="192dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tvBaja"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/baja"
-                android:textColor="@android:color/black" />
-
-            <ToggleButton
-                android:id="@+id/baja"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="23dp"
-                android:textOn="x"
-                android:textOff=" "
-                android:background="@drawable/prioridad_baja"
-                tools:ignore="HardcodedText" />
-
-        </LinearLayout>
 
         <ImageView
             android:id="@+id/image"

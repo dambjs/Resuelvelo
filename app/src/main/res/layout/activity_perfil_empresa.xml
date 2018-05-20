@@ -83,6 +83,7 @@
                     android:background="#A9F5F2"
                     android:padding="10dp"
                     android:text="@string/grupos"
+                    android:textAllCaps="true"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -110,8 +111,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            >
+            android:layout_marginTop="20dp">
 
             <Button
                 android:layout_width="wrap_content"

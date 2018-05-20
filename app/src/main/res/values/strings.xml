@@ -27,18 +27,18 @@
     <string name="not_revoke">No se pudo revocar el acceso</string>
 
     <!-- Crear Incidencia -->
-    <string name="departamentotitulo">DEPARTAMENTO</string>
-    <string name="destinatariotitulo">DESTINATARIO</string>
-    <string name="motivotitulo">MOTIVO</string>
-
-    <string name="botonenviar">E N V I A R</string>
+    <string name="departamentotitulo">departamento</string>
+    <string name="destinatariotitulo">destinatario</string>
+    <string name="motivotitulo">motivo</string>
+    <string name="prioridad">prioridad</string>
+    <string name="botonenviar">e n v i a r</string>
 
 
     <!-- Perfil Empresario -->
-    <string name="empresas">MIS EMPRESAS</string>
+    <string name="empresas">mis empresas</string>
 
     <!-- Perfil Empresa -->
-    <string name="grupos">CREAR GRUPO</string>
+    <string name="grupos">crear grupo</string>
 
     <!-- Perfil Empresario -->
     <string name="creaEmp">Crear empresa</string>
@@ -58,6 +58,13 @@
         <item>Pantalla sin señal</item>
         <item>Proyector estropeado</item>
         <item>Otros</item>
+    </string-array>
+
+    <!-- spinner4 -->
+    <string-array name="prioridad">
+        <item>Prioridad Alta</item>
+        <item>Prioridad Media</item>
+        <item>Prioridad Baja</item>
     </string-array>
 
     <!-- Prioridad -->

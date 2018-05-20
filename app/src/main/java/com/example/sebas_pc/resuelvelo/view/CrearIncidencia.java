@@ -1,6 +1,8 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
@@ -12,6 +14,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -21,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
@@ -49,16 +54,20 @@ public class CrearIncidencia extends AppCompatActivity {
     private ImageView image, add;
     private Button enviar;
     private Spinner jaja;
+    private Spinner jeje;
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
+
     Uri mediaUri;
     Uri downloaderUrl;
     private final int RC_IMAGE_PICK = 5677;
     private DatabaseReference mDatabase, mDatabase2, mDatabase3;
-    private final static String[] letra = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
+    private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
             "Pantalla sin señal", "Proyector estropeado", "Otros" };
+    private final static String[] prioridad = { "Prioridad Alta", "Prioridad Media", "Prioridad Baja"};
 
 
+    @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +106,12 @@ public class CrearIncidencia extends AppCompatActivity {
 
         jaja = (Spinner) findViewById(R.id.sp3);
 
-        jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, letra));
+        jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, otros));
+
+
+        jeje = (Spinner) findViewById(R.id.sp4);
+
+        jeje.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, prioridad));
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -143,7 +157,9 @@ public class CrearIncidencia extends AppCompatActivity {
 
             }
         });
+
     }
+
 
     void uploadFile(){
         StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("incidencia/" + UUID.randomUUID());
@@ -162,11 +178,12 @@ public class CrearIncidencia extends AppCompatActivity {
         String departamento = areaSpinner1.getSelectedItem().toString();
         String destinatario = areaSpinner2.getSelectedItem().toString();
         String motivo = jaja.getSelectedItem().toString();
+        String prioridad = jeje.getSelectedItem().toString();
 
         if(downloaderUrl == null) {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, null));
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, null));
         } else {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, downloaderUrl.toString()));
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, downloaderUrl.toString()));
         }
         finish();
     }
@@ -180,5 +197,4 @@ public class CrearIncidencia extends AppCompatActivity {
             }
         }
     }
-
 }
