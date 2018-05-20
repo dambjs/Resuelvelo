@@ -51,7 +51,6 @@
     <string name="imagenP">Imagen de perfil</string>
 
     <!-- spinner3 -->
-
     <string-array name="motivo">
         <item>Fallo de impresora</item>
         <item>Fallo de Sistema Operativo</item>
@@ -60,5 +59,11 @@
         <item>Proyector estropeado</item>
         <item>Otros</item>
     </string-array>
+
+    <!-- Prioridad -->
+    <string name="alta">Prioridad Alta</string>
+    <string name="media">Prioridad Media</string>
+    <string name="baja">Prioridad Baja</string>
+
 
 </resources>

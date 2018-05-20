@@ -7,55 +7,128 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Letras Departamento -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginStart="30dp"
-            android:text="@string/departamentotitulo"
-            android:textSize="24sp"
-            android:textColor="#7426b7" />
+            <!-- Letras Departamento -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="30dp"
+                android:text="@string/departamentotitulo"
+                android:textSize="24sp"
+                android:textColor="#7426b7" />
 
-        <include layout="@layout/spinner1"/>
+            <include layout="@layout/spinner1"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp"
-            android:text="@string/destinatariotitulo"
-            android:textSize="24sp"
-            android:textColor="#7426b7" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:text="@string/destinatariotitulo"
+                android:textSize="24sp"
+                android:textColor="#7426b7" />
 
-        <include layout="@layout/spinner2"/>
+            <include layout="@layout/spinner2"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp"
-            android:text="@string/motivotitulo"
-            android:textSize="24sp"
-            android:textColor="#7426b7" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:text="@string/motivotitulo"
+                android:textSize="24sp"
+                android:textColor="#7426b7" />
 
-        <include layout="@layout/spinner3"/>
+            <include layout="@layout/spinner3"/>
 
         <ImageView
             android:id="@+id/add"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="35dp"
-            android:background="@mipmap/add"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="60dp"
+            android:src="@mipmap/add" />
+
+        <LinearLayout
+            android:layout_width="142dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="192dp"
+            android:layout_marginTop="-80dp">
+
+            <TextView
+                android:id="@+id/tvAlta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alta"
+                android:textColor="@android:color/black" />
+
+            <ToggleButton
+                android:id="@+id/alta"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="24dp"
+                android:textOn="x"
+                android:textOff=" "
+                android:background="@drawable/prioridad_alta"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="142dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="192dp"
+                android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tvMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="@string/media"/>
+            <ToggleButton
+                android:id="@+id/media"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="11dp"
+                android:textOn="x"
+                android:textOff=" "
+                android:background="@drawable/prioridad_media"
+                tools:ignore="HardcodedText" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="142dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="192dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tvBaja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/baja"
+                android:textColor="@android:color/black" />
+
+            <ToggleButton
+                android:id="@+id/baja"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="23dp"
+                android:textOn="x"
+                android:textOff=" "
+                android:background="@drawable/prioridad_baja"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="162dp"
+            android:layout_marginTop="25dp"
             android:layout_height="186dp"
             android:layout_gravity="center" />
 
@@ -63,13 +136,12 @@
             android:id="@+id/enviar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:background="#6eda1e"
+            android:text="@string/botonenviar"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
             android:textSize="20dp"
-            android:text="@string/botonenviar" />
-
+            android:layout_alignParentBottom="true"
+            android:textStyle="bold" />
     </LinearLayout>
-
 </ScrollView>
