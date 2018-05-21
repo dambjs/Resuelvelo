@@ -72,5 +72,11 @@
     <string name="media">Prioridad Media</string>
     <string name="baja">Prioridad Baja</string>
 
+    <!-- Dialog -->
+    <string name="nombreDep">Nombre del departamento:</string>
+    <string name="nombrePer">Nombre del emplead@:</string>
+    <string name="correo">Correo emplead@:</string>
+
+
 
 </resources>

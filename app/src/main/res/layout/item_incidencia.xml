@@ -8,41 +8,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="92dp">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/nombreDep"
+            android:id="@+id/departamento"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="-40dp"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="right">
-
-        <!--<ImageView-->
-            <!--android:id="@+id/mas"-->
-            <!--android:layout_width="32dp"-->
-            <!--android:layout_height="29dp"-->
-            <!--android:onClick="mas"-->
-            <!--android:background="@mipmap/mas" />-->
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/nombrePer"
+            android:id="@+id/prioridad"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_marginTop="30dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -50,14 +41,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/correo"
+            android:id="@+id/motivo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_marginTop="85dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 

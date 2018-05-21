@@ -1,6 +1,7 @@
 package com.example.sebas_pc.resuelvelo.view;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class PerfilEmpresa extends AppCompatActivity {
     private TextView director;
     private FirebaseRecyclerAdapter mAdapter;
     String idEmpresa;
+    final Context context = this;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
+
         String uid = FirebaseAuth.getInstance().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
@@ -78,6 +82,8 @@ public class PerfilEmpresa extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull DepartamentoViewHolder holder, final int position, @NonNull final Departamentos empresa) {
                 holder.nombreDep.setText(empresa.displayNameDept);
                 holder.nombrePer.setText(empresa.displayName);
+                holder.correo.setText(empresa.correo);
+
             }
 
             @Override
@@ -93,45 +99,51 @@ public class PerfilEmpresa extends AppCompatActivity {
     }
 
     public void add(View view) {
-        final EditText taskEditText = new EditText(this);
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Nombre de Departamento")
-                .setMessage("¿Que nombre quieres darle al departamento?")
-                .setView(taskEditText)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final FirebaseUser departamentos = FirebaseAuth.getInstance().getCurrentUser();
 
-                        final String nombre = taskEditText.getText().toString();
-                        mDatabase.push().setValue(new Departamentos(departamentos.getUid(), nombre, null));
+        LayoutInflater li = LayoutInflater.from(context);
+        View promptsView = li.inflate(R.layout.dialog, null);
 
-                    }
-                })
-                .setNegativeButton("Cancelar", null)
-                .create();
-        dialog.show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        alertDialogBuilder.setView(promptsView);
+
+
+        final EditText userInput = (EditText) promptsView
+                .findViewById(R.id.editTextDialogUserInput);
+
+        final EditText userInput2 = (EditText) promptsView
+                .findViewById(R.id.editTextDialogUserInput2);
+
+        final EditText userInput3 = (EditText) promptsView
+                .findViewById(R.id.editTextDialogUserInput3);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                final FirebaseUser departamentos = FirebaseAuth.getInstance().getCurrentUser();
+
+                                final String departamento = userInput.getText().toString();
+                                final String nombre = userInput2.getText().toString();
+                                final String correo = userInput3.getText().toString();
+
+                                mDatabase.push().setValue(new Departamentos(departamentos.getUid(), departamento, nombre, correo));
+
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
     }
 
-    public void mas(View view) {
-        final EditText taskEditText = new EditText(this);
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setMessage("Nombre del empleado")
-                .setView(taskEditText)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final FirebaseUser departamentos = FirebaseAuth.getInstance().getCurrentUser();
 
-                        final String empleado = taskEditText.getText().toString();
-                        mDatabase.push().setValue(new Departamentos(departamentos.getUid(), null, empleado));
-
-                    }
-                })
-                .setNegativeButton("Cancelar", null)
-                .create();
-        dialog.show();
-    }
 
     void cargarDatosEmpresa(){
         mDatabase2.child(idEmpresa).addValueEventListener(new ValueEventListener() {
@@ -176,6 +188,11 @@ public class PerfilEmpresa extends AppCompatActivity {
 
     public void create(View view) {
         Intent intent = new Intent(this, CrearIncidencia.class);
+        startActivity(intent);
+    }
+
+    public void ver(View view) {
+        Intent intent = new Intent(this, VerIncidencia.class);
         startActivity(intent);
     }
 }

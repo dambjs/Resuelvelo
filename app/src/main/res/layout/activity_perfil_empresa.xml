@@ -99,13 +99,13 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="50dp">
 
             <Button
+                android:id="@+id/crear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -113,7 +113,9 @@
                 android:onClick="create"/>
 
             <Button
+                android:id="@+id/ver"
                 android:layout_width="148dp"
+                android:onClick="ver"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="Ver incidencia" />
