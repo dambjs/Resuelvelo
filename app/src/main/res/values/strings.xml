@@ -38,7 +38,7 @@
     <string name="empresas">mis empresas</string>
 
     <!-- Perfil Empresa -->
-    <string name="grupos">crear grupo</string>
+    <string name="grupos">crear departamento</string>
 
     <!-- Perfil Empresario -->
     <string name="creaEmp">Crear empresa</string>
