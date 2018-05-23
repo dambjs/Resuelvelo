@@ -1,11 +1,16 @@
 <resources>
     <string name="app_name">Resuelvelo</string>
 
-    <!-- LogeoEmpresario -->
-
+    <!-- MAIN -->
+    <string name="bienvenido">!Bienvenidos!</string>
     <string name="resuelvelo">¡Resuelvelo!</string>
     <string name="empresario">Empresario</string>
     <string name="empleado">Empleado</string>
+    <string name="opcion">Escoja una opción</string>
+
+
+    <!-- LogeoEmpresario -->
+
     <string name="email">&#160;&#160;Email</string>
     <string name="contraseña">&#160;&#160;Contraseña</string>
     <string name="entra">Entra</string>
@@ -14,8 +19,11 @@
     <string name="HolaE">¡Bienvenido Empresario/a!</string>
 
 
+    <!-- LogeoEmpresario -->
+    <string name="HolaEm">¡Bienvenido Empleado/a!</string>
 
-    <!-- Registro -->
+
+    <!-- RegistroEmpresario -->
 
     <string name="registro">Hola, Registrate!</string>
     <string name="nombreEmpresario">Nombre:</string>

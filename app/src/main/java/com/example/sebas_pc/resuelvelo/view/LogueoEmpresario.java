@@ -175,7 +175,7 @@ public class LogueoEmpresario extends AppCompatActivity implements View.OnClickL
 
         if (view == tvRegistrarte) {
             finish();
-            startActivity(new Intent(this, Registro.class));
+            startActivity(new Intent(this, RegistroEmpresario.class));
         }
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.User;
+import com.example.sebas_pc.resuelvelo.model.UserDos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Registro extends AppCompatActivity implements View.OnClickListener {
+public class RegistroEmpleado extends AppCompatActivity implements View.OnClickListener {
 
     private EditText etDisplayName;
     private EditText etEmail;
@@ -39,13 +40,13 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_registro_empleado);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
+            startActivity(new Intent(getApplicationContext(), PerfilEmpleado.class));
         }
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -123,9 +124,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
                         if(task.isSuccessful()){
                             onAuthSuccess(task.getResult().getUser());
                             finish();
-                            startActivity(new Intent(getApplicationContext(), PerfilEmpresario.class));
+                            startActivity(new Intent(getApplicationContext(), PerfilEmpleado.class));
                         }else{
-                            Toast.makeText(Registro.this,"Registro Erroneo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegistroEmpleado.this,"RegistroEmpresario Erroneo", Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }
@@ -137,9 +138,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
     private void onAuthSuccess(FirebaseUser user) {
         String email = etEmail.getText().toString();
         String nombre = etDisplayName.getText().toString();
-        mDatabase.child("users").child(user.getUid()).setValue(new User(user.getUid(), nombre, email));
+        mDatabase.child("usersEmpleado").child(user.getUid()).setValue(new UserDos(user.getUid(), nombre, email));
 
-        startActivity(new Intent(Registro.this, PerfilEmpresario.class));
+        startActivity(new Intent(RegistroEmpleado.this, PerfilEmpleado.class));
         finish();
     }
 
@@ -152,7 +153,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
         if(view == tvEntrar){
             //open login activity when user taps on the already registered textview
-            startActivity(new Intent(this, LogueoEmpresario.class));
+            startActivity(new Intent(this, LogueoEmpleado.class));
         }
     }
 }
