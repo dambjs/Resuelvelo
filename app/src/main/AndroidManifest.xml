@@ -12,14 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".view.Logueo"
+        <activity android:name=".view.MainActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.LogueoEmpresario"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity android:name=".view.PerfilEmpresario" />
         <activity android:name=".view.PerfilEmpresa" />
@@ -36,7 +38,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sebas_pc.resuelvelo.view.CrearIncidencia" />
         </activity>
-        <activity android:name=".view.VerIncidencia"></activity>
+        <activity android:name=".view.VerIncidencia" />
+        <activity android:name=".view.LogueoEmpleado"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

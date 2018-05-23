@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Arrays;
 
-public class Logueo extends AppCompatActivity implements View.OnClickListener {
+public class LogueoEmpresario extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGN_IN = 123;
 
@@ -43,7 +43,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_logueo);
+        setContentView(R.layout.activity_logueo_empresario);
 
         etEmail = (EditText) findViewById(R.id.email); // ok
         etPassword = (EditText) findViewById(R.id.constraseña); //ok
@@ -60,7 +60,7 @@ public class Logueo extends AppCompatActivity implements View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
         btnEntra.setOnClickListener(this);
-        tvRegistrarte.setOnClickListener(Logueo.this);
+        tvRegistrarte.setOnClickListener(LogueoEmpresario.this);
         comeIn();
     }
 

@@ -21,25 +21,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
-import com.example.sebas_pc.resuelvelo.model.FotoPersonal;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class PerfilEmpresario extends AppCompatActivity {
 
@@ -205,7 +199,7 @@ public class PerfilEmpresario extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(PerfilEmpresario.this, Logueo.class));
+                        startActivity(new Intent(PerfilEmpresario.this, LogueoEmpresario.class));
                         finish();
                     }
                 });

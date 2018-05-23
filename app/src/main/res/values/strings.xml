@@ -1,16 +1,19 @@
 <resources>
     <string name="app_name">Resuelvelo</string>
 
-    <!-- Logeo -->
+    <!-- LogeoEmpresario -->
 
-    <string name="resuelvelo">Resuelvelo!</string>
+    <string name="resuelvelo">¡Resuelvelo!</string>
     <string name="empresario">Empresario</string>
     <string name="empleado">Empleado</string>
     <string name="email">&#160;&#160;Email</string>
     <string name="contraseña">&#160;&#160;Contraseña</string>
     <string name="entra">Entra</string>
-    <string name="entre">Entra con</string>
     <string name="registrate">Registrate</string>
+    <string name="perdida">¿Contraseña perdida?</string>
+    <string name="HolaE">¡Bienvenido Empresario/a!</string>
+
+
 
     <!-- Registro -->
 
@@ -76,7 +79,6 @@
     <string name="nombreDep">Nombre del departamento:</string>
     <string name="nombrePer">Nombre del emplead@:</string>
     <string name="correo">Correo emplead@:</string>
-
 
 
 </resources>

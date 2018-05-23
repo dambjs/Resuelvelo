@@ -152,7 +152,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener 
 
         if(view == tvEntrar){
             //open login activity when user taps on the already registered textview
-            startActivity(new Intent(this, Logueo.class));
+            startActivity(new Intent(this, LogueoEmpresario.class));
         }
     }
 }
