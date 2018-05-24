@@ -85,7 +85,8 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private void registerUser(){
 
         final String displayName = etDisplayName.getText().toString().trim();
-        String email = etEmail.getText().toString().trim();
+
+        String email = etEmail.getText()+dominio.getText().toString().trim();
         String password2 = etPassword2.getText().toString().trim();
         String password  = etPassword.getText().toString().trim();
 
@@ -138,7 +139,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private void onAuthSuccess(FirebaseUser user) {
         String email = etEmail.getText().toString();
         String nombre = etDisplayName.getText().toString();
-        mDatabase.child("usersEmpleado").child(user.getUid()).setValue(new User(user.getUid(), nombre, email));
+        mDatabase.child("usersEmpleado").child(user.getUid()).setValue(new User(user.getUid(), nombre, email+"@resuelvelo.es"));
 
         startActivity(new Intent(RegistroEmpleado.this, PerfilEmpleado.class));
         finish();
