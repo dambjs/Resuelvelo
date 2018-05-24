@@ -13,10 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.User;
-import com.example.sebas_pc.resuelvelo.model.UserDos;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.ErrorCodes;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -28,11 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Arrays;
-
 public class LogueoEmpleado extends AppCompatActivity implements View.OnClickListener {
-
-    private static final int RC_SIGN_IN = 123;
 
     private Button btnEntra; //ok
     private EditText etEmail; // ok
@@ -51,12 +43,6 @@ public class LogueoEmpleado extends AppCompatActivity implements View.OnClickLis
         btnEntra = (Button) findViewById(R.id.entra); // ok
         tvRegistrarte = (TextView) findViewById(R.id.registrarte); // ok
 
-        findViewById(R.id.google).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
-        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
@@ -76,9 +62,9 @@ public class LogueoEmpleado extends AppCompatActivity implements View.OnClickLis
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    UserDos user = dataSnapshot.getValue(UserDos.class);
+                    User user = dataSnapshot.getValue(User.class);
                     if(user == null){
-                        databaseReference.setValue(new UserDos(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
+                        databaseReference.setValue(new User(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
                     }
                 }
 
@@ -92,41 +78,31 @@ public class LogueoEmpleado extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    void signIn() {
-        startActivityForResult(
-                AuthUI.getInstance().createSignInIntentBuilder()
-                        .setAvailableProviders(Arrays.asList(
-                                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
-                        .build(),
-                RC_SIGN_IN);
-
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
-
-            if (resultCode == RESULT_OK) {
-                comeIn();
-            } else {
-//                 Sign in failed
-                if (response == null) {
-                    // User pressed back button
-                    return;
-                }
-
-                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    return;
-                }
-
-                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                    return;
-                }
-            }
-        }
-    }
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == RC_SIGN_IN) {
+//            IdpResponse response = IdpResponse.fromResultIntent(data);
+//
+//            if (resultCode == RESULT_OK) {
+//                comeIn();
+//            } else {
+////                 Sign in failed
+//                if (response == null) {
+//                    // User pressed back button
+//                    return;
+//                }
+//
+//                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+//                    return;
+//                }
+//
+//                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+//                    return;
+//                }
+//            }
+//        }
+//    }
 
     private void userLogin() {
         String emailP = etEmail.getText().toString().trim();

@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.User;
-import com.example.sebas_pc.resuelvelo.model.UserDos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,6 +30,8 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private Button btnRegistrarse;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private TextView tvEntrar;
+    private TextView dominio;
+
 
     private ProgressDialog progressDialog;
 
@@ -66,6 +67,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         etPassword = (EditText) findViewById(R.id.password);
         tvEntrar = (TextView) findViewById(R.id.entrar);
         btnRegistrarse = (Button) findViewById(R.id.registrarse);
+        dominio = (TextView) findViewById(R.id.dominio); // ok
 
         progressDialog = new ProgressDialog(this);
 
@@ -126,19 +128,17 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
                             finish();
                             startActivity(new Intent(getApplicationContext(), PerfilEmpleado.class));
                         }else{
-                            Toast.makeText(RegistroEmpleado.this,"RegistroEmpresario Erroneo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegistroEmpleado.this,"Registro Erroneo", Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }
-
                 });
-
     }
 
     private void onAuthSuccess(FirebaseUser user) {
         String email = etEmail.getText().toString();
         String nombre = etDisplayName.getText().toString();
-        mDatabase.child("usersEmpleado").child(user.getUid()).setValue(new UserDos(user.getUid(), nombre, email));
+        mDatabase.child("usersEmpleado").child(user.getUid()).setValue(new User(user.getUid(), nombre, email));
 
         startActivity(new Intent(RegistroEmpleado.this, PerfilEmpleado.class));
         finish();
