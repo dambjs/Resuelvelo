@@ -1,5 +1,7 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,22 @@ public class PerfilEmpleado extends AppCompatActivity {
         setContentView(R.layout.activity_perfil_empleado);
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("¿Seguro que desea salir?")
+                .setCancelable(false)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+                        a.addCategory(Intent.CATEGORY_HOME);
+                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(a);
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
     public void salir(View view) {
         AuthUI.getInstance()
                 .signOut(this)
