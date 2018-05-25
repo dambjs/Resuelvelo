@@ -13,6 +13,8 @@
         <TextView
             android:id="@+id/nombreDep"
             android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_height="match_parent"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -41,10 +43,9 @@
             android:id="@+id/nombrePer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
+            android:layout_marginTop="50dp"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -59,7 +60,7 @@
             android:layout_marginTop="80dp"
             android:gravity="center"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

@@ -36,30 +36,45 @@
                 android:layout_width="167dp"
                 android:layout_height="124dp"
                 android:layout_marginLeft="-170dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/nombreEmp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="Empresa" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/nombreEmp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="Empresa" />
 
-                <TextView
-                    android:id="@+id/fechaEmp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="-55dp"
-                    android:layout_marginTop="65dp"
-                    android:text="Año" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp">
 
+                        <TextView
+                            android:id="@+id/fechaEmp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Año" />
+
+                    </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/director"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="-25dp"
-                    android:layout_marginTop="90dp"
                     android:text="Director" />
+
+                </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -76,8 +91,8 @@
                     android:id="@+id/txt1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#A9F5F2"
                     android:padding="10dp"
+                    android:gravity="center"
                     android:text="@string/grupos"
                     android:onClick="add"
                     android:textAllCaps="true"
