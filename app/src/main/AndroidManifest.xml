@@ -46,8 +46,13 @@
         <activity
             android:name=".view.RegistroEmpleado"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".view.PerfilEmpleado"
+        <activity
+            android:name=".view.PerfilEmpleado"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".view.TabActivityEmpleado"
+            android:label="@string/title_activity_tab_empleado"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

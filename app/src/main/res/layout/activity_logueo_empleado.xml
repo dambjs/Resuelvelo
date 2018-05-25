@@ -88,6 +88,7 @@
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="40dp"
+                android:onClick="gotoTabActivity"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:text="@string/entra"
                 android:background="#00cc99"/>

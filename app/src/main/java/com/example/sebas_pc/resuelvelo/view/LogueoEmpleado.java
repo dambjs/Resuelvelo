@@ -155,4 +155,9 @@ public class LogueoEmpleado extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, RegistroEmpleado.class));
         }
     }
+
+    public void gotoTabActivity(View view){
+        startActivity(new Intent(this, TabActivityEmpleado.class));
+    }
+
 }

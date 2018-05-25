@@ -18,7 +18,7 @@ public class PerfilEmpleado extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perfil_empleado);
+        setContentView(R.layout.activity_tab_empleado);
     }
 
     @Override
