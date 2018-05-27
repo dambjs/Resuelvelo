@@ -84,7 +84,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="40dp"
+            android:gravity="center">
+
+            <include layout="@layout/spinner_empresas"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"

@@ -7,8 +7,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
@@ -18,8 +20,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistroEmpleado extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,17 +39,23 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private TextView tvEntrar;
     private TextView dominio;
-
+    private Spinner areaSpinner;
+    String idEmpresa;
 
     private ProgressDialog progressDialog;
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, mDatabase2;
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_empleado);
+
+
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -59,7 +73,6 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
                 }
             }
         };
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         etDisplayName = (EditText) findViewById(R.id.displayName);
         etEmail = (EditText) findViewById(R.id.email);
@@ -69,10 +82,37 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         btnRegistrarse = (Button) findViewById(R.id.registrarse);
         dominio = (TextView) findViewById(R.id.dominio); // ok
 
+
+
+
         progressDialog = new ProgressDialog(this);
 
         btnRegistrarse.setOnClickListener(this);
         tvEntrar.setOnClickListener(this);
+
+//        mDatabase2.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                final List<String> areas = new ArrayList<String>();
+//
+//                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+//                    String areaName = areaSnapshot.child("displayNameEmpresa").getValue(String.class);
+//                    areas.add(areaName);
+//                }
+//
+//
+//                areaSpinner = (Spinner) findViewById(R.id.sp5);
+//                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RegistroEmpleado.this, android.R.layout.simple_spinner_item, areas);
+//                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                areaSpinner.setAdapter(areasAdapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 
     @Override
