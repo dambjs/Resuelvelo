@@ -80,7 +80,7 @@ public class CrearIncidencia extends AppCompatActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
-        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usuariosM");
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usersEmpleado");
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia").child(uid);
 
 
@@ -142,8 +142,10 @@ public class CrearIncidencia extends AppCompatActivity {
 
                 final List<String> areas = new ArrayList<String>();
 
-                    String areaName = dataSnapshot.child("nombre").getValue(String.class);
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String areaName = areaSnapshot.child("displayName").getValue(String.class);
                     areas.add(areaName);
+                }
 
 
                 areaSpinner2 = (Spinner) findViewById(R.id.sp2);
