@@ -46,16 +46,20 @@ public class PerfilEmpresario extends AppCompatActivity {
     Uri mediaUri;
     Uri downloaderUrl;
     private final int RC_IMAGE_PICK = 5677;
+    String idEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_empresario);
 
-        String uid = FirebaseAuth.getInstance().getUid();
+        idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
+        final String uid = FirebaseAuth.getInstance().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
+//        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("empresa").child(idEmpresa);
+
 //        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("imagenPersonal").child(uid);
 
 
@@ -79,7 +83,7 @@ public class PerfilEmpresario extends AppCompatActivity {
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.list_view);
+        final RecyclerView recyclerView = findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Query postsQuery = mDatabase2;
@@ -92,6 +96,7 @@ public class PerfilEmpresario extends AppCompatActivity {
         mAdapter = new FirebaseRecyclerAdapter<Empresa, EmpresaViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull EmpresaViewHolder holder, final int position, @NonNull final Empresa empresa) {
+
                 holder.nombreEmp.setText(empresa.displayNameEmpresa);
                 if(empresa.photoEmpresaUrl != null) {
                     holder.image.setVisibility(View.VISIBLE);
@@ -110,6 +115,38 @@ public class PerfilEmpresario extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                holder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
+                    @Override
+                    public boolean onLongClick(View view) {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PerfilEmpresario.this);
+                        builder1.setMessage("¿ Estas seguro que deseas eliminar esta empresa?.");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        String postKey = getRef(position).getKey();
+                                        mDatabase2.child(postKey).setValue(null);
+                                        //Falta que no pete cuando se elimina el ultimo item.
+                                    }
+                                });
+
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
+                        return true;
+                    }
+                });
             }
 
             @Override
@@ -118,8 +155,14 @@ public class PerfilEmpresario extends AppCompatActivity {
                 return new EmpresaViewHolder(view);
 
             }
+
+
         };
         recyclerView.setAdapter(mAdapter);
+
+
+
+
 
 //        imagenP.setOnClickListener(new View.OnClickListener() {
 //            @Override
