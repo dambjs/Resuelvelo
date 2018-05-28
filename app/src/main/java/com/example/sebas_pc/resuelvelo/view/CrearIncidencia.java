@@ -45,6 +45,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -57,6 +58,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private Spinner jeje;
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
+    final HashMap<String,String> pruebasKey = new HashMap<>();
 
     Uri mediaUri;
     Uri downloaderUrl;
@@ -78,8 +80,10 @@ public class CrearIncidencia extends AppCompatActivity {
         add = findViewById(R.id.add);
         image = findViewById(R.id.image);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
+
+//        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usersEmpleado");
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia").child(uid);
 
@@ -113,15 +117,18 @@ public class CrearIncidencia extends AppCompatActivity {
 
         jeje.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, prioridad));
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.child("departamentos").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final List<String> areas = new ArrayList<String>();
 
-                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-                    String areaName = areaSnapshot.child("displayNameDept").getValue(String.class);
-                    areas.add(areaName);
+                for (DataSnapshot prueba: dataSnapshot.getChildren()) {
+                    for (DataSnapshot areaSnapshot: prueba.getChildren()){
+                        String areaName = areaSnapshot.child("displayNameDept").getValue(String.class);
+                        areas.add(areaName);
+                    }
+
                 }
 
                 areaSpinner1 = (Spinner) findViewById(R.id.sp);

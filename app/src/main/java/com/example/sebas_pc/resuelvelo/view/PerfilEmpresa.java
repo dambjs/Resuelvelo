@@ -61,7 +61,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 
         String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(idEmpresa);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 

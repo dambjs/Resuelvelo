@@ -98,10 +98,10 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
 
                 for (DataSnapshot empresario: dataSnapshot.getChildren()) {
                     for(DataSnapshot empresa: empresario.getChildren()){
-                        String empresaKey = empresa.getKey();
+//                        String empresaKey = empresa.getKey();
                         String nombreempresa = empresa.child("displayNameEmpresa").getValue(String.class);
                         empresas.add(nombreempresa);
-                        empresasKey.put(nombreempresa, empresaKey);
+//                        empresasKey.put(nombreempresa, empresaKey);
                     }
                 }
 
