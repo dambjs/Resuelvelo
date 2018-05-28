@@ -24,6 +24,8 @@ public class VerIncidencia extends AppCompatActivity {
 
     private FirebaseRecyclerAdapter mAdapter;
     private DatabaseReference mDatabase;
+    String idIncidencia;
+    String idEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,10 @@ public class VerIncidencia extends AppCompatActivity {
         setContentView(R.layout.activity_ver_incidencia);
 
         String uid = FirebaseAuth.getInstance().getUid();
+        idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
+
+        idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child(uid);
 

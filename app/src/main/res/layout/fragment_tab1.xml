@@ -5,19 +5,16 @@
     tools:context="com.example.sebas_pc.resuelvelo.view.Tab1">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tab 1"
-        android:layout_centerInParent="true"
-        android:textSize="30dp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sebas"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
