@@ -42,7 +42,6 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private TextView dominio;
     private Spinner areaSpinner;
     final HashMap<String,String> empresasKey = new HashMap<>();
-    String idEmpresa;
 
     private ProgressDialog progressDialog;
 
@@ -99,10 +98,10 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
 
                 for (DataSnapshot empresario: dataSnapshot.getChildren()) {
                     for(DataSnapshot empresa: empresario.getChildren()){
-//                        String empresaKey = empresa.getKey();
+                        String empresaKey = empresa.getKey();
                         String nombreempresa = empresa.child("displayNameEmpresa").getValue(String.class);
                         empresas.add(nombreempresa);
-//                        empresasKey.put(nombreempresa, empresaKey);
+                        empresasKey.put(nombreempresa, empresaKey);
                     }
                 }
 
@@ -134,9 +133,9 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         String password2 = etPassword2.getText().toString().trim();
         String password  = etPassword.getText().toString().trim();
 
-//        String nombreEmpresa = areaSpinner.getSelectedItem().toString();
-//
-//        String empresaKey = empresasKey.get(nombreEmpresa);
+        //String nombreEmpresa = spinner.getValue();
+
+        //String empresaKey = empresasKey.get(nombreEmpresa);
 
         if(TextUtils.isEmpty(displayName)){
             Toast.makeText(this,"Porfavor ponga un nombre de empresa", Toast.LENGTH_LONG).show();
