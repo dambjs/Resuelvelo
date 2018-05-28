@@ -18,8 +18,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -55,6 +57,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private ImageView image, add;
     private Button enviar;
     private Spinner jaja;
+    private EditText TextoOtros;
     private Spinner jeje;
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
@@ -65,6 +68,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private DatabaseReference mDatabase, mDatabase2, mDatabase3;
     private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
             "Pantalla sin señal", "Proyector estropeado", "Otros" };
+
     private final static String[] prioridad = { "Prioridad Alta", "Prioridad Media", "Prioridad Baja"};
     String idEmpresa, idIncidencia;
 
@@ -113,8 +117,26 @@ public class CrearIncidencia extends AppCompatActivity {
 
 
         jaja = (Spinner) findViewById(R.id.sp3);
+        TextoOtros = (EditText) findViewById(R.id.textootros);
 
         jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, otros));
+
+        jaja.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (jaja.getItemAtPosition(position).toString().equalsIgnoreCase("Otros")) {
+                    TextoOtros.setVisibility(View.VISIBLE);
+                } else {
+                    TextoOtros.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
 
         jeje = (Spinner) findViewById(R.id.sp4);
@@ -174,6 +196,7 @@ public class CrearIncidencia extends AppCompatActivity {
     }
 
 
+
     void uploadFile(){
         StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("incidencia/" + UUID.randomUUID());
         fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -191,12 +214,13 @@ public class CrearIncidencia extends AppCompatActivity {
         String departamento = areaSpinner1.getSelectedItem().toString();
         String destinatario = areaSpinner2.getSelectedItem().toString();
         String motivo = jaja.getSelectedItem().toString();
+        String motivo2 = TextoOtros.getText().toString();
         String prioridad = jeje.getSelectedItem().toString();
 
-        if(downloaderUrl == null) {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, null));
+        if(downloaderUrl == null || TextoOtros == null) {
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, null, prioridad, null));
         } else {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, downloaderUrl.toString()));
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, motivo2, prioridad, downloaderUrl.toString()));
         }
         finish();
     }

@@ -17,6 +17,7 @@ public class IncidenciaViewHolder extends RecyclerView.ViewHolder{
         departamento = itemView.findViewById(R.id.departamento);
         prioridad = itemView.findViewById(R.id.prioridad);
         motivo = itemView.findViewById(R.id.motivo);
+
     }
 
 }
