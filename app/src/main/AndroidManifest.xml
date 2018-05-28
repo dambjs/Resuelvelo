@@ -49,6 +49,7 @@
         <activity
             android:name=".view.PerfilEmpleado"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".view.VerIncidenciaCompleta"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,6 +50,14 @@ public class VerIncidencia extends AppCompatActivity {
                 holder.prioridad.setText(empresa.prioridad);
                 holder.motivo.setText(empresa.motivo);
 
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(VerIncidencia.this, VerIncidenciaCompleta.class);
+                        intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
