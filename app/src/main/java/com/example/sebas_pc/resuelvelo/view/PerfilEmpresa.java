@@ -143,6 +143,7 @@ public class PerfilEmpresa extends AppCompatActivity {
                 alertDialog.show();
     }
 
+//    https://medium.com/mobiletech/firebase-authentication-sample-371b5940ba93
 
 
     void cargarDatosEmpresa(){

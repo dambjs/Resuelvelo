@@ -51,14 +51,13 @@ import java.util.UUID;
 
 public class CrearIncidencia extends AppCompatActivity {
 
-//    private String dropDownItemArr[] = {"Prioridad Baja", "Prioridad Media", "Prioridad Alta"};
+    //    private String dropDownItemArr[] = {"Prioridad Baja", "Prioridad Media", "Prioridad Alta"};
     private ImageView image, add;
     private Button enviar;
     private Spinner jaja;
     private Spinner jeje;
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
-    final HashMap<String,String> pruebasKey = new HashMap<>();
 
     Uri mediaUri;
     Uri downloaderUrl;
