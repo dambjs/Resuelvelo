@@ -27,26 +27,87 @@
             android:textColor="@android:color/black"
             android:textSize="30sp"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/prioridad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="prioridad"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/departamento"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="departamento"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/destinatario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="destinatario"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/motivo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="motivo"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="30sp"
+                tools:ignore="HardcodedText" />
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
-                <TextView
-                    android:id="@+id/prioridad"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="prueba"
-                    android:gravity="left"
-                    android:textColor="@android:color/black"
-                    android:textSize="30sp"
-                    tools:ignore="HardcodedText" />
+            <ImageView
+                android:id="@+id/imagen"
+                android:layout_width="200dp"
+                android:layout_height="200dp" />
 
         </LinearLayout>
-
-        </LinearLayout>
-
-
     </LinearLayout>
 
 </LinearLayout>
