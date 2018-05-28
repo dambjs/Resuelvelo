@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RegistroEmpleado extends AppCompatActivity implements View.OnClickListener {
@@ -40,19 +41,18 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private TextView tvEntrar;
     private TextView dominio;
     private Spinner areaSpinner;
+    final HashMap<String,String> empresasKey = new HashMap<>();
     String idEmpresa;
 
     private ProgressDialog progressDialog;
 
-    private DatabaseReference mDatabase, mDatabase2;
+    private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_empleado);
-
-
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -90,29 +90,33 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         btnRegistrarse.setOnClickListener(this);
         tvEntrar.setOnClickListener(this);
 
-//        mDatabase2.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//
-//                final List<String> areas = new ArrayList<String>();
-//
-//                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-//                    String areaName = areaSnapshot.child("displayNameEmpresa").getValue(String.class);
-//                    areas.add(areaName);
-//                }
-//
-//
-//                areaSpinner = (Spinner) findViewById(R.id.sp5);
-//                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RegistroEmpleado.this, android.R.layout.simple_spinner_item, areas);
-//                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                areaSpinner.setAdapter(areasAdapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+        mDatabase.child("empresa").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                final List<String> empresas = new ArrayList<String>();
+
+
+                for (DataSnapshot empresario: dataSnapshot.getChildren()) {
+                    for(DataSnapshot empresa: empresario.getChildren()){
+//                        String empresaKey = empresa.getKey();
+                        String nombreempresa = empresa.child("displayNameEmpresa").getValue(String.class);
+                        empresas.add(nombreempresa);
+//                        empresasKey.put(nombreempresa, empresaKey);
+                    }
+                }
+
+                areaSpinner = (Spinner) findViewById(R.id.sp5);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RegistroEmpleado.this, android.R.layout.simple_spinner_item, empresas);
+                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                areaSpinner.setAdapter(areasAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -129,6 +133,10 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         String email = etEmail.getText()+dominio.getText().toString().trim();
         String password2 = etPassword2.getText().toString().trim();
         String password  = etPassword.getText().toString().trim();
+
+//        String nombreEmpresa = areaSpinner.getSelectedItem().toString();
+//
+//        String empresaKey = empresasKey.get(nombreEmpresa);
 
         if(TextUtils.isEmpty(displayName)){
             Toast.makeText(this,"Porfavor ponga un nombre de empresa", Toast.LENGTH_LONG).show();
