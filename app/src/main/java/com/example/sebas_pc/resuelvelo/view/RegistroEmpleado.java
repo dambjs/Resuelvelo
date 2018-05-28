@@ -41,7 +41,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private TextView tvEntrar;
     private TextView dominio;
     private Spinner areaSpinner;
-    final HashMap<String,String> empresasKey = new HashMap<>();
+//    final HashMap<String,String> empresasKey = new HashMap<>();
 
     private ProgressDialog progressDialog;
 
@@ -80,7 +80,6 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         tvEntrar = (TextView) findViewById(R.id.entrar);
         btnRegistrarse = (Button) findViewById(R.id.registrarse);
         dominio = (TextView) findViewById(R.id.dominio); // ok
-
 
 
 

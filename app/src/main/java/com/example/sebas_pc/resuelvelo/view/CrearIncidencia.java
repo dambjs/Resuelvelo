@@ -67,6 +67,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
             "Pantalla sin señal", "Proyector estropeado", "Otros" };
     private final static String[] prioridad = { "Prioridad Alta", "Prioridad Media", "Prioridad Baja"};
+    String idEmpresa;
 
 
     @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
@@ -79,6 +80,9 @@ public class CrearIncidencia extends AppCompatActivity {
         enviar = findViewById(R.id.enviar);
         add = findViewById(R.id.add);
         image = findViewById(R.id.image);
+
+
+        idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
