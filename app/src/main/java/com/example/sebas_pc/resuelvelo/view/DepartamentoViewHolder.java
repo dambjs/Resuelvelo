@@ -14,13 +14,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class DepartamentoViewHolder extends RecyclerView.ViewHolder{
-    TextView nombreDep;
     TextView nombrePer;
     TextView correo;
     public DepartamentoViewHolder(View itemView) {
         super(itemView);
 
-        nombreDep = itemView.findViewById(R.id.nombreDep);
         nombrePer = itemView.findViewById(R.id.nombrePer);
         correo = itemView.findViewById(R.id.correo);
 

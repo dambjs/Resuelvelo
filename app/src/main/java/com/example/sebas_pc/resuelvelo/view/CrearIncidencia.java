@@ -143,7 +143,7 @@ public class CrearIncidencia extends AppCompatActivity {
 
         jeje.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, prioridad));
 
-        mDatabase.child("departamentos").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("dep").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

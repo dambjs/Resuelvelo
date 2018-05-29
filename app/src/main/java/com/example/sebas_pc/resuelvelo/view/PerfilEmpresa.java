@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
+import com.example.sebas_pc.resuelvelo.model.Dep;
 import com.example.sebas_pc.resuelvelo.model.Departamentos;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
 import com.example.sebas_pc.resuelvelo.model.User;
@@ -61,7 +62,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 
         String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(idEmpresa);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("dep").child(idEmpresa);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
@@ -73,23 +74,29 @@ public class PerfilEmpresa extends AppCompatActivity {
 
         Query postsQuery = mDatabase;
 
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Departamentos>()
-                .setQuery(postsQuery, Departamentos.class)
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Dep>()
+                .setQuery(postsQuery, Dep.class)
                 .setLifecycleOwner(this)
                 .build();
-        mAdapter = new FirebaseRecyclerAdapter<Departamentos, DepartamentoViewHolder>(options) {
+        mAdapter = new FirebaseRecyclerAdapter<Dep, DepViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull DepartamentoViewHolder holder, final int position, @NonNull final Departamentos empresa) {
+            protected void onBindViewHolder(@NonNull DepViewHolder holder, final int position, @NonNull final Dep empresa) {
                 holder.nombreDep.setText(empresa.displayNameDept);
-                holder.nombrePer.setText(empresa.displayName);
-                holder.correo.setText(empresa.correo);
 
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(PerfilEmpresa.this, DepartamentoAdd.class);
+                        intent.putExtra("DEPARTAMENTO_KEY", getRef(position).getKey());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
-            public DepartamentoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_departamento, parent, false);
-                return new DepartamentoViewHolder(view);
+            public DepViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dep, parent, false);
+                return new DepViewHolder(view);
 
             }
         };
@@ -101,7 +108,7 @@ public class PerfilEmpresa extends AppCompatActivity {
     public void add(View view) {
 
         LayoutInflater li = LayoutInflater.from(context);
-        View promptsView = li.inflate(R.layout.dialog, null);
+        View promptsView = li.inflate(R.layout.dep, null);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 context);
@@ -123,13 +130,11 @@ public class PerfilEmpresa extends AppCompatActivity {
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                final FirebaseUser departamentos = FirebaseAuth.getInstance().getCurrentUser();
+                                final FirebaseUser dep = FirebaseAuth.getInstance().getCurrentUser();
 
                                 final String departamento = userInput.getText().toString();
-                                final String nombre = userInput2.getText().toString();
-                                final String correo = userInput3.getText().toString();
 
-                                mDatabase.push().setValue(new Departamentos(departamentos.getUid(), departamento, nombre, correo));
+                                mDatabase.push().setValue(new Dep(dep.getUid(), departamento));
 
                             }
                         })
