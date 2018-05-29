@@ -90,8 +90,6 @@ public class CrearIncidencia extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
-//        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usersEmpleado");
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia").child(uid);
 
