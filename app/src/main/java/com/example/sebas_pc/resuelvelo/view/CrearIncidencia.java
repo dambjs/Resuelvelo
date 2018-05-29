@@ -217,8 +217,8 @@ public class CrearIncidencia extends AppCompatActivity {
         String otros = TextoOtros.getText().toString();
         String prioridad = jeje.getSelectedItem().toString();
 
-        if(downloaderUrl == null || TextoOtros == null) {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, null, prioridad, null, null));
+        if(downloaderUrl == null) {
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
         } else {
             mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
         }
