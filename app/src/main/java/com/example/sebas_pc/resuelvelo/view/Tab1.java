@@ -77,9 +77,7 @@ public class Tab1 extends Fragment {
         }
 
 
-        String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child("B8643YNgIDMY0kJnbpaAYz20V3A2");
 
 
     }
@@ -91,8 +89,11 @@ public class Tab1 extends Fragment {
         // Inflate the layout for this fragment
 
 //        return inflater.inflate(R.layout.fragment_tab1, container, false);
-        View view = inflater.inflate(R.layout.fragment_tab1, container, false);
+        final View view = inflater.inflate(R.layout.fragment_tab1, container, false);
 
+//        String uid = FirebaseAuth.getInstance().getUid();
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child("B8643YNgIDMY0kJnbpaAYz20V3A2");
 
         RecyclerView recyclerView = view.findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
@@ -106,9 +107,17 @@ public class Tab1 extends Fragment {
         mAdapter = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
-                holder.departamento.setText(empresa.departamento);
-                holder.prioridad.setText(empresa.prioridad);
-                holder.motivo.setText(empresa.motivo);
+
+                if (empresa.prioridad.equals("Prioridad Alta")){
+                    holder.departamento.setText(empresa.departamento);
+                    holder.motivo.setText(empresa.motivo);
+                    holder.prioridad.setText(empresa.prioridad);
+
+                    holder.itemView.setVisibility(View.VISIBLE);
+                }else {
+                    holder.itemView.setVisibility(View.INVISIBLE);
+                }
+
 
 //                holder.itemView.setOnClickListener(new View.OnClickListener() {
 //                    @Override

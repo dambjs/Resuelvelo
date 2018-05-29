@@ -8,7 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
 
             <!-- Letras Departamento -->
             <TextView
@@ -53,7 +55,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp" />
+            android:layout_marginStart="30dp">
 
 
         <TextView
@@ -95,5 +97,5 @@
             android:textSize="20dp"
             android:layout_alignParentBottom="true"
             android:textStyle="bold" />
-    </LinearLayout>
+    </EditText>
 </ScrollView>

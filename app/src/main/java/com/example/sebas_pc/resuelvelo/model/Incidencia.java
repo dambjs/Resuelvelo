@@ -5,17 +5,19 @@ public class Incidencia {
     public String departamento;
     public String destinatario;
     public String motivo;
-    public String motivo2;
     public String prioridad;
+    public String otros;
     public String imagenIncidencia;
 
-    public Incidencia(String userId, String departamento, String destinatario, String motivo, String motivo2, String prioridad, String imagenIncidencia) {
+
+
+    public Incidencia(String userId, String departamento, String destinatario, String motivo, String prioridad , String otros, String imagenIncidencia) {
         this.userId = userId;
         this.departamento = departamento;
         this.destinatario = destinatario;
         this.motivo = motivo;
-        this.motivo2 = motivo2;
         this.prioridad = prioridad;
+        this.otros = otros;
         this.imagenIncidencia = imagenIncidencia;
     }
     public Incidencia(){}
