@@ -57,7 +57,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private ImageView image, add;
     private Button enviar;
     private Spinner jaja;
-    private EditText textootros;
+    private EditText TextoOtros;
     private Spinner jeje;
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
@@ -83,7 +83,6 @@ public class CrearIncidencia extends AppCompatActivity {
         enviar = findViewById(R.id.enviar);
         add = findViewById(R.id.add);
         image = findViewById(R.id.image);
-        textootros = findViewById(R.id.textootros);
 
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
@@ -118,6 +117,7 @@ public class CrearIncidencia extends AppCompatActivity {
 
 
         jaja = (Spinner) findViewById(R.id.sp3);
+        TextoOtros = (EditText) findViewById(R.id.textootros);
 
         jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, otros));
 
@@ -125,9 +125,9 @@ public class CrearIncidencia extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (jaja.getItemAtPosition(position).toString().equalsIgnoreCase("Otros")) {
-                    textootros.setVisibility(View.VISIBLE);
+                    TextoOtros.setVisibility(View.VISIBLE);
                 } else {
-                    textootros.setVisibility(View.GONE);
+                    TextoOtros.setVisibility(View.GONE);
                 }
             }
 
@@ -214,13 +214,13 @@ public class CrearIncidencia extends AppCompatActivity {
         String departamento = areaSpinner1.getSelectedItem().toString();
         String destinatario = areaSpinner2.getSelectedItem().toString();
         String motivo = jaja.getSelectedItem().toString();
-        String otros = textootros.getText().toString();
+        String otros = TextoOtros.getText().toString();
         String prioridad = jeje.getSelectedItem().toString();
 
-        if(downloaderUrl == null) {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo,  prioridad, otros, null ));
+        if(downloaderUrl == null || TextoOtros == null) {
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, null, prioridad, null, null));
         } else {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo,  prioridad, otros, downloaderUrl.toString()));
+            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
         }
         finish();
     }

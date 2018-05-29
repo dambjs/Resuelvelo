@@ -8,54 +8,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:focusable="true"
-        android:focusableInTouchMode="true"/>
+        android:orientation="vertical">
 
-            <!-- Letras Departamento -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginStart="30dp"
-                android:text="@string/departamentotitulo"
-                android:textAllCaps="true"
-                android:textSize="24sp"
-                android:textColor="#7426b7" />
+        <!-- Letras Departamento -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="30dp"
+            android:text="@string/departamentotitulo"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textColor="#7426b7" />
 
-            <include layout="@layout/spinner1"/>
+        <include layout="@layout/spinner1"/>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="30dp"
-                android:text="@string/destinatariotitulo"
-                android:textAllCaps="true"
-                android:textSize="24sp"
-                android:textColor="#7426b7" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:text="@string/destinatariotitulo"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textColor="#7426b7" />
 
-            <include layout="@layout/spinner2"/>
+        <include layout="@layout/spinner2"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="30dp"
-                android:text="@string/motivotitulo"
-                android:textAllCaps="true"
-                android:textSize="24sp"
-                android:textColor="#7426b7" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="30dp"
+            android:text="@string/motivotitulo"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textColor="#7426b7" />
 
-            <include layout="@layout/spinner3"/>
+        <include layout="@layout/spinner3"/>
 
         <EditText
             android:id="@+id/textootros"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp">
+            android:layout_marginStart="30dp" />
 
 
         <TextView
@@ -97,5 +95,5 @@
             android:textSize="20dp"
             android:layout_alignParentBottom="true"
             android:textStyle="bold" />
-    </EditText>
+    </LinearLayout>
 </ScrollView>
