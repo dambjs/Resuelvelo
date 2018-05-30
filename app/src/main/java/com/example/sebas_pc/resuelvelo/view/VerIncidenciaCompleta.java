@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 public class VerIncidenciaCompleta extends AppCompatActivity {
 
     String idIncidencia;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,mDatabase2,mDatabase3;
 
     private ImageView imagen;
     private TextView prioridad;
@@ -36,8 +36,9 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
 
         idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child(uid);
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia/alta").child(uid);
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("incidencia/media").child(uid);
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia/baja").child(uid);
 
         imagen = findViewById(R.id.imagen);
         prioridad = findViewById(R.id.prioridad);
@@ -46,6 +47,48 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
         motivo = findViewById(R.id.motivo);
 
         mDatabase.child(idIncidencia).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
+                if (incidencia != null) {
+                    prioridad.setText(incidencia.prioridad);
+                    departamento.setText(incidencia.departamento);
+                    destinatario.setText(incidencia.destinatario);
+                    motivo.setText(incidencia.motivo);
+                    Glide.with(VerIncidenciaCompleta.this)
+                            .load(incidencia.imagenIncidencia)
+                            .into(imagen);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mDatabase2.child(idIncidencia).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
+                if (incidencia != null) {
+                    prioridad.setText(incidencia.prioridad);
+                    departamento.setText(incidencia.departamento);
+                    destinatario.setText(incidencia.destinatario);
+                    motivo.setText(incidencia.motivo);
+                    Glide.with(VerIncidenciaCompleta.this)
+                            .load(incidencia.imagenIncidencia)
+                            .into(imagen);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mDatabase3.child(idIncidencia).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
