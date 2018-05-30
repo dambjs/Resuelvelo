@@ -5,7 +5,16 @@
     tools:context="com.example.sebas_pc.resuelvelo.view.Tab1">
 
     <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="nombre"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"/>
+
     <LinearLayout
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

@@ -11,18 +11,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Incidencia;
+import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -39,10 +44,11 @@ public class Tab1 extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private FirebaseRecyclerAdapter mAdapter;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, mDatabase2, mDatabase3;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    TextView nombre;
 
     private OnFragmentInteractionListener mListener;
 
@@ -80,6 +86,8 @@ public class Tab1 extends Fragment {
 
 
 
+
+
     }
 
 
@@ -90,10 +98,37 @@ public class Tab1 extends Fragment {
 
 //        return inflater.inflate(R.layout.fragment_tab1, container, false);
         final View view = inflater.inflate(R.layout.fragment_tab1, container, false);
+        String uid = FirebaseAuth.getInstance().getUid();
 
-//        String uid = FirebaseAuth.getInstance().getUid();
+
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usersEmpleado").child(uid);
+
+        nombre = view.findViewById(R.id.nombre);
+                mDatabase2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        if(user != null) {
+                            nombre.setText(user.displayName);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("The read failed: " + databaseError.getMessage());
+                    }
+                });
+
+
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia/alta").child("B8643YNgIDMY0kJnbpaAYz20V3A2");
+
+
+//        if(mDatabase.child("destinatario").equals(nombre)){
+//
+//        }
+
 
         RecyclerView recyclerView = view.findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
@@ -131,6 +166,7 @@ public class Tab1 extends Fragment {
             }
         };
         recyclerView.setAdapter(mAdapter);
+
         return view;
 
     }
