@@ -82,7 +82,7 @@ public class Tab3 extends Fragment {
 
 //        String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child("B8643YNgIDMY0kJnbpaAYz20V3A2");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia/baja").child("B8643YNgIDMY0kJnbpaAYz20V3A2");
 
         RecyclerView recyclerView = view.findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(Tab3.this.getActivity()));
@@ -97,15 +97,11 @@ public class Tab3 extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
 
-                if (empresa.prioridad.equals("Prioridad Baja")){
                     holder.departamento.setText(empresa.departamento);
                     holder.motivo.setText(empresa.motivo);
                     holder.prioridad.setText(empresa.prioridad);
 
-                    holder.itemView.setVisibility(View.VISIBLE);
-                }else {
-                    holder.itemView.setVisibility(View.INVISIBLE);
-                }
+
 
 
 //                holder.itemView.setOnClickListener(new View.OnClickListener() {
