@@ -21,4 +21,4 @@ public class FotoPersonal {
 //        6- Eliminar empresas pulsando. --------------------------------------------------------------------------------------- HECHO, mini fallo
 //        7- Perfil empresario mostrar las incidencias según su prioridad.------------------------------------------------------ medio
 //        8- Imagen de perfil empresarios.--------------------------------------------------------------------------------------
-//        9- Crear el has olvidado contraseña.----------------------------------------------------------------------------------
+//        9- Crear el has olvidado contraseña.---------------------------------------------------------------------------------- HECHO
