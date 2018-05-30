@@ -65,7 +65,7 @@ public class CrearIncidencia extends AppCompatActivity {
     Uri mediaUri;
     Uri downloaderUrl;
     private final int RC_IMAGE_PICK = 5677;
-    private DatabaseReference mDatabase, mDatabase2, mDatabase3;
+    private DatabaseReference mDatabase, mDatabase2, mDatabase3, mDatabase4, mDatabase5;
     private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
             "Pantalla sin señal", "Proyector estropeado", "Otros" };
 
@@ -89,9 +89,10 @@ public class CrearIncidencia extends AppCompatActivity {
         idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usersEmpleado");
-        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia").child(uid);
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia/alta").child(uid);
+        mDatabase4 = FirebaseDatabase.getInstance().getReference().child("incidencia/media").child(uid);
+        mDatabase5 = FirebaseDatabase.getInstance().getReference().child("incidencia/baja").child(uid);
 
 
         enviar.setOnClickListener(new View.OnClickListener() {
@@ -215,12 +216,34 @@ public class CrearIncidencia extends AppCompatActivity {
         String otros = TextoOtros.getText().toString();
         String prioridad = jeje.getSelectedItem().toString();
 
-        if(downloaderUrl == null) {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
-        } else {
-            mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
+        if(prioridad.equals("Prioridad Alta")){
+            if(downloaderUrl == null) {
+                mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
+            } else {
+                mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
+            }
+            finish();
         }
-        finish();
+
+        if(prioridad.equals("Prioridad Media")){
+            if(downloaderUrl == null) {
+                mDatabase4.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
+            } else {
+                mDatabase4.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
+            }
+            finish();
+        }
+
+        if(prioridad.equals("Prioridad Baja")){
+            if(downloaderUrl == null) {
+                mDatabase5.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
+            } else {
+                mDatabase5.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
+            }
+            finish();
+        }
+
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
