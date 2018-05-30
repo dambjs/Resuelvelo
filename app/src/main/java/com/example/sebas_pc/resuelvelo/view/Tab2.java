@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -28,6 +27,7 @@ import com.google.firebase.database.Query;
  * Use the {@link Tab2#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class Tab2 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -101,14 +101,11 @@ public class Tab2 extends Fragment {
                     holder.departamento.setText(empresa.departamento);
                     holder.motivo.setText(empresa.motivo);
                     holder.prioridad.setText(empresa.prioridad);
-
                     holder.itemView.setVisibility(View.VISIBLE);
-                }else {
 
+                } else {
                     holder.itemView.setVisibility(View.GONE);
-
                 }
-
 
 //                holder.itemView.setOnClickListener(new View.OnClickListener() {
 //                    @Override
@@ -118,6 +115,7 @@ public class Tab2 extends Fragment {
 //                        startActivity(intent);
 //                    }
 //                });
+
             }
 
             @Override

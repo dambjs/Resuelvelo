@@ -118,7 +118,6 @@ public class Tab1 extends Fragment {
                     holder.itemView.setVisibility(View.INVISIBLE);
                 }
 
-
 //                holder.itemView.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {

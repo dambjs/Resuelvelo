@@ -1,17 +1,23 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
+import com.example.sebas_pc.resuelvelo.model.Dep;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -39,6 +45,7 @@ public class LogueoEmpresario extends AppCompatActivity implements View.OnClickL
     private TextView tvRegistrarte; //ok
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,5 +184,51 @@ public class LogueoEmpresario extends AppCompatActivity implements View.OnClickL
             finish();
             startActivity(new Intent(this, RegistroEmpresario.class));
         }
+    }
+
+
+
+    public void recuperarContraseña(View view) {
+
+
+        LayoutInflater li = LayoutInflater.from(context);
+        View promptsView = li.inflate(R.layout.contra, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                final String correo = userInput.getText().toString();
+                                FirebaseAuth.getInstance().sendPasswordResetEmail(correo)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(LogueoEmpresario.this, "Vaya a su correo para restablecer su contraseña.", Toast.LENGTH_LONG).show();
+                                                } else {
+                                                    Toast.makeText(LogueoEmpresario.this, "Error, correo invalido", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                        });
+                            }
+                        })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
     }
 }

@@ -21,19 +21,25 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
+import com.example.sebas_pc.resuelvelo.model.FotoPersonal;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 public class PerfilEmpresario extends AppCompatActivity {
 
@@ -60,7 +66,7 @@ public class PerfilEmpresario extends AppCompatActivity {
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
 //        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("empresa").child(idEmpresa);
 
-//        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("imagenPersonal").child(uid);
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("imagenPersonal").child(uid);
 
 
         correo = findViewById(R.id.email);
@@ -161,57 +167,57 @@ public class PerfilEmpresario extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
 
+        //click
+        imagenP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                imagenP.setEnabled(false);
 
-
-//        imagenP.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                imagenP.setEnabled(false);
 //                if (mediaUri != null){
-//                    uploadFile();
+//                    Glide.with(this).load(mediaUri).into();
 //                } else{
 //                    creaImagen();
 //                }
-//                finish();
-//            }
-//        });
-//        cargarFoto();
+
+            }
+    });
+        cargarFoto();
+}
+
+
+    void uploadFile(){
+        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("ImagenPersonal/" + nom.getText());
+        fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                downloaderUrl = taskSnapshot.getDownloadUrl();
+                creaImagen();
+            }
+        });
+    }
+
+    private void creaImagen() {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(downloaderUrl == null) {
+            mDatabase3.setValue(new FotoPersonal(user.getUid(), null));
+        } else {
+            mDatabase3.setValue(new FotoPersonal(user.getUid(), downloaderUrl.toString()));
+        }
+        finish();
     }
 
 
-//    void uploadFile(){
-//        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("ImagenPersonal/" + nom.getText());
-//        fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                downloaderUrl = taskSnapshot.getDownloadUrl();
-//                creaImagen();
-//            }
-//        });
-//    }
-
-//    private void creaImagen() {
-//        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if(downloaderUrl == null) {
-//            mDatabase3.setValue(new FotoPersonal(user.getUid(), null));
-//        } else {
-//            mDatabase3.setValue(new FotoPersonal(user.getUid(), downloaderUrl.toString()));
-//        }
-//        finish();
-//    }
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (data != null) {
-//            if (requestCode == RC_IMAGE_PICK) {
-//                mediaUri = data.getData();
-//                Glide.with(this).load(mediaUri).into(imagenP);
-//            }
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            if (requestCode == RC_IMAGE_PICK) {
+                mediaUri = data.getData();
+                Glide.with(this).load(mediaUri).into(imagenP);
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -266,25 +272,25 @@ public class PerfilEmpresario extends AppCompatActivity {
                 .show();
     }
 
-//    void cargarFoto(){
-//        mDatabase3.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                FotoPersonal fotoPersonal = dataSnapshot.getValue(FotoPersonal.class);
-//                if (fotoPersonal != null) {
-//                    Glide.with(PerfilEmpresario.this)
-//                            .load(fotoPersonal.imagenP)
-//                            .into(imagenP);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
+    //dsdsdsdsdksnsdnaskdnkasndanjasnfj
+    void cargarFoto(){
+        mDatabase3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FotoPersonal fotoPersonal = dataSnapshot.getValue(FotoPersonal.class);
+                if (fotoPersonal != null) {
+                    Glide.with(PerfilEmpresario.this)
+                            .load(fotoPersonal.imagenP)
+                            .into(imagenP);
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     public void add(View view) {
         Intent intent = new Intent(this, CrearEmpresa.class);

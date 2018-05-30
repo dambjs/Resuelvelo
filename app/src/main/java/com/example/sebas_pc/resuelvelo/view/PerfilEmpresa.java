@@ -175,7 +175,6 @@ public class PerfilEmpresa extends AppCompatActivity {
 
     void cargarDepartamentos(){
 
-
         mDatabase3.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
