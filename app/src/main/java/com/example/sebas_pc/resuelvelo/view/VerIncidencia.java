@@ -22,8 +22,8 @@ import com.google.firebase.database.Query;
 
 public class VerIncidencia extends AppCompatActivity {
 
-    private FirebaseRecyclerAdapter mAdapter;
-    private DatabaseReference mDatabase;
+    private FirebaseRecyclerAdapter mAdapter, mAdapter2, mAdapter3;
+    private DatabaseReference mDatabase,mDatabase2,mDatabase3;
     String idIncidencia;
     String idEmpresa;
 
@@ -38,7 +38,7 @@ public class VerIncidencia extends AppCompatActivity {
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child(uid);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child("alta").child(uid);
 
         RecyclerView recyclerView = findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,5 +74,96 @@ public class VerIncidencia extends AppCompatActivity {
             }
         };
         recyclerView.setAdapter(mAdapter);
+
+        //
+
+        jaja();
+        jeje();
+
+
+        //
+
+
+    }
+
+    public void jaja(){
+        String uid = FirebaseAuth.getInstance().getUid();
+
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("incidencia").child("media").child(uid);
+
+        RecyclerView recyclerView = findViewById(R.id.list_viewM);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Query postsQuery = mDatabase2;
+
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
+                .setQuery(postsQuery, Incidencia.class)
+                .setLifecycleOwner(this)
+                .build();
+        mAdapter2 = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
+                holder.departamento.setText(empresa.departamento);
+                holder.prioridad.setText(empresa.prioridad);
+                holder.motivo.setText(empresa.motivo);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(VerIncidencia.this, VerIncidenciaCompleta.class);
+                        intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public IncidenciaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia, parent, false);
+                return new IncidenciaViewHolder(view);
+
+            }
+        };
+        recyclerView.setAdapter(mAdapter2);
+    }
+    public void jeje() {
+        String uid = FirebaseAuth.getInstance().getUid();
+
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia").child("baja").child(uid);
+
+        RecyclerView recyclerView = findViewById(R.id.list_viewB);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        Query postsQuery = mDatabase3;
+
+        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
+                .setQuery(postsQuery, Incidencia.class)
+                .setLifecycleOwner(this)
+                .build();
+        mAdapter3 = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
+                holder.departamento.setText(empresa.departamento);
+                holder.prioridad.setText(empresa.prioridad);
+                holder.motivo.setText(empresa.motivo);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(VerIncidencia.this, VerIncidenciaCompleta.class);
+                        intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public IncidenciaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia, parent, false);
+                return new IncidenciaViewHolder(view);
+
+            }
+        };
+        recyclerView.setAdapter(mAdapter3);
     }
 }
