@@ -2,8 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings"
+    <item android:id="@+id/editar_perfil"
         android:orderInCategory="11"
-        android:title="@string/imagenP"
+        android:title="Editar Perfil"
         app:showAsAction="never"/>
+
+    <!--<item android:id="@+id/action_settings"-->
+        <!--android:orderInCategory="11"-->
+        <!--android:title="@string/imagenP"-->
+        <!--app:showAsAction="never"/>-->
+
+    <!--<item android:id="@+id/action_settings2"-->
+        <!--android:orderInCategory="11"-->
+        <!--android:title="Guardar Imagen"-->
+        <!--app:showAsAction="never"/>-->
 </menu>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.EditarPerfilEmpresario"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Añada una imagen:"
+            android:layout_marginLeft="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-35dp">
+
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="250dp"
+            android:background="@mipmap/add" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/imagenP"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="25sp"
+            android:text="Nombre: "
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp">
+
+        <EditText
+            android:id="@+id/nombre"
+            android:layout_width="250dp"
+            android:textSize="25sp"
+            android:layout_marginLeft="100dp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <Button
+            android:id="@+id/guardarF"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:text="Guardar Imagen"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/guardarN"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:text="Editar Nombre"
+            android:layout_marginLeft="30dp"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/volver"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:text="Volver al perfil"
+            android:onClick="volver"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

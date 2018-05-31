@@ -49,9 +49,6 @@ public class PerfilEmpresario extends AppCompatActivity {
     private TextView txt1;
     private DatabaseReference mDatabase, mDatabase2, mDatabase3;
     private FirebaseRecyclerAdapter mAdapter;
-    Uri mediaUri;
-    Uri downloaderUrl;
-    private final int RC_IMAGE_PICK = 5677;
     String idEmpresa;
 
     @Override
@@ -62,10 +59,9 @@ public class PerfilEmpresario extends AppCompatActivity {
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
         final String uid = FirebaseAuth.getInstance().getUid();
 
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
-//        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("empresa").child(idEmpresa);
-
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("imagenPersonal").child(uid);
 
 
@@ -73,6 +69,26 @@ public class PerfilEmpresario extends AppCompatActivity {
         nom = findViewById(R.id.displayNameEmpresa);
         imagenP = findViewById(R.id.imagenP);
         txt1 = findViewById(R.id.txt1);
+
+
+        mDatabase3.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                FotoPersonal fotoPersonal = dataSnapshot.getValue(FotoPersonal.class);
+                if (fotoPersonal != null) {
+                    Glide.with(PerfilEmpresario.this)
+                            .load(fotoPersonal.imagenP)
+                            .into(imagenP);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -166,57 +182,6 @@ public class PerfilEmpresario extends AppCompatActivity {
         };
         recyclerView.setAdapter(mAdapter);
 
-
-        //click
-        imagenP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                imagenP.setEnabled(false);
-
-//                if (mediaUri != null){
-//                    Glide.with(this).load(mediaUri).into();
-//                } else{
-//                    creaImagen();
-//                }
-
-            }
-    });
-        cargarFoto();
-}
-
-
-    void uploadFile(){
-        StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("ImagenPersonal/" + nom.getText());
-        fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                downloaderUrl = taskSnapshot.getDownloadUrl();
-                creaImagen();
-            }
-        });
-    }
-
-    private void creaImagen() {
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(downloaderUrl == null) {
-            mDatabase3.setValue(new FotoPersonal(user.getUid(), null));
-        } else {
-            mDatabase3.setValue(new FotoPersonal(user.getUid(), downloaderUrl.toString()));
-        }
-        finish();
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            if (requestCode == RC_IMAGE_PICK) {
-                mediaUri = data.getData();
-                Glide.with(this).load(mediaUri).into(imagenP);
-            }
-        }
     }
 
     @Override
@@ -232,15 +197,16 @@ public class PerfilEmpresario extends AppCompatActivity {
                 Log.i("ActionBar", "Atrás");
                 finish();
                 return true;
-            case R.id.action_settings:
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,RC_IMAGE_PICK);
+            case R.id.editar_perfil:
+                Intent intent = new Intent(this, EditarPerfilEmpresario.class);
+                this.startActivity(intent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
     }
+
 
     public void salir(View view) {
         AuthUI.getInstance()
@@ -272,25 +238,6 @@ public class PerfilEmpresario extends AppCompatActivity {
                 .show();
     }
 
-    //dsdsdsdsdksnsdnaskdnkasndanjasnfj
-    void cargarFoto(){
-        mDatabase3.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                FotoPersonal fotoPersonal = dataSnapshot.getValue(FotoPersonal.class);
-                if (fotoPersonal != null) {
-                    Glide.with(PerfilEmpresario.this)
-                            .load(fotoPersonal.imagenP)
-                            .into(imagenP);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     public void add(View view) {
         Intent intent = new Intent(this, CrearEmpresa.class);
