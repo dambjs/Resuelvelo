@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,7 +46,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private Spinner areaSpinner1;
 
     Uri mediaUri;
-    Uri downloaderUrl;
+    String downloaderUrl;
     private final int RC_IMAGE_PICK = 5677;
     private DatabaseReference mDatabase, mDatabase2, mDatabase3, mDatabase4, mDatabase5, mDatabase6, mDatabase7, mDatabase8;
     private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
@@ -53,6 +54,9 @@ public class CrearIncidencia extends AppCompatActivity {
 
     private final static String[] prioridad = { "Prioridad Alta", "Prioridad Media", "Prioridad Baja"};
     String idEmpresa, idIncidencia;
+    HashMap<String, String> hashMapDepartamentos = new HashMap<>();
+    HashMap<String, String> hashMapEmpleados = new HashMap<>();
+    String uid;
 
 
     @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
@@ -61,22 +65,21 @@ public class CrearIncidencia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_incidencia);
 
-        String uid = FirebaseAuth.getInstance().getUid();
+        uid = FirebaseAuth.getInstance().getUid();
         enviar = findViewById(R.id.enviar);
         add = findViewById(R.id.add);
         image = findViewById(R.id.image);
 
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
-        idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empleado/users");
-        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia/alta").child(uid);
-        mDatabase4 = FirebaseDatabase.getInstance().getReference().child("incidencia/media").child(uid);
-        mDatabase5 = FirebaseDatabase.getInstance().getReference().child("incidencia/baja").child(uid);
+        mDatabase3 = FirebaseDatabase.getInstance().getReference();
+        mDatabase4 = FirebaseDatabase.getInstance().getReference();
+        mDatabase5 = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase6 = FirebaseDatabase.getInstance().getReference().child("empleado/incidencia/alta");
+        mDatabase6 = FirebaseDatabase.getInstance().getReference();
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,20 +132,21 @@ public class CrearIncidencia extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                final List<String> areas = new ArrayList<String>();
+                final List<String> departamentos = new ArrayList<String>();
 
                 for (DataSnapshot prueba: dataSnapshot.getChildren()) {
                     for (DataSnapshot areaSnapshot: prueba.getChildren()){
-                        String areaName = areaSnapshot.child("displayNameDept").getValue(String.class);
-                        areas.add(areaName);
+                        String displayNameDept = areaSnapshot.child("displayNameDept").getValue(String.class);
+                        departamentos.add(displayNameDept);
+                        hashMapDepartamentos.put(displayNameDept, areaSnapshot.getKey());
                     }
 
                 }
 
                 areaSpinner1 = (Spinner) findViewById(R.id.sp);
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_dropdown_item, areas);
-                areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                areaSpinner1.setAdapter(areasAdapter);
+                ArrayAdapter<String> departamentosAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_dropdown_item, departamentos);
+                departamentosAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                areaSpinner1.setAdapter(departamentosAdapter);
             }
 
             @Override
@@ -155,16 +159,17 @@ public class CrearIncidencia extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                final List<String> areas = new ArrayList<String>();
+                final List<String> empleados = new ArrayList<String>();
 
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-                    String areaName = areaSnapshot.child("displayName").getValue(String.class);
-                    areas.add(areaName);
+                    String displayName = areaSnapshot.child("displayName").getValue(String.class);
+                    empleados.add(displayName);
+                    hashMapEmpleados.put(displayName, areaSnapshot.getKey());
                 }
 
 
                 areaSpinner2 = (Spinner) findViewById(R.id.sp2);
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, areas);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, empleados);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 areaSpinner2.setAdapter(areasAdapter);
             }
@@ -184,57 +189,36 @@ public class CrearIncidencia extends AppCompatActivity {
         fileRef.putFile(mediaUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                downloaderUrl = taskSnapshot.getDownloadUrl();
+                downloaderUrl = taskSnapshot.getDownloadUrl().toString();
                 incidencia();
             }
         });
     }
 
     private void incidencia() {
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         String departamento = areaSpinner1.getSelectedItem().toString();
         String destinatario = areaSpinner2.getSelectedItem().toString();
         String motivo = jaja.getSelectedItem().toString();
         String otros = TextoOtros.getText().toString();
         String prioridad = jeje.getSelectedItem().toString();
 
-
-        if(prioridad.equals("Prioridad Alta")){
-            if(downloaderUrl == null) {
-                mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
-                mDatabase6.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
-
-            } else {
-                mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
-                mDatabase6.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
-
-            }
-
-            finish();
+        String carpeta = "alta";
+        if(prioridad.equals("Prioridad Media")) {
+            carpeta = "media";
+        } else if(prioridad.equals("Prioridad Baja")) {
+            carpeta = "baja";
         }
 
+        Incidencia incidencia = new Incidencia(uid, departamento, destinatario, motivo, prioridad, otros, downloaderUrl);
 
-        if(prioridad.equals("Prioridad Media")){
-            if(downloaderUrl == null) {
-                mDatabase4.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
-            } else {
-                mDatabase4.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
-            }
-            finish();
-        }
+        String key = mDatabase.push().getKey();
 
-        if(prioridad.equals("Prioridad Baja")){
-            if(downloaderUrl == null) {
-                mDatabase5.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
-            } else {
-                mDatabase5.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
-            }
-            finish();
-        }
+        mDatabase.child("incidencia").child(carpeta).child(uid).child(idEmpresa).child(key).setValue(incidencia);
+        mDatabase.child("incidencia").child(carpeta).child(hashMapEmpleados.get(destinatario)).child(key).setValue(incidencia);
 
-
+        finish();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
