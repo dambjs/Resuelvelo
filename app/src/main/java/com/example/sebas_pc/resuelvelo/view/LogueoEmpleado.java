@@ -57,7 +57,7 @@ public class LogueoEmpleado extends AppCompatActivity implements View.OnClickLis
 
             final String userId = firebaseUser.getUid();
 
-            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("usersEmpleado").child(userId);
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("empleado/users").child(userId);
 
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override

@@ -1,39 +1,22 @@
 package com.example.sebas_pc.resuelvelo.view;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
-import com.example.sebas_pc.resuelvelo.model.Empresa;
 import com.example.sebas_pc.resuelvelo.model.Incidencia;
-import com.example.sebas_pc.resuelvelo.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,7 +30,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,7 +47,7 @@ public class CrearIncidencia extends AppCompatActivity {
     Uri mediaUri;
     Uri downloaderUrl;
     private final int RC_IMAGE_PICK = 5677;
-    private DatabaseReference mDatabase, mDatabase2, mDatabase3, mDatabase4, mDatabase5;
+    private DatabaseReference mDatabase, mDatabase2, mDatabase3, mDatabase4, mDatabase5, mDatabase6, mDatabase7, mDatabase8;
     private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
             "Pantalla sin señal", "Proyector estropeado", "Otros" };
 
@@ -89,11 +71,12 @@ public class CrearIncidencia extends AppCompatActivity {
         idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usersEmpleado");
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empleado/users");
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia/alta").child(uid);
         mDatabase4 = FirebaseDatabase.getInstance().getReference().child("incidencia/media").child(uid);
         mDatabase5 = FirebaseDatabase.getInstance().getReference().child("incidencia/baja").child(uid);
 
+        mDatabase6 = FirebaseDatabase.getInstance().getReference().child("empleado/incidencia/alta");
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,14 +199,21 @@ public class CrearIncidencia extends AppCompatActivity {
         String otros = TextoOtros.getText().toString();
         String prioridad = jeje.getSelectedItem().toString();
 
+
         if(prioridad.equals("Prioridad Alta")){
             if(downloaderUrl == null) {
                 mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
+                mDatabase6.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
+
             } else {
                 mDatabase3.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, downloaderUrl.toString()));
+                mDatabase6.push().setValue(new Incidencia(user.getUid(), departamento, destinatario, motivo, prioridad, otros, null));
+
             }
+
             finish();
         }
+
 
         if(prioridad.equals("Prioridad Media")){
             if(downloaderUrl == null) {

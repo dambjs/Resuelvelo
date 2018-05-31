@@ -101,7 +101,7 @@ public class Tab1 extends Fragment {
         String uid = FirebaseAuth.getInstance().getUid();
 
 
-        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("usersEmpleado").child(uid);
+        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empleado/users").child(uid);
 
         nombre = view.findViewById(R.id.nombre);
                 mDatabase2.addValueEventListener(new ValueEventListener() {
@@ -122,26 +122,24 @@ public class Tab1 extends Fragment {
 
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia/alta").child("B8643YNgIDMY0kJnbpaAYz20V3A2");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("empleado/incidencia/alta");
+        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("empleado/incidencia/alta").child("destinatario");
 
 
-//        if(mDatabase.child("destinatario").equals(nombre)){
-//
-//        }
+//        if(mDatabase3.equals(nombre)) {
 
+            RecyclerView recyclerView = view.findViewById(R.id.list_view);
+            recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
 
-        RecyclerView recyclerView = view.findViewById(R.id.list_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
+            Query postsQuery = mDatabase;
 
-        Query postsQuery = mDatabase;
-
-        FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
-                .setQuery(postsQuery, Incidencia.class)
-                .setLifecycleOwner(this)
-                .build();
-        mAdapter = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
+            FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
+                    .setQuery(postsQuery, Incidencia.class)
+                    .setLifecycleOwner(this)
+                    .build();
+            mAdapter = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {
+                @Override
+                protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
 
                     holder.departamento.setText(empresa.departamento);
                     holder.motivo.setText(empresa.motivo);
@@ -156,16 +154,16 @@ public class Tab1 extends Fragment {
 //                        startActivity(intent);
 //                    }
 //                });
-            }
+                }
 
-            @Override
-            public IncidenciaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia, parent, false);
-                return new IncidenciaViewHolder(view);
+                @Override
+                public IncidenciaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia, parent, false);
+                    return new IncidenciaViewHolder(view);
 
-            }
-        };
-        recyclerView.setAdapter(mAdapter);
+                }
+            };
+            recyclerView.setAdapter(mAdapter);
 
         return view;
 

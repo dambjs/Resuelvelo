@@ -185,7 +185,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private void onAuthSuccess(FirebaseUser user) {
         String email = etEmail.getText().toString();
         String nombre = etDisplayName.getText().toString();
-        mDatabase.child("usersEmpleado").child(user.getUid()).setValue(new User(user.getUid(), nombre, email+"@resuelvelo.es"));
+        mDatabase.child("empleado/users").child(user.getUid()).setValue(new User(user.getUid(), nombre, email+"@resuelvelo.es"));
 
         startActivity(new Intent(RegistroEmpleado.this, PerfilEmpleado.class));
         finish();
