@@ -48,7 +48,7 @@
 
 
     <!-- Perfil Empresario -->
-    <string name="empresas">mis empresas</string>
+    <string name="empresas">Mis empresas</string>
 
     <!-- Perfil Empresa -->
     <string name="grupos">crear departamento</string>
@@ -96,8 +96,12 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <!-- Ver incidencias -->
+    <string name="lista_incidencias">Lista de Incidencias</string>
+
+    Lista de Incidencias
     <!-- Incidencia Completa -->
-    <string name="titulo">Incidencia completa</string>
+    <string name="titulo">Incidencia</string>
 
 
 </resources>

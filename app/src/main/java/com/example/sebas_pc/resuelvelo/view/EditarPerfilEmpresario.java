@@ -85,9 +85,9 @@ public class EditarPerfilEmpresario extends AppCompatActivity {
     private void creaEmpresa() {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(downloaderUrl == null) {
-            mDatabase.child("imagenPersonal").child(user.getUid()).setValue(new FotoPersonal(user.getUid(), null));
+            mDatabase.child("imagenPersonal").child(user.getUid()).setValue(new FotoPersonal(user.getUid(), null, null, null, null));
         } else {
-            mDatabase.child("imagenPersonal").child(user.getUid()).setValue(new FotoPersonal(user.getUid(), downloaderUrl.toString()));
+            mDatabase.child("imagenPersonal").child(user.getUid()).setValue(new FotoPersonal(user.getUid(), null, downloaderUrl.toString(), null, null));
         }
         finish();
     }

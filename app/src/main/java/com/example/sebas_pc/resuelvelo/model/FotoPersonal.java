@@ -2,11 +2,16 @@ package com.example.sebas_pc.resuelvelo.model;
 
 public class FotoPersonal {
     public String userId;
-    public String imagenP;
+    public String imagenP, imagenP2;
+    public String mediaUrl;
+    public String mediaTYPE;
 
-    public FotoPersonal(String userId, String imagenP) {
+    public FotoPersonal(String userId, String imagenP, String imagenP2, String mediaUrl, String mediaTYPE ) {
         this.userId = userId;
         this.imagenP = imagenP;
+        this.imagenP2 = imagenP2;
+        this.mediaUrl = mediaUrl;
+        this.mediaTYPE = mediaTYPE;
     }
 
     public FotoPersonal(){}

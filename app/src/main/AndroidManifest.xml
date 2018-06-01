@@ -52,6 +52,7 @@
         <activity android:name=".view.VerIncidenciaCompleta" />
         <activity android:name=".view.DepartamentoAdd" />
         <activity android:name=".view.EditarPerfilEmpresario"/>
+        <activity android:name=".view.MediaActivity"/>
     </application>
 
 </manifest>

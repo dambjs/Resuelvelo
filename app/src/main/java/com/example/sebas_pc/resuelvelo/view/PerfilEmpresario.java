@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
@@ -45,8 +46,9 @@ public class PerfilEmpresario extends AppCompatActivity {
 
     private TextView nom;
     private TextView correo;
-    private ImageView imagenP;
+    private ImageView imagenP, imagenP2;
     private TextView txt1;
+    int RC_IMAGE_PICK = 5677;
     private DatabaseReference mDatabase, mDatabase2, mDatabase3;
     private FirebaseRecyclerAdapter mAdapter;
     String idEmpresa;
@@ -68,6 +70,7 @@ public class PerfilEmpresario extends AppCompatActivity {
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayNameEmpresa);
         imagenP = findViewById(R.id.imagenP);
+        imagenP2 = findViewById(R.id.imagenP2);
         txt1 = findViewById(R.id.txt1);
 
 
@@ -76,15 +79,32 @@ public class PerfilEmpresario extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 FotoPersonal fotoPersonal = dataSnapshot.getValue(FotoPersonal.class);
                 if (fotoPersonal != null) {
+                    imagenP2.setVisibility(View.VISIBLE);
                     Glide.with(PerfilEmpresario.this)
-                            .load(fotoPersonal.imagenP)
-                            .into(imagenP);
+                            .load(fotoPersonal.imagenP2)
+                            .into(imagenP2);
+                    imagenP2.setVisibility(View.VISIBLE);
+                    imagenP.setVisibility(View.GONE);
+                } else {
+                    imagenP2.setVisibility(View.GONE);
+                    imagenP.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+
+        imagenP2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PerfilEmpresario.this, MediaActivity.class);
+                intent.putExtra("MEDIA_TYPE",R.id.imagenP2);
+                intent.putExtra("MEDIA_URL",R.id.imagenP2);
+                startActivity(intent);
             }
         });
 
@@ -177,7 +197,6 @@ public class PerfilEmpresario extends AppCompatActivity {
                 return new EmpresaViewHolder(view);
 
             }
-
 
         };
         recyclerView.setAdapter(mAdapter);
