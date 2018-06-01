@@ -11,13 +11,15 @@ public class IncidenciaViewHolder extends RecyclerView.ViewHolder{
     TextView departamento;
     TextView prioridad;
     TextView motivo;
+    ImageView basura;
+
     public IncidenciaViewHolder(View itemView) {
         super(itemView);
 
         departamento = itemView.findViewById(R.id.departamento);
         prioridad = itemView.findViewById(R.id.prioridad);
         motivo = itemView.findViewById(R.id.motivo);
+        basura = itemView.findViewById(R.id.basura);
 
     }
-
 }

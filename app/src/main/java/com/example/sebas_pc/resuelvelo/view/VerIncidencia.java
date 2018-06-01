@@ -1,5 +1,7 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.sebas_pc.resuelvelo.R;
@@ -29,6 +32,7 @@ public class VerIncidencia extends AppCompatActivity {
     private DatabaseReference mDatabase,mDatabase2,mDatabase3;
     String idIncidencia;
     String idEmpresa;
+    private ImageView basura;
 //    private FrameLayout fullScreenLayout;
 
 
@@ -85,6 +89,40 @@ public class VerIncidencia extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                holder.basura.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(VerIncidencia.this);
+                        builder1.setMessage("¿Estas seguro que deseas eliminar esta incidencia?");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        String postKey = getRef(position).getKey();
+                                        mDatabase.child(postKey).setValue(null);
+
+                                        //mReference.child("posts/data").child(postkey).setValue(null);
+                                        //Falta que no pete cuando se elimina el ultimo item.
+                                    }
+                                });
+
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                        }
+                });
             }
 
             @Override
@@ -136,6 +174,40 @@ public class VerIncidencia extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                holder.basura.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(VerIncidencia.this);
+                        builder1.setMessage("¿Estas seguro que deseas eliminar esta incidencia?");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        String postKey = getRef(position).getKey();
+                                        mDatabase2.child(postKey).setValue(null);
+
+                                        //mReference.child("posts/data").child(postkey).setValue(null);
+                                        //Falta que no pete cuando se elimina el ultimo item.
+                                    }
+                                });
+
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+                    }
+                });
             }
 
             @Override
@@ -174,6 +246,40 @@ public class VerIncidencia extends AppCompatActivity {
                         Intent intent = new Intent(VerIncidencia.this, VerIncidenciaCompleta.class);
                         intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
                         startActivity(intent);
+                    }
+                });
+
+                holder.basura.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(VerIncidencia.this);
+                        builder1.setMessage("¿Estas seguro que deseas eliminar esta incidencia?");
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Si",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        String postKey = getRef(position).getKey();
+                                        mDatabase3.child(postKey).setValue(null);
+
+                                        //mReference.child("posts/data").child(postkey).setValue(null);
+                                        //Falta que no pete cuando se elimina el ultimo item.
+                                    }
+                                });
+
+                        builder1.setNegativeButton(
+                                "No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                 });
             }

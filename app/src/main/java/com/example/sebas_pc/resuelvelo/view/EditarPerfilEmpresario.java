@@ -64,6 +64,18 @@ public class EditarPerfilEmpresario extends AppCompatActivity {
                 startActivity(new Intent(EditarPerfilEmpresario.this, PerfilEmpresario.class));
             }
         });
+
+        guardarN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                mDatabase.child("users").child(user.getUid()).setValue(new User(user.getUid(), nombre.getText().toString(),user.getEmail()));
+                finish();
+                startActivity(new Intent(EditarPerfilEmpresario.this, PerfilEmpresario.class));
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
