@@ -193,6 +193,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 
     public void create(View view) {
         Intent intent = new Intent(this, CrearIncidencia.class);
+        intent.putExtra("EMPRESA_KEY", idEmpresa);
         startActivity(intent);
     }
 

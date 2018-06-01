@@ -1,5 +1,8 @@
 package com.example.sebas_pc.resuelvelo.model;
 
+
+import android.widget.EditText;
+
 public class User {
     public String userId;
     public String displayName;
@@ -12,4 +15,6 @@ public class User {
     }
 
     public User(){}
+
+
 }

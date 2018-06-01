@@ -13,6 +13,7 @@ import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.FotoPersonal;
 
 import com.bumptech.glide.Glide;
+import com.example.sebas_pc.resuelvelo.model.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +34,7 @@ public class EditarPerfilEmpresario extends AppCompatActivity {
     private ImageView imagenP;
     private Button guardarF;
     private Button guardarN;
-    protected DatabaseReference mDatabase;
+    protected DatabaseReference mDatabase, mDatabase2;
 
 
     @Override
@@ -48,6 +49,8 @@ public class EditarPerfilEmpresario extends AppCompatActivity {
         guardarN = findViewById(R.id.guardarN);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase2 = FirebaseDatabase.getInstance().getReference();
+
         guardarF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +72,7 @@ public class EditarPerfilEmpresario extends AppCompatActivity {
             }
         });
 
-    }
+        }
 
     void uploadFile(){
         StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("imagepP/" + UUID.randomUUID());

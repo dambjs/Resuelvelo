@@ -162,7 +162,7 @@ public class PerfilEmpresario extends AppCompatActivity {
                     @Override
                     public boolean onLongClick(View view) {
                         AlertDialog.Builder builder1 = new AlertDialog.Builder(PerfilEmpresario.this);
-                        builder1.setMessage("¿ Estas seguro que deseas eliminar esta empresa?.");
+                        builder1.setMessage("¿Estas seguro que deseas eliminar esta empresa?");
                         builder1.setCancelable(true);
 
                         builder1.setPositiveButton(
