@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="70dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.sebas_pc.resuelvelo.view.CrearIncidencia"
+    tools:context="com.example.sebas_pc.resuelvelo.view.RegistroEmpleado"
     tools:showIn="@layout/activity_registro_empleado"
     android:layout_gravity="center"
     android:background="@drawable/bg_spinner">

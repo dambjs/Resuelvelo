@@ -119,12 +119,6 @@ public class PerfilEmpresa extends AppCompatActivity {
         final EditText userInput = (EditText) promptsView
                 .findViewById(R.id.editTextDialogUserInput);
 
-        final EditText userInput2 = (EditText) promptsView
-                .findViewById(R.id.editTextDialogUserInput2);
-
-        final EditText userInput3 = (EditText) promptsView
-                .findViewById(R.id.editTextDialogUserInput3);
-
         alertDialogBuilder
                 .setCancelable(false)
                 .setPositiveButton("OK",
@@ -199,6 +193,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 
     public void ver(View view) {
         Intent intent = new Intent(this, VerIncidencia.class);
+        intent.putExtra("EMPRESA_KEY", idEmpresa);
         startActivity(intent);
     }
 }
