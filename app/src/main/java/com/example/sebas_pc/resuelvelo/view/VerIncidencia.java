@@ -3,6 +3,7 @@ package com.example.sebas_pc.resuelvelo.view;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.sebas_pc.resuelvelo.R;
+import com.example.sebas_pc.resuelvelo.model.Departamentos;
 import com.example.sebas_pc.resuelvelo.model.Incidencia;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -26,20 +30,19 @@ public class VerIncidencia extends AppCompatActivity {
 
     private FirebaseRecyclerAdapter mAdapter, mAdapter2, mAdapter3;
     private DatabaseReference mDatabase,mDatabase2,mDatabase3;
-    String idIncidencia;
-    String idEmpresa;
+//    String idIncidencia;
+    String idEmpresa, uid;
     private ImageView basura;
-
 //    private FrameLayout fullScreenLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_incidencia);
 
-
-        String uid = FirebaseAuth.getInstance().getUid();
-        idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
+        uid = FirebaseAuth.getInstance().getUid();
+//        idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
 
@@ -101,7 +104,7 @@ public class VerIncidencia extends AppCompatActivity {
 
                         AlertDialog alert11 = builder1.create();
                         alert11.show();
-                        }
+                    }
                 });
             }
 
@@ -119,14 +122,15 @@ public class VerIncidencia extends AppCompatActivity {
 //        jaja();
 //        jeje();
 
+
         //
 
+
     }
-//
+
 //    public void jaja(){
-//        String uid = FirebaseAuth.getInstance().getUid();
 //
-//        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("incidencia").child("media").child(uid);
+//        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("incidencia").child("media").child(uid).child(idEmpresa);
 //
 //        RecyclerView recyclerView = findViewById(R.id.list_viewM);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -198,9 +202,8 @@ public class VerIncidencia extends AppCompatActivity {
 //        recyclerView.setAdapter(mAdapter2);
 //    }
 //    public void jeje() {
-//        String uid = FirebaseAuth.getInstance().getUid();
 //
-//        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia").child("baja").child(uid);
+//        mDatabase3 = FirebaseDatabase.getInstance().getReference().child("incidencia").child("baja").child(uid).child(idEmpresa);
 //
 //        RecyclerView recyclerView = findViewById(R.id.list_viewB);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));

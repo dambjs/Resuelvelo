@@ -135,8 +135,8 @@ public class PerfilEmpresa extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
 //    https://medium.com/mobiletech/firebase-authentication-sample-371b5940ba93

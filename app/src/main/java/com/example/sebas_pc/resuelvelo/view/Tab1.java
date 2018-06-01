@@ -31,22 +31,19 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class Tab1 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private FirebaseRecyclerAdapter mAdapter;
     private DatabaseReference mDatabase;
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
     TextView nombre;
 
     private OnFragmentInteractionListener mListener;
 
-    public Tab1() {
-        // Required empty public constructor
-    }
+    public Tab1() { }
 
     public static Tab1 newInstance(String param1, String param2) {
         Tab1 fragment = new Tab1();
@@ -69,29 +66,28 @@ public class Tab1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
-//        return inflater.inflate(R.layout.fragment_tab1, container, false);
         final View view = inflater.inflate(R.layout.fragment_tab1, container, false);
         String uid = FirebaseAuth.getInstance().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         nombre = view.findViewById(R.id.nombre);
-                mDatabase.child("empleado/users").child(uid).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        User user = dataSnapshot.getValue(User.class);
-                        if(user != null) {
-                            //nombre.setText(user.displayName);
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        System.out.println("The read failed: " + databaseError.getMessage());
-                    }
-                });
+//                mDatabase.child("empleado/users").child(uid).addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        User user = dataSnapshot.getValue(User.class);
+//                        if(user != null) {
+//                            //nombre.setText(user.displayName);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        System.out.println("The read failed: " + databaseError.getMessage());
+//                    }
+//                });
 
             RecyclerView recyclerView = view.findViewById(R.id.list_view);
             recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
@@ -105,20 +101,19 @@ public class Tab1 extends Fragment {
                 protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
 
                     holder.itemView.setBackgroundColor(Color.WHITE);
-
                     holder.departamento.setText(empresa.departamento);
                     holder.motivo.setText(empresa.motivo);
                     holder.prioridad.setText(empresa.prioridad);
 
 
-//                holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(Tab1.this, VerIncidenciaCompleta.class);
-//                        intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
-//                        startActivity(intent);
-//                    }
-//                });
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Tab1.this.getActivity(), VerIncidenciaCompleta.class);
+                            intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
+                            startActivity(intent);
+                        }
+                    });
                 }
 
                 @Override
