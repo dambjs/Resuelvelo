@@ -2,41 +2,56 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@color/tw__solid_white">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="215dp"
+            android:background="@mipmap/background_profile" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="215dp"
+            android:layout_height="60dp"
+            android:background="@mipmap/background_profile2" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="224dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/image"
-                android:layout_width="158dp"
-                android:layout_height="101dp"
-                android:layout_marginRight="20dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginTop="25dp"
-                android:src="@mipmap/empresa" />
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/empresa"
+                app:civ_border_color="#FFFFFF"
+                app:civ_border_width="2dp"/>
 
             <TextView
                 android:id="@+id/descEmp"
                 android:layout_width="311dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-150dp"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#FFFFFF"
                 android:text="Somos una empresa que desde sus inicios se ha dedicado siempre a proveer y equipar con sistemas de telecomunicaciones. " />
 
             <LinearLayout
                 android:layout_width="167dp"
                 android:layout_height="124dp"
-                android:layout_marginLeft="-170dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="-170dp"
+                android:layout_marginLeft="140dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -48,8 +63,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
+                        android:textColor="#FFFFFF"
                         android:text="Empresa" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="42dp">
@@ -59,6 +74,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:textColor="#FFFFFF"
                             android:text="Año" />
 
                     </LinearLayout>
@@ -70,6 +86,7 @@
                     android:id="@+id/director"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#FFFFFF"
                     android:text="Director" />
 
                 </LinearLayout>
@@ -86,47 +103,38 @@
             android:layout_marginRight="1dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="17dp"
-                android:background="@mipmap/entra2"
-                android:layout_marginLeft="45dp"/>
-
             <TextView
                 android:id="@+id/txt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginTop="225dp"
+                android:layout_marginLeft="80dp"
                 android:onClick="add"
                 android:padding="10dp"
                 android:text="@string/grupos"
                 android:textAllCaps="true"
                 android:textColor="@android:color/black"
                 android:textSize="15dp"
-                android:textStyle="bold" />
+                />
+
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="17dp"
-                android:background="@mipmap/entra2" />
-
-            <!--<ImageView-->
-            <!--android:layout_width="20dp"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:background="@mipmap/mas"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:onClick="add" />-->
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/mas"
+            android:layout_marginTop="235dp"
+            android:layout_marginLeft="5dp"
+            android:onClick="add" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="25dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginRight="5dp"
             android:orientation="horizontal">
 
             <android.support.v7.widget.RecyclerView
@@ -138,16 +146,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:layout_marginBottom="30dp">
+            android:layout_height="58dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="500dp">
 
             <Button
                 android:id="@+id/crear"
-                android:layout_width="147dp"
-                android:layout_height="40dp"
+                android:layout_width="165dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/bk_boton_plano"
                 android:onClick="create"
@@ -156,24 +164,22 @@
 
             <Button
                 android:id="@+id/ver"
-                android:layout_width="147dp"
-                android:layout_height="40dp"
+                android:layout_width="165dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
-                android:onClick="ver"
-                android:textColor="#FFFFFF"
                 android:background="@drawable/bk_boton_plano"
+                android:onClick="ver"
                 android:text="Ver incidencia"
-                />
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:layout_width="5dp"
                 android:layout_height="5dp"
                 android:layout_marginTop="40dp"
-                android:text="HOLA"
-                />
+                android:text="HOLA" />
 
         </LinearLayout>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </ScrollView>
