@@ -28,7 +28,7 @@ public class Tab3 extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
-    private String mParam2;
+    private String mParam2, uid;
     private FirebaseRecyclerAdapter mAdapter;
     private DatabaseReference mDatabase;
     private OnFragmentInteractionListener mListener;
@@ -59,10 +59,12 @@ public class Tab3 extends Fragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_tab3, container, false);
-        String uid = FirebaseAuth.getInstance().getUid();
+        uid = FirebaseAuth.getInstance().getUid();
 
         RecyclerView recyclerView = view.findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(Tab3.this.getActivity()));
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
                 .setQuery(mDatabase.child("incidencia/bajar").child(uid), Incidencia.class)
@@ -80,7 +82,7 @@ public class Tab3 extends Fragment {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Tab3.this.getActivity(), VerIncidenciaCompleta.class);
+                        Intent intent = new Intent(Tab3.this.getActivity(), VerIncidenciaEmpleado.class);
                         intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
                         startActivity(intent);
                     }
@@ -89,7 +91,7 @@ public class Tab3 extends Fragment {
 
             @Override
             public IncidenciaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia_empleado, parent, false);
                 return new IncidenciaViewHolder(view);
 
             }

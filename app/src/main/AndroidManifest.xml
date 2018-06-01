@@ -14,8 +14,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,73 +24,71 @@
         </activity>
         <activity
             android:name=".view.LogueoEmpresario"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait" />
-        <activity android:name=".view.PerfilEmpresario"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".view.PerfilEmpresario"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.RegistroEmpresario"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".view.CrearEmpresa"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".view.CrearIncidencia"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sebas_pc.resuelvelo.view.CrearIncidencia" />
         </activity>
-
-        <activity android:name=".view.VerIncidencia"
-            android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".view.VerIncidencia"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.LogueoEmpleado"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".view.RegistroEmpleado"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".view.PerfilEmpleado"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".view.VerIncidenciaCompleta"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.PerfilEmpresa"
             android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sebas_pc.resuelvelo.view.PerfilEmpresario" />
         </activity>
-
-        <activity android:name=".view.VerIncidenciaCompleta"
+        <activity
+            android:name=".view.DepartamentoAdd"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.EditarPerfilEmpresario"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sebas_pc.resuelvelo.view.PerfilEmpresario" />
+        </activity>
+        <activity
+            android:name=".view.MediaActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sebas_pc.resuelvelo.view.PerfilEmpresario" />
+        </activity>
+        <activity android:name=".view.VerIncidenciaEmpleado"
             android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.PerfilEmpresa"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sebas_pc.resuelvelo.view.PerfilEmpresario" />
-        </activity>
-
-        <activity android:name=".view.DepartamentoAdd"
-            android:screenOrientation="portrait"/>
-
-        <activity android:name=".view.EditarPerfilEmpresario"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sebas_pc.resuelvelo.view.PerfilEmpresario" />
-        </activity>
-
-        <activity android:name=".view.MediaActivity"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sebas_pc.resuelvelo.view.PerfilEmpresario" />
-        </activity>
-
     </application>
 
 </manifest>

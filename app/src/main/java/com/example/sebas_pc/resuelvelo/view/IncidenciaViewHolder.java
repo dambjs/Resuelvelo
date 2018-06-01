@@ -12,6 +12,7 @@ public class IncidenciaViewHolder extends RecyclerView.ViewHolder{
     TextView prioridad;
     TextView motivo;
     ImageView basura;
+    ImageView tick;
 
     public IncidenciaViewHolder(View itemView) {
         super(itemView);
@@ -20,6 +21,7 @@ public class IncidenciaViewHolder extends RecyclerView.ViewHolder{
         prioridad = itemView.findViewById(R.id.prioridad);
         motivo = itemView.findViewById(R.id.motivo);
         basura = itemView.findViewById(R.id.basura);
+        tick = itemView.findViewById(R.id.tick);
 
     }
 }

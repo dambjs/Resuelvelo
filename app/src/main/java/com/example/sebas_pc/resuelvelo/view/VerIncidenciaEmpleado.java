@@ -1,7 +1,11 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class VerIncidenciaCompleta extends AppCompatActivity {
+public class VerIncidenciaEmpleado extends AppCompatActivity {
 
-    String idEmpresa, uid;
+    String idIncidencia, uid;
     private DatabaseReference mDatabase,mDatabase2,mDatabase3;
 
     private ImageView imagen;
@@ -27,7 +31,7 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
     private TextView destinatario;
     private TextView motivo;
     private TextView otros;
-
+    private Button resuelta;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +39,7 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
 
         uid = FirebaseAuth.getInstance().getUid();
 
-        idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
+        idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
 
 
@@ -47,11 +51,12 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
         destinatario = findViewById(R.id.destinatario);
         motivo = findViewById(R.id.motivo);
         otros = findViewById(R.id.otros);
+        resuelta = findViewById(R.id.resuelta);
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.child("incidencia").child("alta").child(uid).child(idEmpresa).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("incidencia/alta").child(uid).child(idIncidencia).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
@@ -61,7 +66,7 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
                     destinatario.setText(incidencia.destinatario);
                     motivo.setText(incidencia.motivo);
                     otros.setText(incidencia.otros);
-                    Glide.with(VerIncidenciaCompleta.this)
+                    Glide.with(VerIncidenciaEmpleado.this)
                             .load(incidencia.imagenIncidencia)
                             .into(imagen);
                 }
@@ -73,7 +78,7 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
             }
         });
 
-        mDatabase.child("incidencia/media").child(uid).child(idEmpresa).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("incidencia/media").child(uid).child(idIncidencia).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
@@ -83,7 +88,7 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
                     destinatario.setText(incidencia.destinatario);
                     motivo.setText(incidencia.motivo);
                     otros.setText(incidencia.otros);
-                    Glide.with(VerIncidenciaCompleta.this)
+                    Glide.with(VerIncidenciaEmpleado.this)
                             .load(incidencia.imagenIncidencia)
                             .into(imagen);
                 }
@@ -95,7 +100,7 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
             }
         });
 
-        mDatabase.child("incidencia/baja").child(uid).child(idEmpresa).addValueEventListener(new ValueEventListener() {
+        mDatabase.child("incidencia/baja").child(uid).child(idIncidencia).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
@@ -105,7 +110,7 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
                     destinatario.setText(incidencia.destinatario);
                     motivo.setText(incidencia.motivo);
                     otros.setText(incidencia.otros);
-                    Glide.with(VerIncidenciaCompleta.this)
+                    Glide.with(VerIncidenciaEmpleado.this)
                             .load(incidencia.imagenIncidencia)
                             .into(imagen);
                 }
@@ -116,6 +121,42 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
 
             }
         });
+
+//        resuelta.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                AlertDialog.Builder builder1 = new AlertDialog.Builder(VerIncidenciaEmpleado.this);
+//                builder1.setMessage("¿Estas seguro que la incidencia ha sido resuelta?");
+//                builder1.setCancelable(true);
+//
+//                builder1.setPositiveButton(
+//                        "Si",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+////                                String postKey = getRef(position).getKey();
+//
+////                                mDatabase.setValue(mDatabase.child("Resueltas"));
+//
+//                                //mReference.child("posts/data").child(postkey).setValue(null);
+//                                //Falta que no pete cuando se elimina el ultimo item.
+//                            }
+//                        });
+//
+//                builder1.setNegativeButton(
+//                        "No",
+//                        new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//
+//                AlertDialog alert11 = builder1.create();
+//                alert11.show();
+//            }
+//        });
+
 
     }
 }

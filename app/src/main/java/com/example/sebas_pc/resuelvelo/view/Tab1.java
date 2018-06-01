@@ -1,6 +1,8 @@
 package com.example.sebas_pc.resuelvelo.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,19 +18,11 @@ import android.widget.TextView;
 
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Incidencia;
-import com.example.sebas_pc.resuelvelo.model.User;
-import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 public class Tab1 extends Fragment {
 
@@ -38,7 +32,7 @@ public class Tab1 extends Fragment {
     private DatabaseReference mDatabase;
 
     private String mParam1;
-    private String mParam2;
+    private String mParam2, uid;
     TextView nombre;
 
     private OnFragmentInteractionListener mListener;
@@ -68,7 +62,7 @@ public class Tab1 extends Fragment {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_tab1, container, false);
-        String uid = FirebaseAuth.getInstance().getUid();
+        uid = FirebaseAuth.getInstance().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -109,16 +103,51 @@ public class Tab1 extends Fragment {
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(Tab1.this.getActivity(), VerIncidenciaCompleta.class);
+                            Intent intent = new Intent(Tab1.this.getActivity(), VerIncidenciaEmpleado.class);
                             intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
                             startActivity(intent);
                         }
                     });
+
+
+
+                    holder.tick.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            AlertDialog.Builder builder1 = new AlertDialog.Builder(Tab1.this.getActivity());
+                            builder1.setMessage("¿Estas seguro que se ha resuelto esta incidencia?");
+                            builder1.setCancelable(true);
+
+                            builder1.setPositiveButton(
+                                    "Si",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+
+                                            String postKey = getRef(position).getKey();
+                                            mDatabase.child(postKey).setValue(null);
+                                        }
+                                    });
+
+                            builder1.setNegativeButton(
+                                    "No",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+
+                            AlertDialog alert11 = builder1.create();
+                            alert11.show();
+                        }
+                    });
                 }
+
 
                 @Override
                 public IncidenciaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia, parent, false);
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_incidencia_empleado, parent, false);
                     return new IncidenciaViewHolder(view);
 
                 }
