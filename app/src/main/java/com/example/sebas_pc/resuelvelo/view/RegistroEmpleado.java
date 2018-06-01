@@ -55,7 +55,6 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         if(firebaseAuth.getCurrentUser() != null){
@@ -81,8 +80,6 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         btnRegistrarse = (Button) findViewById(R.id.registrarse);
         dominio = (TextView) findViewById(R.id.dominio); // ok
 
-
-
         progressDialog = new ProgressDialog(this);
 
         btnRegistrarse.setOnClickListener(this);
@@ -94,7 +91,6 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
 
                 final List<String> empresas = new ArrayList<String>();
 
-
                 for (DataSnapshot empresario: dataSnapshot.getChildren()) {
                     for(DataSnapshot empresa: empresario.getChildren()){
 //                        String empresaKey = empresa.getKey();
@@ -105,9 +101,10 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
                 }
 
                 areaSpinner = (Spinner) findViewById(R.id.sp5);
-                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RegistroEmpleado.this, android.R.layout.simple_spinner_item, empresas);
+                ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(RegistroEmpleado.this, android.R.layout.simple_spinner_dropdown_item, empresas);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 areaSpinner.setAdapter(areasAdapter);
+
             }
 
             @Override

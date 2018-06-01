@@ -36,7 +36,6 @@ import java.util.UUID;
 
 public class CrearIncidencia extends AppCompatActivity {
 
-    //    private String dropDownItemArr[] = {"Prioridad Baja", "Prioridad Media", "Prioridad Alta"};
     private ImageView image, add;
     private Button enviar;
     private Spinner jaja;
@@ -58,7 +57,6 @@ public class CrearIncidencia extends AppCompatActivity {
     HashMap<String, String> hashMapEmpleados = new HashMap<>();
     String uid;
 
-
     @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +67,6 @@ public class CrearIncidencia extends AppCompatActivity {
         enviar = findViewById(R.id.enviar);
         add = findViewById(R.id.add);
         image = findViewById(R.id.image);
-
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
 
@@ -100,8 +97,8 @@ public class CrearIncidencia extends AppCompatActivity {
             }
         });
 
-
         jaja = (Spinner) findViewById(R.id.sp3);
+
         TextoOtros = (EditText) findViewById(R.id.textootros);
 
         jaja.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, otros));
@@ -123,7 +120,6 @@ public class CrearIncidencia extends AppCompatActivity {
 
         });
 
-
         jeje = (Spinner) findViewById(R.id.sp4);
 
         jeje.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, prioridad));
@@ -140,9 +136,7 @@ public class CrearIncidencia extends AppCompatActivity {
                         departamentos.add(displayNameDept);
                         hashMapDepartamentos.put(displayNameDept, areaSnapshot.getKey());
                     }
-
                 }
-
                 areaSpinner1 = (Spinner) findViewById(R.id.sp);
                 ArrayAdapter<String> departamentosAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_dropdown_item, departamentos);
                 departamentosAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -153,6 +147,7 @@ public class CrearIncidencia extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
 
         mDatabase2.addValueEventListener(new ValueEventListener() {
@@ -167,7 +162,6 @@ public class CrearIncidencia extends AppCompatActivity {
                     hashMapEmpleados.put(displayName, areaSnapshot.getKey());
                 }
 
-
                 areaSpinner2 = (Spinner) findViewById(R.id.sp2);
                 ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, empleados);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -179,10 +173,7 @@ public class CrearIncidencia extends AppCompatActivity {
 
             }
         });
-
     }
-
-
 
     void uploadFile(){
         StorageReference fileRef = FirebaseStorage.getInstance().getReference().child("incidencia/" + UUID.randomUUID());

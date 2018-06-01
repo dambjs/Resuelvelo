@@ -33,7 +33,6 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
 
         String uid = FirebaseAuth.getInstance().getUid();
 
-
         idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia/alta").child(uid);

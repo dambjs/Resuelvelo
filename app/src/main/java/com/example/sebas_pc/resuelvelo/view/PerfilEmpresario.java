@@ -3,8 +3,6 @@ package com.example.sebas_pc.resuelvelo.view;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
@@ -28,19 +25,14 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 public class PerfilEmpresario extends AppCompatActivity {
 
@@ -61,11 +53,9 @@ public class PerfilEmpresario extends AppCompatActivity {
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
         final String uid = FirebaseAuth.getInstance().getUid();
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("imagenPersonal").child(uid);
-
 
         correo = findViewById(R.id.email);
         nom = findViewById(R.id.displayNameEmpresa);
@@ -90,13 +80,11 @@ public class PerfilEmpresario extends AppCompatActivity {
                     imagenP.setVisibility(View.VISIBLE);
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
 
         imagenP2.setOnClickListener(new View.OnClickListener() {
             @Override

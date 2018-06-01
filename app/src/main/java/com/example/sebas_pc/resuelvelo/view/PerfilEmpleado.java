@@ -74,6 +74,7 @@ public class PerfilEmpleado extends AppCompatActivity implements Tab1.OnFragment
                 .setNegativeButton("No", null)
                 .show();
     }
+
     public void salir(View view) {
         AuthUI.getInstance()
                 .signOut(this)

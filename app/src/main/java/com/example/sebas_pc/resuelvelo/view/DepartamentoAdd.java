@@ -58,15 +58,6 @@ public class DepartamentoAdd extends AppCompatActivity {
                 holder.nombrePer.setText(empresa.displayName);
                 holder.correo.setText(empresa.correo);
 
-
-//                holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(PerfilEmpresa.this, DepartamentoAdd.class);
-//                        intent.putExtra("DEPARTAMENTO_KEY", getRef(position).getKey());
-//                        startActivity(intent);
-//                    }
-//                });
             }
 
             @Override
@@ -108,7 +99,6 @@ public class DepartamentoAdd extends AppCompatActivity {
                                 final String correo = userInput2.getText().toString();
 
                                 mDatabase.push().setValue(new Departamentos(departamentos.getUid(), nombre, correo));
-
                             }
                         })
                 .setNegativeButton("Cancel",

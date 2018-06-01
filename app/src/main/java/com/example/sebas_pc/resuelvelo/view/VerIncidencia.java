@@ -3,7 +3,6 @@ package com.example.sebas_pc.resuelvelo.view;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,12 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.example.sebas_pc.resuelvelo.R;
-import com.example.sebas_pc.resuelvelo.model.Departamentos;
 import com.example.sebas_pc.resuelvelo.model.Incidencia;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -33,35 +29,19 @@ public class VerIncidencia extends AppCompatActivity {
     String idIncidencia;
     String idEmpresa;
     private ImageView basura;
-//    private FrameLayout fullScreenLayout;
 
+//    private FrameLayout fullScreenLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_incidencia);
 
+
         String uid = FirebaseAuth.getInstance().getUid();
         idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
-
-//        fullScreenLayout = (FrameLayout) findViewById(R.id.fullScreenLayout);
-//
-//        final RelativeLayout layout = new RelativeLayout(this);         // Dynamically creating layout
-//        layout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams
-//                .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//        layout.setBackgroundColor(Color.DKGRAY);                        // Setting bgcolor to the layout
-//        layout.setAlpha(0.5f);                                          // Setting opacity to the layout
-//        layout.setBackgroundResource(R.mipmap.helperscreen);          // Adding image to layout
-//        layout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                fullScreenLayout.removeView(layout);                    // On clicking the image layout will be removed
-//            }
-//        });
-//        fullScreenLayout.addView(layout);                               // Adding view to the layout
-
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child("alta").child(uid).child(idEmpresa);
 
@@ -139,9 +119,7 @@ public class VerIncidencia extends AppCompatActivity {
 //        jaja();
 //        jeje();
 
-
         //
-
 
     }
 //

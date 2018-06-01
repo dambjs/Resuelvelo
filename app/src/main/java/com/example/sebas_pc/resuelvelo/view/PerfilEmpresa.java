@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Dep;
-import com.example.sebas_pc.resuelvelo.model.Departamentos;
 import com.example.sebas_pc.resuelvelo.model.Empresa;
 import com.example.sebas_pc.resuelvelo.model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -45,7 +44,6 @@ public class PerfilEmpresa extends AppCompatActivity {
     String idEmpresa;
     final Context context = this;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +54,6 @@ public class PerfilEmpresa extends AppCompatActivity {
         nombreEmp = findViewById(R.id.nombreEmp);
         fechaEmp = findViewById(R.id.fechaEmp);
         director = findViewById(R.id.director);
-
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
 
