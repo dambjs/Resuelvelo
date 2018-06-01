@@ -1,6 +1,7 @@
 package com.example.sebas_pc.resuelvelo.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.Departamentos;
@@ -26,6 +29,8 @@ public class VerIncidencia extends AppCompatActivity {
     private DatabaseReference mDatabase,mDatabase2,mDatabase3;
     String idIncidencia;
     String idEmpresa;
+//    private FrameLayout fullScreenLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,22 @@ public class VerIncidencia extends AppCompatActivity {
         idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
+
+//        fullScreenLayout = (FrameLayout) findViewById(R.id.fullScreenLayout);
+//
+//        final RelativeLayout layout = new RelativeLayout(this);         // Dynamically creating layout
+//        layout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams
+//                .MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        layout.setBackgroundColor(Color.DKGRAY);                        // Setting bgcolor to the layout
+//        layout.setAlpha(0.5f);                                          // Setting opacity to the layout
+//        layout.setBackgroundResource(R.mipmap.helperscreen);          // Adding image to layout
+//        layout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                fullScreenLayout.removeView(layout);                    // On clicking the image layout will be removed
+//            }
+//        });
+//        fullScreenLayout.addView(layout);                               // Adding view to the layout
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("incidencia").child("alta").child(uid);

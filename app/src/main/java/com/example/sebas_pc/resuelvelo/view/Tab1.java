@@ -2,6 +2,7 @@ package com.example.sebas_pc.resuelvelo.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -82,7 +83,7 @@ public class Tab1 extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
                         if(user != null) {
-                            nombre.setText(user.displayName);
+                            //nombre.setText(user.displayName);
                         }
                     }
 
@@ -102,6 +103,8 @@ public class Tab1 extends Fragment {
             mAdapter = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {
                 @Override
                 protected void onBindViewHolder(@NonNull IncidenciaViewHolder holder, final int position, @NonNull final Incidencia empresa) {
+
+                    holder.itemView.setBackgroundColor(Color.WHITE);
 
                     holder.departamento.setText(empresa.departamento);
                     holder.motivo.setText(empresa.motivo);
