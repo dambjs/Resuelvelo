@@ -24,8 +24,9 @@
                 android:layout_height="match_parent"
                 android:text="@string/titulo"
                 android:layout_marginTop="5dp"
+                android:textStyle="bold"
                 android:textColor="@android:color/black"
-                android:textSize="25sp"/>
+                android:textSize="30sp"/>
 
         </LinearLayout>
 
@@ -41,23 +42,36 @@
                 android:text="prioridad"
                 android:gravity="center"
                 android:textColor="@android:color/black"
-                android:textSize="30sp"
+                android:textSize="25sp"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:text="Departamento:"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/departamento"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="departamento"
-                android:gravity="center"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="-28dp"
                 android:textColor="@android:color/black"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>
@@ -65,33 +79,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Destinatario:"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:paddingLeft="4dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/destinatario"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="destinatario"
-                android:gravity="center"
+                android:layout_marginLeft="123dp"
+                android:layout_marginTop="-28dp"
                 android:textColor="@android:color/black"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 tools:ignore="HardcodedText" />
+
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Motivo:"
+                android:gravity="left"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingLeft="4dp"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/motivo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="motivo"
-                android:gravity="center"
+                android:layout_marginLeft="75dp"
+                android:layout_marginTop="-28dp"
                 android:textColor="@android:color/black"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>
@@ -100,20 +141,55 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Descripción:"
+                android:gravity="left"
+                android:paddingLeft="4dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
 
             <TextView
                 android:id="@+id/otros"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="otros"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="descripción"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
                 android:textColor="@android:color/black"
-                android:textSize="30sp"
+                android:textSize="20sp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
                 tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Imagen:"
+                android:gravity="left"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:paddingLeft="4dp"
+                tools:ignore="HardcodedText" />
+
+
+        </LinearLayout>
 
 
         <LinearLayout
@@ -125,11 +201,14 @@
             <ImageView
                 android:id="@+id/imagen"
                 android:layout_width="200dp"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"/>
 
         </LinearLayout>
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 

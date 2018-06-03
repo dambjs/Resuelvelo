@@ -11,6 +11,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
+
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.MainActivity"
@@ -86,6 +90,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sebas_pc.resuelvelo.view.PerfilEmpresario" />
+        </activity>
+        <activity
+            android:name=".view.MediaActivity2"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sebas_pc.resuelvelo.view.VerIncidenciaEmpleado" />
         </activity>
         <activity android:name=".view.VerIncidenciaEmpleado"
             android:screenOrientation="portrait"/>

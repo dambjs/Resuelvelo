@@ -101,7 +101,7 @@
 
     Lista de Incidencias
     <!-- Incidencia Completa -->
-    <string name="titulo">Incidencia</string>
+    <string name="titulo"><u>Incidencia</u></string>
 
 
 </resources>
