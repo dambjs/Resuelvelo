@@ -36,14 +36,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
+            android:layout_marginLeft="40dp"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/email"
-                android:layout_width="280dp"
+                android:layout_width="152dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_margin="15dp"
                 android:background="@drawable/bordes"
                 android:drawableStart="@mipmap/user"
                 android:hint="@string/email"
@@ -52,6 +51,20 @@
                 android:paddingStart="10dp"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="155dp"
+                android:layout_marginTop="-40dp">
+            <TextView
+                android:id="@+id/dominio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/dominio"
+                android:textColor="@android:color/white"/>
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -59,6 +72,7 @@
             android:id="@+id/contra"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <EditText

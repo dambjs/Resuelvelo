@@ -127,7 +127,7 @@ public class LogueoEmpleado extends AppCompatActivity implements View.OnClickLis
         progressDialog.show();
 
         //logging in the user
-        firebaseAuth.signInWithEmailAndPassword(emailP, password)
+        firebaseAuth.signInWithEmailAndPassword(emailP+"@resuelvelo.es", password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
