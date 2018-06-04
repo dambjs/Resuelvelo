@@ -59,7 +59,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 
         String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("dep").child(idEmpresa);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("dep").child(uid).child(idEmpresa);
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empresa").child(uid);
         mDatabase3 = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
@@ -184,6 +184,7 @@ public class PerfilEmpresa extends AppCompatActivity {
 
     public void create(View view) {
         Intent intent = new Intent(this, CrearIncidencia.class);
+        intent.putExtra("DEPARTAMENTO_KEY", idEmpresa);
         intent.putExtra("EMPRESA_KEY", idEmpresa);
         startActivity(intent);
     }

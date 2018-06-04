@@ -44,8 +44,9 @@ public class CrearIncidencia extends AppCompatActivity {
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
 
+
     Uri mediaUri;
-    String downloaderUrl;
+    String downloaderUrl, idDepartamento;
     private final int RC_IMAGE_PICK = 5677;
     private DatabaseReference mDatabase, mDatabase2, mDatabase3, mDatabase4, mDatabase5, mDatabase6, mDatabase7, mDatabase8;
     private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
@@ -69,6 +70,8 @@ public class CrearIncidencia extends AppCompatActivity {
         image = findViewById(R.id.image);
 
         idEmpresa = getIntent().getStringExtra("EMPRESA_KEY");
+        idDepartamento = getIntent().getStringExtra("DEPARTAMENTO_KEY");
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empleado/users");
@@ -124,7 +127,7 @@ public class CrearIncidencia extends AppCompatActivity {
 
         jeje.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, prioridad));
 
-        mDatabase.child("dep").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("dep").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

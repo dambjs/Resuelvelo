@@ -39,9 +39,9 @@ public class DepartamentoAdd extends AppCompatActivity {
 
         idDepartamento = getIntent().getStringExtra("DEPARTAMENTO_KEY");
 
-//        String uid = FirebaseAuth.getInstance().getUid();
+        String uid = FirebaseAuth.getInstance().getUid();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(idDepartamento);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("departamentos").child(uid).child(idDepartamento);
 
         RecyclerView recyclerView = findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
