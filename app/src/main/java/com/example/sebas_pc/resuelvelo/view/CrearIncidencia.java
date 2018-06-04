@@ -44,7 +44,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
 
-
+// https://openwebinars.net/blog/como-hacer-notificaciones-push-en-android-facil/ notis
     Uri mediaUri;
     String downloaderUrl, idDepartamento;
     private final int RC_IMAGE_PICK = 5677;
