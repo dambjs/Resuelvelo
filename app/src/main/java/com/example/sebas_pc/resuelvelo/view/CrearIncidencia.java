@@ -48,7 +48,7 @@ public class CrearIncidencia extends AppCompatActivity {
     Uri mediaUri;
     String downloaderUrl, idDepartamento;
     private final int RC_IMAGE_PICK = 5677;
-    private DatabaseReference mDatabase, mDatabase2, mDatabase3, mDatabase4, mDatabase5, mDatabase6, mDatabase7, mDatabase8;
+    private DatabaseReference mDatabase, mDatabase2;
     private final static String[] otros = { "Fallo de impresora", "Fallo de Sistema Operativo", "Falla el ordenador",
             "Pantalla sin señal", "Proyector estropeado", "Otros" };
 
@@ -75,11 +75,6 @@ public class CrearIncidencia extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empleado/users");
-        mDatabase3 = FirebaseDatabase.getInstance().getReference();
-        mDatabase4 = FirebaseDatabase.getInstance().getReference();
-        mDatabase5 = FirebaseDatabase.getInstance().getReference();
-
-        mDatabase6 = FirebaseDatabase.getInstance().getReference();
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override

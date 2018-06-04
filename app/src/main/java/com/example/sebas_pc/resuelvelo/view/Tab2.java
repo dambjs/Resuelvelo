@@ -111,7 +111,7 @@ public class Tab2 extends Fragment {
 
                                         String postKey = getRef(position).getKey();
 
-                                        mDatabase.child("incidencia/alta").child(uid).child(postKey).setValue(null);
+                                        mDatabase.child("incidencia/media").child(uid).child(postKey).setValue(null);
 
                                     }
                                 });

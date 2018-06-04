@@ -24,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class Tab1 extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +34,7 @@ public class Tab1 extends Fragment {
     private DatabaseReference mDatabase;
 
     private String mParam1;
-    private String mParam2, uid;
+    private String mParam2, uid, idEmpresa;
     TextView nombre;
 
     private OnFragmentInteractionListener mListener;
@@ -83,7 +85,10 @@ public class Tab1 extends Fragment {
 //                    }
 //                });
 
-            RecyclerView recyclerView = view.findViewById(R.id.list_view);
+
+        idEmpresa = getActivity().getIntent().getStringExtra("EMPRESA_KEY");
+
+        RecyclerView recyclerView = view.findViewById(R.id.list_view);
             recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
 
             FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
@@ -127,7 +132,7 @@ public class Tab1 extends Fragment {
 
                                             String postKey = getRef(position).getKey();
 
-                                            mDatabase.child("incidencia/alta").child(uid).child(postKey).setValue(null);
+                                          mDatabase.child("incidencia/alta").child(uid).child(postKey).setValue(null);
 
                                         }
                                     });

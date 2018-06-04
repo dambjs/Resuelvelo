@@ -41,7 +41,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private TextView tvEntrar;
     private TextView dominio;
     private Spinner areaSpinner;
-//    final HashMap<String,String> empresasKey = new HashMap<>();
+    final HashMap<String,String> empresasKey = new HashMap<>();
 
     private ProgressDialog progressDialog;
 
@@ -93,10 +93,9 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
 
                 for (DataSnapshot empresario: dataSnapshot.getChildren()) {
                     for(DataSnapshot empresa: empresario.getChildren()){
-//                        String empresaKey = empresa.getKey();
                         String nombreempresa = empresa.child("displayNameEmpresa").getValue(String.class);
                         empresas.add(nombreempresa);
-//                        empresasKey.put(nombreempresa, empresaKey);
+                        empresasKey.put(nombreempresa, empresa.getKey());
                     }
                 }
 
@@ -182,6 +181,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private void onAuthSuccess(FirebaseUser user) {
         String email = etEmail.getText().toString();
         String nombre = etDisplayName.getText().toString();
+
         mDatabase.child("empleado/users").child(user.getUid()).setValue(new User(user.getUid(), nombre, email+"@resuelvelo.es"));
 
         startActivity(new Intent(RegistroEmpleado.this, PerfilEmpleado.class));

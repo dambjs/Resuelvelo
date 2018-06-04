@@ -69,7 +69,7 @@ public class Tab3 extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
-                .setQuery(mDatabase.child("incidencia/bajar").child(uid), Incidencia.class)
+                .setQuery(mDatabase.child("incidencia/baja").child(uid), Incidencia.class)
                 .setLifecycleOwner(this)
                 .build();
         mAdapter = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {
@@ -106,7 +106,7 @@ public class Tab3 extends Fragment {
 
                                         String postKey = getRef(position).getKey();
 
-                                        mDatabase.child("incidencia/alta").child(uid).child(postKey).setValue(null);
+                                        mDatabase.child("incidencia/baja").child(uid).child(postKey).setValue(null);
 
                                     }
                                 });
