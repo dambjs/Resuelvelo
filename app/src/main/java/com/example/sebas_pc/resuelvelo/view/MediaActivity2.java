@@ -24,7 +24,7 @@ public class MediaActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_media);
+        setContentView(R.layout.activity_media2);
 
         idIncidencia = getIntent().getStringExtra("INCIDENCIA_KEY");
 

@@ -127,8 +127,7 @@ public class VerIncidenciaEmpleado extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VerIncidenciaEmpleado.this, MediaActivity2.class);
-                intent.putExtra("MEDIA_TYPE",R.id.imagen);
-                intent.putExtra("MEDIA_URL",R.id.imagen);
+                intent.putExtra("INCIDENCIA_KEY", idIncidencia);
                 startActivity(intent);
             }
         });
