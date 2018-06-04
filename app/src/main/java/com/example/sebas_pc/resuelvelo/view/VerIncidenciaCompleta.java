@@ -73,49 +73,49 @@ public class VerIncidenciaCompleta extends AppCompatActivity {
             }
         });
 
-//        mDatabase.child("incidencia/media").child(uid).child(idEmpresa).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
-//                if (incidencia != null) {
-//                    prioridad.setText(incidencia.prioridad);
-//                    departamento.setText(incidencia.departamento);
-//                    destinatario.setText(incidencia.destinatario);
-//                    motivo.setText(incidencia.motivo);
-//                    otros.setText(incidencia.otros);
-//                    Glide.with(VerIncidenciaCompleta.this)
-//                            .load(incidencia.imagenIncidencia)
-//                            .into(imagen);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//
-//        mDatabase.child("incidencia/baja").child(uid).child(idEmpresa).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
-//                if (incidencia != null) {
-//                    prioridad.setText(incidencia.prioridad);
-//                    departamento.setText(incidencia.departamento);
-//                    destinatario.setText(incidencia.destinatario);
-//                    motivo.setText(incidencia.motivo);
-//                    otros.setText(incidencia.otros);
-//                    Glide.with(VerIncidenciaCompleta.this)
-//                            .load(incidencia.imagenIncidencia)
-//                            .into(imagen);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
+        mDatabase.child("incidencia/media").child(uid).child(idEmpresa).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
+                if (incidencia != null) {
+                    prioridad.setText(incidencia.prioridad);
+                    departamento.setText(incidencia.departamento);
+                    destinatario.setText(incidencia.destinatario);
+                    motivo.setText(incidencia.motivo);
+                    otros.setText(incidencia.otros);
+                    Glide.with(VerIncidenciaCompleta.this)
+                            .load(incidencia.imagenIncidencia)
+                            .into(imagen);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mDatabase.child("incidencia/baja").child(uid).child(idEmpresa).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
+                if (incidencia != null) {
+                    prioridad.setText(incidencia.prioridad);
+                    departamento.setText(incidencia.departamento);
+                    destinatario.setText(incidencia.destinatario);
+                    motivo.setText(incidencia.motivo);
+                    otros.setText(incidencia.otros);
+                    Glide.with(VerIncidenciaCompleta.this)
+                            .load(incidencia.imagenIncidencia)
+                            .into(imagen);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }

@@ -100,21 +100,23 @@ public class Tab2 extends Fragment {
                     @Override
                     public void onClick(View v)
                     {
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(Tab2.this.getActivity());
-                        builder1.setMessage("¿Estas seguro que se ha resuelto esta incidencia?");
-                        builder1.setCancelable(true);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Tab2.this.getActivity());
+                        builder.setMessage("¿Estas seguro que se ha resuelto esta incidencia?");
+                        builder.setCancelable(true);
 
-                        builder1.setPositiveButton(
+                        builder.setPositiveButton(
                                 "Si",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
                                         String postKey = getRef(position).getKey();
-                                        mDatabase.child(postKey).setValue(null);
+
+                                        mDatabase.child("incidencia/alta").child(uid).child(postKey).setValue(null);
+
                                     }
                                 });
 
-                        builder1.setNegativeButton(
+                        builder.setNegativeButton(
                                 "No",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -122,7 +124,7 @@ public class Tab2 extends Fragment {
                                     }
                                 });
 
-                        AlertDialog alert11 = builder1.create();
+                        AlertDialog alert11 = builder.create();
                         alert11.show();
                     }
                 });
