@@ -32,7 +32,6 @@ public class VerIncidenciaEmpleado extends AppCompatActivity {
     private TextView destinatario;
     private TextView motivo;
     private TextView otros;
-    private Button resuelta;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +51,6 @@ public class VerIncidenciaEmpleado extends AppCompatActivity {
         destinatario = findViewById(R.id.destinatario);
         motivo = findViewById(R.id.motivo);
         otros = findViewById(R.id.otros);
-        resuelta = findViewById(R.id.resuelta);
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();

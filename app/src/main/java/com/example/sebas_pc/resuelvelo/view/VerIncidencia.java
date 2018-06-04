@@ -69,7 +69,7 @@ public class VerIncidencia extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(VerIncidencia.this, VerIncidenciaCompleta.class);
-                        intent.putExtra("EMPRESA_KEY", getRef(position).getKey());
+                        intent.putExtra("PRUEBA_KEY", getRef(position).getKey());
                         startActivity(intent);
                     }
                 });
@@ -153,7 +153,7 @@ public class VerIncidencia extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(VerIncidencia.this, VerIncidenciaCompleta.class);
-                        intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
+                        intent.putExtra("PRUEBA_KEY", getRef(position).getKey());
                         startActivity(intent);
                     }
                 });
@@ -226,7 +226,7 @@ public class VerIncidencia extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(VerIncidencia.this, VerIncidenciaCompleta.class);
-                        intent.putExtra("INCIDENCIA_KEY", getRef(position).getKey());
+                        intent.putExtra("PRUEBA_KEY", getRef(position).getKey());
                         startActivity(intent);
                     }
                 });
