@@ -34,7 +34,7 @@ public class Tab1 extends Fragment {
     private DatabaseReference mDatabase;
 
     private String mParam1;
-    private String mParam2, uid, idEmpresa;
+    private String mParam2, uid;
     TextView nombre;
 
     private OnFragmentInteractionListener mListener;
@@ -86,11 +86,9 @@ public class Tab1 extends Fragment {
 //                });
 
 
-        idEmpresa = getActivity().getIntent().getStringExtra("EMPRESA_KEY");
 
         RecyclerView recyclerView = view.findViewById(R.id.list_view);
             recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
-
 
             FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
                     .setQuery(mDatabase.child("incidencia").child("alta").child(uid), Incidencia.class)
