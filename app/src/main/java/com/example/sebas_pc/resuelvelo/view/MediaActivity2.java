@@ -33,11 +33,10 @@ public class MediaActivity2 extends AppCompatActivity {
         imageView = findViewById(R.id.imageview);
         imagen = findViewById(R.id.imagen);
 
-        mDatabase.child("incidencia/alta").child(uid).child(idIncidencia);
 //        mDatabase.child("incidencia/media").child(uid).child(idIncidencia);
 //        mDatabase.child("incidencia/baja").child(uid).child(idIncidencia);
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.child("incidencia/alta").child(uid).child(idIncidencia).addValueEventListener(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
                     if (incidencia != null){
@@ -53,7 +52,45 @@ public class MediaActivity2 extends AppCompatActivity {
             }
         });
 
+        media();
+        baja();
 
+    }
+
+    void media(){
+        mDatabase.child("incidencia/media").child(uid).child(idIncidencia).addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
+                if (incidencia != null){
+                    Glide.with(MediaActivity2.this)
+                            .load(incidencia.imagenIncidencia)
+                            .into(imageView);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    void baja(){
+        mDatabase.child("incidencia/baja").child(uid).child(idIncidencia).addValueEventListener(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Incidencia incidencia = dataSnapshot.getValue(Incidencia.class);
+                if (incidencia != null){
+                    Glide.with(MediaActivity2.this)
+                            .load(incidencia.imagenIncidencia)
+                            .into(imageView);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
