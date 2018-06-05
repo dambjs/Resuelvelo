@@ -2,6 +2,7 @@ package com.example.sebas_pc.resuelvelo.view;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -67,6 +68,10 @@ public class CrearEmpresa extends AppCompatActivity {
         registrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final ProgressDialog progressDialog = new ProgressDialog(CrearEmpresa.this);
+                progressDialog.setIcon(R.mipmap.ic_launcher);
+                progressDialog.setMessage("Cargando...");
+                progressDialog.show();
                 registrarse.setEnabled(false);
                 if (mediaUri != null){
                     uploadFile();

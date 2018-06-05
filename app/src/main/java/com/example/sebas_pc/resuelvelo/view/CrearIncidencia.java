@@ -1,6 +1,7 @@
 package com.example.sebas_pc.resuelvelo.view;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class CrearIncidencia extends AppCompatActivity {
     private Spinner areaSpinner2;
     private Spinner areaSpinner1;
 
-// https://openwebinars.net/blog/como-hacer-notificaciones-push-en-android-facil/ notis
+    // https://openwebinars.net/blog/como-hacer-notificaciones-push-en-android-facil/ notis
     Uri mediaUri;
     String downloaderUrl, idDepartamento;
     private final int RC_IMAGE_PICK = 5677;
@@ -74,11 +75,15 @@ public class CrearIncidencia extends AppCompatActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase2 = FirebaseDatabase.getInstance().getReference().child("empleado/users");
+
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final ProgressDialog progressDialog = new ProgressDialog(CrearIncidencia.this);
+                progressDialog.setIcon(R.mipmap.ic_launcher);
+                progressDialog.setMessage("Cargando...");
+                progressDialog.show();
                 enviar.setEnabled(false);
                 if (mediaUri != null) {
                     uploadFile();
@@ -127,7 +132,6 @@ public class CrearIncidencia extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final List<String> departamentos = new ArrayList<String>();
-
                 for (DataSnapshot prueba: dataSnapshot.getChildren()) {
                     for (DataSnapshot areaSnapshot: prueba.getChildren()){
                         String displayNameDept = areaSnapshot.child("displayNameDept").getValue(String.class);
@@ -148,7 +152,7 @@ public class CrearIncidencia extends AppCompatActivity {
 
         });
 
-        mDatabase2.addValueEventListener(new ValueEventListener() {
+        mDatabase.child("prueba").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -157,13 +161,29 @@ public class CrearIncidencia extends AppCompatActivity {
                 for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
                     String displayName = areaSnapshot.child("displayName").getValue(String.class);
                     empleados.add(displayName);
-                    hashMapEmpleados.put(displayName, areaSnapshot.getKey());
+//                    hashMapEmpleados.put(displayName, areaSnapshot.getKey());
                 }
 
                 areaSpinner2 = (Spinner) findViewById(R.id.sp2);
                 ArrayAdapter<String> areasAdapter = new ArrayAdapter<String>(CrearIncidencia.this, android.R.layout.simple_spinner_item, empleados);
                 areasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 areaSpinner2.setAdapter(areasAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mDatabase.child("empleado/users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String displayName = areaSnapshot.child("displayName").getValue(String.class);
+                    hashMapEmpleados.put(displayName, areaSnapshot.getKey());
+                }
             }
 
             @Override

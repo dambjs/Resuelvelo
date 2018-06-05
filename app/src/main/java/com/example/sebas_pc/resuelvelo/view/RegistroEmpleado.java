@@ -14,7 +14,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
+import com.example.sebas_pc.resuelvelo.model.Incidencia;
 import com.example.sebas_pc.resuelvelo.model.User;
+import com.example.sebas_pc.resuelvelo.model.UserEmpleado;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -44,7 +46,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     final HashMap<String,String> empresasKey = new HashMap<>();
 
     private ProgressDialog progressDialog;
-
+    String uid;
     private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
 
@@ -54,6 +56,7 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_registro_empleado);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        uid = FirebaseAuth.getInstance().getUid();
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -90,12 +93,11 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 final List<String> empresas = new ArrayList<String>();
-
                 for (DataSnapshot empresario: dataSnapshot.getChildren()) {
                     for(DataSnapshot empresa: empresario.getChildren()){
                         String nombreempresa = empresa.child("displayNameEmpresa").getValue(String.class);
                         empresas.add(nombreempresa);
-                        empresasKey.put(nombreempresa, empresa.getKey());
+                        empresasKey.put(nombreempresa, empresario.getKey());
                     }
                 }
 
@@ -128,9 +130,6 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
         String password2 = etPassword2.getText().toString().trim();
         String password  = etPassword.getText().toString().trim();
 
-        //String nombreEmpresa = spinner.getValue();
-
-        //String empresaKey = empresasKey.get(nombreEmpresa);
 
         if(TextUtils.isEmpty(displayName)){
             Toast.makeText(this,"Porfavor ponga un nombre de empresa", Toast.LENGTH_LONG).show();
@@ -181,8 +180,18 @@ public class RegistroEmpleado extends AppCompatActivity implements View.OnClickL
     private void onAuthSuccess(FirebaseUser user) {
         String email = etEmail.getText().toString();
         String nombre = etDisplayName.getText().toString();
+        String empresa = areaSpinner.getSelectedItem().toString();
 
-        mDatabase.child("empleado/users").child(user.getUid()).setValue(new User(user.getUid(), nombre, email+"@resuelvelo.es"));
+//        mDatabase.child("empleado/users").child(user.getUid()).setValue(new UserEmpleado(user.getUid(), nombre, email+"@resuelvelo.es", empresa));
+
+        UserEmpleado userEmpleado = new UserEmpleado(user.getUid(), nombre, email+"@resuelvelo.es", empresa);
+
+//        String key = mDatabase.push().getKey();
+
+        mDatabase.child("empleado/users").child(user.getUid()).setValue(userEmpleado);
+
+        mDatabase.child("prueba").child(empresasKey.get(empresa)).push().setValue(userEmpleado);
+
 
         startActivity(new Intent(RegistroEmpleado.this, PerfilEmpleado.class));
         finish();

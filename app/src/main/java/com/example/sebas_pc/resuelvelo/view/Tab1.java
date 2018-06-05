@@ -91,8 +91,9 @@ public class Tab1 extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.list_view);
             recyclerView.setLayoutManager(new LinearLayoutManager(Tab1.this.getActivity()));
 
+
             FirebaseRecyclerOptions options = new FirebaseRecyclerOptions.Builder<Incidencia>()
-                    .setQuery(mDatabase.child("incidencia/alta").child(uid), Incidencia.class)
+                    .setQuery(mDatabase.child("incidencia").child("alta").child(uid), Incidencia.class)
                     .setLifecycleOwner(this)
                     .build();
             mAdapter = new FirebaseRecyclerAdapter<Incidencia, IncidenciaViewHolder>(options) {

@@ -17,8 +17,10 @@
             android:layout_height="match_parent"
             android:text="Añada una imagen:"
             android:layout_marginLeft="5dp"
+            android:gravity="center"
             android:textColor="@android:color/black"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"/>
 
 
     </LinearLayout>
@@ -26,27 +28,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-35dp">
+        android:layout_marginTop="-35dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/add"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginLeft="250dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="40dp"
             android:background="@mipmap/add" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="10dp">
 
         <ImageView
             android:id="@+id/imagenP"
             android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp" />
 
     </LinearLayout>
 
@@ -58,26 +65,21 @@
         <TextView
             android:layout_width="match_parent"
             android:textSize="25sp"
-            android:text="Nombre: "
+            android:text="Nombre:"
+            android:gravity="center"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/nombre"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-40dp">
-
-        <EditText
-            android:id="@+id/nombre"
-            android:layout_width="250dp"
-            android:textSize="25sp"
-            android:layout_marginLeft="100dp"
-            android:textColor="@android:color/black"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
+        android:layout_marginLeft="60dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,6 +91,8 @@
             android:layout_width="164dp"
             android:layout_height="wrap_content"
             android:text="Guardar Imagen"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:textColor="@android:color/black" />
 
         <Button
@@ -96,23 +100,22 @@
             android:layout_width="164dp"
             android:layout_height="wrap_content"
             android:text="Editar Nombre"
-            android:layout_marginLeft="30dp"
+            android:layout_marginRight="10dp"
             android:textColor="@android:color/black" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_height="66dp"
         android:gravity="center">
 
         <Button
             android:id="@+id/volver"
             android:layout_width="164dp"
             android:layout_height="wrap_content"
-            android:text="Volver al perfil"
             android:onClick="volver"
+            android:text="Volver al perfil"
             android:textColor="@android:color/black" />
 
     </LinearLayout>

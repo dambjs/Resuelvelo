@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.sebas_pc.resuelvelo.R;
 import com.example.sebas_pc.resuelvelo.model.User;
+import com.example.sebas_pc.resuelvelo.model.UserEmpleado;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -64,7 +65,7 @@ public class LogueoEmpleado extends AppCompatActivity implements View.OnClickLis
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User user = dataSnapshot.getValue(User.class);
                     if(user == null){
-                        databaseReference.setValue(new User(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
+                        databaseReference.setValue(new UserEmpleado(userId, firebaseUser.getDisplayName(), firebaseUser.getEmail()));
                     }
                 }
 
